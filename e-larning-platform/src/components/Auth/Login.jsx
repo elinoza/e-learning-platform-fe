@@ -4,7 +4,7 @@ import { AiFillLinkedin} from 'react-icons/ai';
 // import downloadAppStore from "../assets/downloadAPPstore.png";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import logo from "../assets/Instagram-Logo.png";
-import {FcGoogle as GrFacebook } from "react-icons/fc";
+import {FcGoogle  } from "react-icons/fc";
 import Footer from "./Footer"
 import "./login.css";
 import axios from "axios";
@@ -105,7 +105,7 @@ class Login extends Component {
     </Form>
 
     <Row className=" d-flex justify-content-center mt-4 googleLogin">
-                <GrFacebook className="blue mr-2 mt-1" />{" "}
+                <FcGoogle className="blue mr-2 mt-1" />{" "}
                 <a
                   href={process.env.REACT_APP_URL + "/users/googleLogin"}
                   className="login-link"

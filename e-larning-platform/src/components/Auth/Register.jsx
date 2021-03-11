@@ -11,8 +11,9 @@ import {
 } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AiFillLinkedin} from 'react-icons/ai';
+import Footer from "./Footer"
 // import logo from "./instagram.png";
-import { GrFacebook } from "react-icons/gr";
+import {FcGoogle  } from "react-icons/fc";
 import "./login.css";
 // import downloadAppStore from "../assets/downloadAPPstore.png";
 class Register extends Component {
@@ -74,20 +75,20 @@ class Register extends Component {
   </div>
 
   <Container>
-  <Form>
+  <Form onSubmit={this.register}>
   <Form.Group controlId="formBasicfullName">
-    <Form.Label>Full Name</Form.Label>
+    <Form.Label className="form-label">Full Name</Form.Label>
     <Form.Control type="text" placeholder="Enter fullname"  onChange={(e) => this.changeFullName(e)}/>
     
   </Form.Group>
 
   <Form.Group controlId="formBasicuserName">
-    <Form.Label>User Name</Form.Label>
+    <Form.Label className="form-label">User Name</Form.Label>
     <Form.Control type="userName" placeholder="Enter your user name"  onChange={(e) => this.changeUserName(e)}/>
     
   </Form.Group>
   <Form.Group controlId="formBasicEmail">
-    <Form.Label>Email address</Form.Label>
+    <Form.Label className="form-label">Email address</Form.Label>
     <Form.Control type="email" placeholder="Enter email" onChange={(e) => this.changeEmail(e)}/>
     <Form.Text className="text-muted">
       We'll never share your email with anyone else.
@@ -95,110 +96,31 @@ class Register extends Component {
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
+    <Form.Label className="form-label">Password</Form.Label>
     <Form.Control type="password" placeholder="Password"  onChange={(e) => this.changePassword(e)} />
   </Form.Group>
-  <Form.Label>By clicking Agree & Join, you agree to the <a className="terms-tag">LinkedIn User Agreement</a>, <a className="terms-tag">Privacy Policy</a>, and <a className="terms-tag">Cookie Policy</a>.{" "}</Form.Label>
+  <Form.Label className="form-label">By clicking Agree & Join, you agree to the <a className="terms-tag">LinkedIn User Agreement</a>, <a className="terms-tag">Privacy Policy</a>, and <a className="terms-tag">Cookie Policy</a>.{" "}</Form.Label>
   
-  <Button variant="primary" type="submit">
-    Submit
+  <Button variant="primary" type="submit" className="signup-btn mt-4">
+    Agree & Join
   </Button>
 </Form>
-  </Container>
-        <Row className="d-flex justify-content-center mt-5">
-          <Col sm={3} className>
-            <Container className="registerContainer2">
-              <Row className="d-flex justify-content-center ">
-                <img
-                  className="containerPhoto"
-                  src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo.png"
-                />
-              </Row>
-              <p className="bigText text-align-center ml-3">
-                Register to see photos and videos from your friends{" "}
-              </p>
-              <Row className=" d-flex justify-content-center mb-4">
-              
-                <button className="loginBtn" >
-                  <GrFacebook className="mr-1 mb-1" />
-                  <a href = {process.env.REACT_APP_URL +"/users/googleLogin"} className="text-white"> Log In with Google</a>
-                </button>
-              </Row>
-              <hr />
-              <Row className=" d-flex justify-content-center mb-2">
-                <input
-                  autocomplete="off"
-                  type="email"
-                  className="input"
-                  
-                  onChange={(e) => this.changeEmail(e)}
-                ></input>
-              </Row>
-              <Row className=" d-flex justify-content-center mb-2">
-                <input
-                  autocomplete="off"
-                  type="name"
-                  className="input"
-                  placeholder="Full name"
-                  onChange={(e) => this.changeFullName(e)}
-                ></input>
-              </Row>
-              <Row className=" d-flex justify-content-center mb-2">
-                <input
-                  autocomplete="off"
-                  type="username"
-                  className="input"
-                  placeholder="username"
-                  onChange={(e) => this.changeUserName(e)}
-                ></input>
-              </Row>
-              <Row className=" d-flex justify-content-center mb-2">
-                <input
-                  autocomplete="off"
-                  type="password"
-                  className="input"
-                  placeholder="password"
-                  onChange={(e) => this.changePassword(e)}
-                ></input>
-              </Row>
-
-              <Row className=" d-flex justify-content-center mb-4">
-                <button className="loginBtn" onClick={this.register}>
-                  Register
-                </button>
-              </Row>
-
-              <Row className=" d-flex justify-content-center mb-3">
-                <p className="blue"> Forgotten password?</p>
-              </Row>
-              <p >
-              By clicking Agree & Join, you agree to the <a className="terms-tag">LinkedIn User Agreement</a>, <a className="terms-tag">Privacy Policy</a>, and <a className="terms-tag">Cookie Policy</a>.{" "}
-               
-              </p>
-            </Container>
-            <Container className="registerContainer3 mt-3">
-              <Row className=" d-flex justify-content-center mt-4">
-                <p className="registrationText"> Already have an account?</p>
-                <p
+<Button variant="primary" type="submit" className="google-btn mt-4">
+<FcGoogle className="mr-1 mb-1" />
+   <a href = {process.env.REACT_APP_URL +"/users/googleLogin"} > Log In with Google</a>
+  </Button>
+  <div className=" d-flex justify-content-center mt-4">
+                <p className="registrationText"> Already on Linkedin?</p>
+                <a
                   className="blue ml-2"
                   onClick={() => (window.location = "/login")}
                 >
-                  Log In
-                </p>
-              </Row>
-            </Container>
-            <Row className=" d-flex justify-content-center mt-2">
-              <p className="downloadText">Download the app</p>
-            </Row>
-            <Row className=" d-flex justify-content-center buttons">
-              <img className="downloadBtn1" src="{downloadAppStore}" />
-              <img
-                className="downloadBtn"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png"
-              />
-            </Row>
-          </Col>
-        </Row>
+                  Sign In
+                </a>
+     </div>
+     <Footer/>
+  </Container>
+       
       </>
     );
   }
