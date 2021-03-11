@@ -2,6 +2,10 @@
     font-size:21px;
 
 }
+.login-main{
+   display:flex;
+   flex-direction: column;
+}
 .login-header{
     padding:50px;
     padding-top:70px;

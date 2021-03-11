@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react"
 import "./NavBar.css";
-import {Navbar,Form ,Nav,Button
+import {Navbar,Form ,Nav,Button,FormControl
   
   } from "react-bootstrap";
+  import { withRouter } from "react-router-dom";
   import { AiFillLinkedin} from 'react-icons/ai';
 
 const NavBar = () => {
@@ -29,4 +30,4 @@ const NavBar = () => {
 	)
 }
 
-export default NavBar
+export default withRouter(NavBar)

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container,Form } from "react-bootstrap";
+import { Row, Col, Container,Form ,Button} from "react-bootstrap";
 import { AiFillLinkedin} from 'react-icons/ai';
 // import downloadAppStore from "../assets/downloadAPPstore.png";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -70,7 +70,7 @@ class Login extends Component {
   };
   render() {
     return (
-      <>
+      <div className="login-main">
   
   <div className="login-header"> 
   <AiFillLinkedin className="logo"/> L E A R N I N G 
@@ -79,32 +79,30 @@ class Login extends Component {
   <Container>
   <h4>Sign In</h4>
   <p>Sign in using the same email address you use for Linkedin.com or your organization email</p>
-  <Form onSubmit= {this.login}>
-  <Form.Row className=" d-flex justify-content-center mb-2">
-                <input
-                  autocomplete="off"
-                  type="email"
-                  className="emailInput"
-                  placeholder="email"
-                  onChange={(e) => this.changeEmail(e)}
-                ></input>
-              </Form.Row>
-              <Form.Row className=" d-flex justify-content-center mb-4">
-                <input
-                  autocomplete="off"
-                  type="password"
-                  className="passwordInput"
-                  placeholder="password"
-                  onChange={(e) => this.changePassword(e)}
-                ></input>
-               
-              </Form.Row>
-                <button className="loginBtn" type="submit">
-                  Continue 
-                </button>
-    </Form>
 
-    <Row className=" d-flex justify-content-center mt-4 googleLogin">
+  <Form onSubmit= {this.login}>
+ 
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label className="form-label">Email address</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" className="emailInput" onChange={(e) => this.changeEmail(e)}/>
+    <Form.Text className="text-muted">
+      We'll never share your email with anyone else.
+    </Form.Text>
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label className="form-label">Password</Form.Label>
+    <Form.Control type="password" placeholder="Password"  onChange={(e) => this.changePassword(e)} />
+  </Form.Group>
+ 
+  
+  <Button variant="primary" type="submit" className="signup-btn loginBtn mt-4">
+  Continue 
+  </Button>
+</Form>
+
+
+    <Row className=" d-flex justify-content-center mt-4 googleLogin ">
                 <FcGoogle className="blue mr-2 mt-1" />{" "}
                 <a
                   href={process.env.REACT_APP_URL + "/users/googleLogin"}
@@ -132,7 +130,7 @@ class Login extends Component {
               
               <Footer/>
   </Container>
-        </>
+        </div>
     );
   }
 }
