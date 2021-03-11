@@ -1,0 +1,36 @@
+.logo{
+    font-size:21px;
+
+}
+.login-header{
+    padding:50px;
+    padding-top:70px
+}
+.loginBtn :hover{
+    background-color: #006097
+}
+
+.login-link{
+    font-weight: 600;
+    line-height: 1.5;
+    color: #0073b1;
+}
+.logo{
+    color:#0577B5
+}
+
+footer{
+   position:absolute;
+   bottom:0px;
+   left:0px;
+   right:0px;
+    
+
+}
+footer ul {
+    list-style:none;
+     flex-direction: row
+}
+.footer-link{
+    color: #000;
+}
