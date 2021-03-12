@@ -113,7 +113,7 @@ class Register extends Component {
                 <p className="registrationText"> Already on Linkedin?</p>
                 <a
                   className="blue ml-2"
-                  onClick={() => (window.location = "/login")}
+                  onClick={() => (window.location = "/")}
                 >
                   Sign In
                 </a>

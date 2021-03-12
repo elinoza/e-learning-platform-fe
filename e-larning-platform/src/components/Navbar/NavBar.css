@@ -1,0 +1,48 @@
+.navbar{
+    background-color:#FFFFFF;
+   
+}
+.me {
+	border-right-style: solid;
+	border-right-width: thin;
+	border-right-color: #d6d5d1;
+   
+}
+
+.me .btn-primary {
+    color: #fff;
+    background-color: transparent;
+    border-color:transparent;
+    width:53px;
+    height:53px;
+}
+
+
+.navbar p{
+   color:#0009
+}
+.navbar-logo{
+    font-size:24px ;
+    display: block;
+	margin: auto;
+	fill: #0009;
+}
+
+.navbar-logo:active {
+	fill: #000;
+}
+.search.form-control {
+   
+    width: 70%;
+  
+    border: none;
+  
+
+}
+
+.search-wrap{
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width:50%;
+}
+
