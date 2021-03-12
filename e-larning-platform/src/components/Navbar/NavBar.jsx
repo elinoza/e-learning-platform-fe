@@ -23,12 +23,12 @@ const NavBar = () => {
 							</Nav.Link>
 
   <Form inline className="search-wrap">
-  <AiOutlineSearch className="d-inline" /> 
+  <AiOutlineSearch className="d-inline navbar-logo" /> 
   <FormControl type="text" placeholder="Search" className="mr-sm-2 search d-inline" />
      
     </Form>
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="ml-auto">
+    <Nav className="ml-auto ">
       <Nav.Link href="#home"> 
       <IoHomeOutline className="navbar-logo"/>
 	    <p className="m-0">Home</p></Nav.Link>

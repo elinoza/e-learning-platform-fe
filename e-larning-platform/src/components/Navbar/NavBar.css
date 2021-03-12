@@ -1,13 +1,10 @@
 .navbar{
     background-color:#FFFFFF;
+    font-size:12px;
+    
    
 }
-.me {
-	border-right-style: solid;
-	border-right-width: thin;
-	border-right-color: #d6d5d1;
-   
-}
+
 
 .me .btn-primary {
     color: #fff;
@@ -19,7 +16,8 @@
 
 
 .navbar p{
-   color:#0009
+   color:#0009;
+   font-weight:bold;
 }
 .navbar-logo{
     font-size:24px ;
@@ -33,9 +31,10 @@
 }
 .search.form-control {
    
-    width: 70%;
+    width: 80%;
   
     border: none;
+    background-color:transparent
   
 
 }
@@ -44,5 +43,19 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     width:50%;
+    background-color:#E9E9E9;
+    padding:10px;
+}
+
+.me p{
+
+
+    color:#0009;
+    font-weight:bold;
+ 
+}
+.MuiAvatar-root {
+    width: 24px!important;
+    height: 24px !important;
 }
 
