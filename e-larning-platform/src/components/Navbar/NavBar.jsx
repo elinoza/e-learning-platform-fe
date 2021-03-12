@@ -5,7 +5,7 @@ import {Navbar,Form ,Nav,Button,FormControl,Dropdown
   } from "react-bootstrap";
   import {Avatar, Badge} from '@material-ui/core';
   import { withRouter } from "react-router-dom";
-  import {AiOutlineUnorderedList,AiOutlineSearch} from 'react-icons/ai';
+  import {AiOutlineUnorderedList,AiOutlineSearch,AiFillLinkedin} from 'react-icons/ai';
   import { BiBookOpen,BiWorld} from 'react-icons/bi';
   import {  IoHomeOutline} from 'react-icons/io5';
  
@@ -14,7 +14,11 @@ const NavBar = () => {
 
 	return (
 		<Navbar  expand="lg">
-  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Navbar.Brand href="#home">
+    <div className="navbar-icon"> 
+  <AiFillLinkedin className="logo"/> L E A R N I N G 
+ 
+  </div></Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
   <Nav.Link href="#home">
