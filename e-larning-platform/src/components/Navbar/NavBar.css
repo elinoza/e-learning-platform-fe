@@ -1,6 +1,7 @@
 .navbar{
     background-color:#FFFFFF;
     font-size:12px;
+    max-height: 52px;
  
     
    
@@ -21,7 +22,7 @@
    font-weight:bold;
 }
 .navbar-logo{
-    font-size:24px ;
+    font-size:20px ;
     display: block;
 	margin: auto;
 	fill: #0009;
@@ -32,18 +33,25 @@
 }
 .search.form-control {
    
-    width: 80%;
+    width: 85%;
   
     border: none;
     background-color:transparent
   
 
 }
+.search.form-control:focus {
+   
+    border: none;
+  box-shadow: none;
+
+}
 
 .search-wrap{
-    border: 1px solid #ced4da;
+    border: none;
     border-radius: 0.25rem;
-    width:50%;
+    width:30%;
+    max-height:39px;
     background-color:#E9E9E9;
   
 }
@@ -55,8 +63,13 @@
     font-weight:bold;
  
 }
-.MuiAvatar-root {
-    width: 24px!important;
-    height: 24px !important;
+.navbar .MuiAvatar-root {
+    width: 20px!important;
+    height: 20px !important;
+}
+
+.carousel .MuiAvatar-root {
+    width: 35px!important;
+    height: 35px !important;
 }
 

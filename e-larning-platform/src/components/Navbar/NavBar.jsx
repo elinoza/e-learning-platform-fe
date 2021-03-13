@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import "./NavBar.css";
-import {Navbar,Form ,Nav,Button,FormControl,Dropdown
+import {Navbar,Form ,Nav,Button,FormControl,Dropdown,Container
   
   } from "react-bootstrap";
   import {Avatar, Badge} from '@material-ui/core';
@@ -13,7 +13,9 @@ const NavBar = () => {
 
 
 	return (
+   
 		<Navbar  expand="lg">
+       <Container>
   <Navbar.Brand href="#home">
     <div className="navbar-icon"> 
   <AiFillLinkedin className="logo"/> L E A R N I N G 
@@ -23,12 +25,12 @@ const NavBar = () => {
 
   <Nav.Link href="#home">
   <AiOutlineUnorderedList className="navbar-logo"/>
-	<p className="m-0">Notifications</p>
+	<p className="m-0">Browse</p>
 							</Nav.Link>
 
   <Form inline className="search-wrap">
-  <AiOutlineSearch className="d-inline navbar-logo" /> 
-  <FormControl type="text" placeholder="Search" className="mr-sm-2 search d-inline" />
+  <AiOutlineSearch className="d-inline navbar-logo mx-1" /> 
+  <FormControl type="text" placeholder="Search" style={{fontSize:"12px"}} className="p-0 m-0 search d-inline" />
      
     </Form>
   <Navbar.Collapse id="basic-navbar-nav">
@@ -44,7 +46,7 @@ const NavBar = () => {
       
       <Nav.Link href="#language"> 
       <BiWorld className="navbar-logo"/>
-	    <p className="m-0">Language</p></Nav.Link>
+	    <p className="m-0">En</p></Nav.Link>
     </Nav>
    
    
@@ -52,7 +54,7 @@ const NavBar = () => {
   <Dropdown className="me px-3">
 								<Dropdown.Toggle  className="Profile-menu">
 								<Avatar  src="https://upload.wikimedia.org/wikipedia/en/d/d7/Random_person_image.png" className="navbar-logo m-0 p-0" />
-									<p className="m-0">Me</p>
+									<p style={{fontSize:"12px"}} className="m-0">Me</p>
 								</Dropdown.Toggle>
 								<Dropdown.Menu
 								
@@ -60,7 +62,9 @@ const NavBar = () => {
 								/>
 							</Dropdown>
 
+              </Container>
 </Navbar>
+
 	
 		
 	)
