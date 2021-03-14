@@ -13,6 +13,7 @@ import {
 Card
 } from "react-bootstrap";
 import "./home.css";
+import SingleCourse from "../singleCourseInfo/SingleCourse"
 
 import Footer from "../Footer/Footer";
 
@@ -145,38 +146,7 @@ class Home extends Component {
                 <Tab eventKey="progress" title="In Progress">
                   <div className="d-flex  border-top pt-2">
                     {" "}
-                    <div className="d-flex">
-                      <div
-                        className="d-inline border mr-2"
-                        style={{ width: "98px", height: "55px" }}
-                      >
-                        <img
-                          className="d-block w-100 "
-                          src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
-                          className="w-100"
-                          alt="progress video"
-                        />
-                      </div>
-                      <div className="d-inline">
-                        <p
-                          style={{ fontSize: "14px", fontWeight: "bold" }}
-                          className="mb-0"
-                        >
-                          Code Challenges: JavaScript
-                        </p>
-                        <p
-                          style={{ fontSize: "12px", fontWeight: "bold" }}
-                          className="text-muted mb-0"
-                        >
-                          COURSE . 48 m 48 s left
-                        </p>
-                        <Line
-                          percent="10"
-                          strokeWidth="1.5"
-                          strokeColor="#0573B1"
-                        />
-                      </div>
-                    </div>
+                   <SingleCourse/>
                     <div
                       className="ml-auto d-inline"
                       style={{ color: "#554AC2" }}
@@ -188,38 +158,15 @@ class Home extends Component {
                 <Tab eventKey="saved" title="Saved">
                   <div className="d-flex  border-top pt-2">
                     {" "}
-                    <div className="d-flex">
-                      <div
-                        className="d-inline border mr-2"
-                        style={{ width: "98px", height: "55px" }}
-                      >
-                        <img
-                          className="d-block w-100 "
-                          src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
-                          className="w-100"
-                          alt="progress video"
-                        />
-                      </div>
-                      <div className="d-inline">
-                        <p
-                          style={{ fontSize: "14px", fontWeight: "bold" }}
-                          className="mb-0"
-                        >
-                          Code Challenges: JavaScript
-                        </p>
-                        <p
-                          style={{ fontSize: "12px", fontWeight: "bold" }}
-                          className="text-muted mb-0"
-                        >
-                          COURSE . 48 m 48 s left
-                        </p>
-                        <Line
-                          percent="10"
-                          strokeWidth="1.5"
-                          strokeColor="#0573B1"
-                        />
-                      </div>
-                    </div>
+                    <Row>
+                     
+                      <SingleCourse/>
+                 
+                 
+                    </Row>
+                  
+                   
+                    
                     <div
                       className="ml-auto d-inline"
                       style={{ color: "#554AC2" }}

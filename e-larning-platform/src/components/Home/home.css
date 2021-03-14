@@ -1,7 +1,7 @@
 .carousel-item{
     max-height: 268px;
     height: 268px;
-  margin:0px;
+  margin:0px!important;
  
  
 }
