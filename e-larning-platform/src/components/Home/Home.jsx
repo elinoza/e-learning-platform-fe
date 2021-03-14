@@ -27,13 +27,13 @@ class Home extends Component {
     return (
       <>
         <Carousel>
-          <Carousel.Item className="carousel-item">
+          <Carousel.Item className="carousel-item m-3">
             <img
               className="d-block w-100 bg-image"
               src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
               alt="First slide"
             />
-            <Carousel.Caption className="d-flex flex-row justify-content-between ">
+            <Carousel.Caption className="d-flex flex-row justify-content-between  ">
               <div className="w-100 d-flex flex-column justify-content-between text-left ">
                 <h5>
                   <Badge
@@ -92,8 +92,8 @@ class Home extends Component {
         <Container>
           <Row className=" border-bottom mt-5 ">
             <Col xs={12} md={6} className="  p-3">
-              <h2>Set Weekly Goal</h2>
-              <div className="d-flex flex-row justify-content-between border-top pt-2">
+              <h2 style={{fontSize:"18px"}}>Set Weekly Goal</h2>
+              <div className="d-flex flex-row justify-content-between border-top mt-4 pt-2">
                 <div className="goal-parent m-0  ">
                   <Circle
                     percent="90"
@@ -114,18 +114,18 @@ class Home extends Component {
                       border: "1px solid #0973B1",
                     }}
                   >
-                    <span style={{ color: "#0973B1" }}>Set a goal</span>
+                    <span style={{ color: "#0973B1", fontWeight:"bold" }}>Set a goal</span>
                   </Button>
                 </div>
               </div>
             </Col>
-            <Col xs={12} md={6} className="  p-3 ">
-            
-              <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-
-  <Tab eventKey="profile" title="In Progress">
-  <div className="d-flex border-top pt-2">
+            <Col xs={12} md={6} className=" myprogress-home p-3 ">
+            <Tabs defaultActiveKey="progress" id="myprogresss-tab" className="mt-2">
+  <Tab eventKey="progress" title="In Progress" >
+  <div className="d-flex  border-top pt-2">
                 {" "}
+                <div className="d-flex">
+                  
                 <div
                   className="d-inline border mr-2"
                   style={{ width: "98px", height: "55px" }}
@@ -150,15 +150,55 @@ class Home extends Component {
                   >
                     COURSE . 48 m 48 s left
                   </p>
-                  <Line percent="10" strokeWidth="1" strokeColor="#0573B1" />
+                  <Line percent="10" strokeWidth="1.5" strokeColor="#0573B1" />
                 </div>
               </div>
+              <div className="ml-auto d-inline" style={{color:"#554AC2"}}><a>Show All (1) </a></div>
+              </div>
+             
            
   </Tab>
-  <Tab eventKey="contact" title="Contact" disabled>
-    hello
+  <Tab eventKey="saved" title="Saved">
+  <div className="d-flex  border-top pt-2">
+                {" "}
+                <div  className="d-flex" >
+                <div
+                  className="d-inline border mr-2"
+                  style={{ width: "98px", height: "55px" }}
+                >
+                  <img
+                    className="d-block w-100 "
+                    src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
+                    className="w-100"
+                    alt="progress video"
+                  />
+                </div>
+                <div className="d-inline">
+                  <p
+                    style={{ fontSize: "14px", fontWeight: "bold" }}
+                    className="mb-0"
+                  >
+                    Code Challenges: JavaScript
+                  </p>
+                  <p
+                    style={{ fontSize: "12px", fontWeight: "bold" }}
+                    className="text-muted mb-0"
+                  >
+                    COURSE . 48 m 48 s left
+                  </p>
+                  <Line percent="10" strokeWidth="1.5" strokeColor="#0573B1" />
+                </div>
+                </div>
+                
+                <div className="ml-auto d-inline" style={{color:"#554AC2"}}><a>Show All (1) </a></div>
+              </div>
+           
+ 
   </Tab>
+  
 </Tabs>
+            
+             
 
             </Col>
           </Row>

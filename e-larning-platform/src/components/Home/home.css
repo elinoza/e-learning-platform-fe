@@ -5,6 +5,10 @@
  
 }
 
+.carousel-caption{
+  max-width: 698px;
+}
+
 .bg-image {
     
     /* Add the blur effect */
@@ -56,3 +60,21 @@ width:100%;
    
 }
 
+.myprogress-home  .nav.nav-tabs{
+ border:none;
+ color:gray
+}
+
+
+.myprogress-home .nav-tabs .nav-link.active
+{
+font-weight:bold;
+border:none;
+border-bottom:2px solid #046097;
+color:#046097}
+
+.myprogress-home a{
+  color:#6C767C;
+  font-weight:bold;
+  font-size:14px
+}
