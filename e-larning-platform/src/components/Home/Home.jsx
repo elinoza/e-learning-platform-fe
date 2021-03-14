@@ -34,7 +34,7 @@ class Home extends Component {
               alt="First slide"
             />
             <Carousel.Caption className="d-flex flex-row justify-content-between  ">
-              <div className="w-100 d-flex flex-column justify-content-between text-left ">
+              <div className="w-100 d-flex flex-column justify-content-between text-left car-cap-1 ">
                 <h5>
                   <Badge
                     style={{ backgroundColor: "purple", marginRight: "3px" }}
@@ -77,7 +77,7 @@ class Home extends Component {
                 </div>
               </div>
 
-              <div className="w-100 d-none d-lg-block">
+              <div className="w-100 d-none d-lg-block car-cap-2">
                 {" "}
                 <img
                   className="d-block w-100 "
