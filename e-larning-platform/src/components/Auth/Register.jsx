@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { AiFillLinkedin} from 'react-icons/ai';
-import Footer from "./Footer"
+import Footer from "../Footer/Footer"
 // import logo from "./instagram.png";
 import {FcGoogle  } from "react-icons/fc";
 import "./login.css";
@@ -118,8 +118,9 @@ class Register extends Component {
                   Sign In
                 </a>
      </div>
-     <Footer/>
+     
   </Container>
+  <Footer/>
        
       </>
     );

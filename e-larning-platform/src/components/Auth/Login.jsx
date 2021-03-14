@@ -5,7 +5,7 @@ import { AiFillLinkedin} from 'react-icons/ai';
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import logo from "../assets/Instagram-Logo.png";
 import {FcGoogle  } from "react-icons/fc";
-import Footer from "./Footer"
+import Footer from "../Footer/Footer"
 import "./login.css";
 import axios from "axios";
 
@@ -128,8 +128,9 @@ class Login extends Component {
                 </a>
               </Row>
               
-              <Footer/>
+              
   </Container>
+  <Footer/>
         </div>
     );
   }

@@ -5,23 +5,30 @@ import {
   Container,
   Form,
   Button,
+  Carousel,
   
   Badge,
   Tabs,
   Tab,
 Card
 } from "react-bootstrap";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import "./home.css";
+
+import Footer from "../Footer/Footer";
+
 
 import { GiTrophyCup } from "react-icons/gi";
 
- import Recommended from "./Recommended"
+
 import { Avatar } from "@material-ui/core";
 import { Line, Circle } from "rc-progress";
-import responsive from "./Carousel"
+import MultiCarousel from "./MultiCarousel";
 
-import "./home.css";
+
+
+
+
+
 
 class Home extends Component {
   state = {
@@ -30,10 +37,11 @@ class Home extends Component {
 
 
 
+
   render() {
     return (
       <>
-        {/* <Carousel>
+        <Carousel>
           <Carousel.Item className="carousel-item m-3">
             <img
               className="d-block w-100 bg-image"
@@ -94,7 +102,7 @@ class Home extends Component {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
-        </Carousel> */}
+        </Carousel>
 
         <Container>
           <Row className=" border-bottom mt-5 ">
@@ -223,20 +231,23 @@ class Home extends Component {
               </Tabs>
             </Col>
           </Row>
-          <div className="my-5 ">
-            <h4>Top Picks For Hilal</h4>
-            <MultipleCarousel responsive={responsive}>
-            <Row >
-            <Recommended />
-           
-          </Row>
-          
-</MultipleCarousel>
-          
-       
+      
+      <div className="my-5 ">
+        <h4>Top Picks For Hilal</h4>
+        <MultiCarousel 
+        title="top picks"/>
+        </div>
+
+        <div className="my-5 ">
+        <h4>Because you watched java</h4>
+        <MultiCarousel 
+        title="java"/>
+        </div>
         
-          </div>
+        
+         
         </Container>
+        <Footer/>
       </>
     );
   }

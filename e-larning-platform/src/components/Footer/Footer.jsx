@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react"
-import "./login.css";
+import "../Auth/login.css";
 
 const Footer = () => {
 

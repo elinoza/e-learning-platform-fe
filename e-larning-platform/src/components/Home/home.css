@@ -1,6 +1,7 @@
 .carousel-item{
     max-height: 268px;
     height: 268px;
+  margin:0px;
  
  
 }
@@ -82,7 +83,7 @@ color:#046097}
 
 .recommendation-card{
   border:none;
-  transition:  0.5s;
+  transition:  0.3s;
   transition-timing-function:ease-in;
   padding:10px;
 
@@ -117,4 +118,8 @@ color:#046097}
   background-color:#cce9f9;
   color:#0973B1
   
+}
+
+.multiple-carousel button.rec-arrow{
+  display:none
 }

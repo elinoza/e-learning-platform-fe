@@ -31,7 +31,7 @@ class Recommended extends Component {
     return (
       <>
      
-     <Col>
+
 <Card className="recommendation-card" style={{ width: '18rem' }} onMouseEnter={
       this.handleHover
      } onMouseLeave={
@@ -51,7 +51,7 @@ class Recommended extends Component {
 Code Challenges: JavaScript
 <p
               style={{ fontSize: "14px"}}
-              className={this.state.showDetail === true ? "d-block text-muted mt-1 mb-0" :"d-none"} 
+              className={this.state.showDetail === true ? "d-none text-muted mt-1 mb-0" :"d-block"} 
             >
 
             By: Christina Gordon
@@ -116,8 +116,9 @@ Save
 
 </Card.Body>
 </Card>
-</Col>
+
         
+     
       </>
     );
   }
