@@ -1,0 +1,73 @@
+.me .btn-primary.dropdown-toggle {
+    color: #0973B1;
+    font-weight:bold;
+    background-color: transparent;
+    border-color:transparent;
+    width:77px;
+    height:32px;
+    padding:0px;
+    margin:0px
+}
+
+ .me .btn-primary.dropdown-toggle:focus {
+    box-shadow:none;
+}
+
+.me.dropdown.show{
+    box-shadow:none;
+    background-color:transparent;
+    border:none;
+}
+
+.btn-primary.dropdown-toggle:not(.disabled):not(.disabled):active{
+    box-shadow:none;
+    background-color:transparent;
+    border:none;
+    color: #0973B1;
+}
+.me .btn-primary.dropdown-toggle:hover {
+    background-color:#cce9f9;
+    color:#0973B1
+}
+
+
+.SaveButton{
+    background-color:transparent;
+     color: #0973B1;
+     border:none;
+     font-size:16px;
+     font-weight:bold
+  }
+  .SaveButton:hover{
+    background-color:#cce9f9;
+    color:#0973B1
+    
+  }
+  .SaveButton:focus{
+    background-color:#cce9f9;
+    color:#0973B1;
+    border:none
+    
+  }
+
+  .myLearning  .nav.nav-tabs{
+    border:none;
+    color:gray
+   }
+   
+   
+   .myLearning .nav-tabs .nav-link.active
+   {
+   font-weight:bold;
+   border:none;
+   border-bottom:2px solid #046097;
+   color:#046097}
+   
+   .myLearning a{
+     color:#6C767C;
+     font-weight:bold;
+     font-size:14px
+   }
+
+ 
+ 

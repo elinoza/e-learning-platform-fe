@@ -146,9 +146,15 @@ class Home extends Component {
                 <Tab eventKey="progress" title="In Progress">
                   <div className="d-flex  border-top pt-2">
                     {" "}
-                   <SingleCourse/>
+                    <Row>
+                     
+                     <SingleCourse/>
+                
+                
+                   </Row>
+                 
                     <div
-                      className="ml-auto d-inline"
+                      className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
                       <a>Show All (1) </a>
@@ -168,7 +174,7 @@ class Home extends Component {
                    
                     
                     <div
-                      className="ml-auto d-inline"
+                      className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
                       <a>Show All (1) </a>

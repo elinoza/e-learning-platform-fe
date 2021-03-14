@@ -14,7 +14,7 @@ const NavBar = () => {
 
 	return (
    
-		<Navbar  expand="lg">
+		<Navbar  expand="lg" className="shadow">
        <Container>
   <Navbar.Brand href="#home">
     <div className="navbar-icon"> 
