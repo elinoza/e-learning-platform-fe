@@ -79,3 +79,42 @@ color:#046097}
   font-weight:bold;
   font-size:14px
 }
+
+.recommendation-card{
+  border:none;
+  transition:  0.5s;
+  transition-timing-function:ease-in;
+  padding:10px;
+
+
+
+
+}
+
+
+.recommendation-card:hover{
+  
+  transform: scale(1.1);
+  border:0.2px solid #DEE2E6;
+  
+  
+}
+
+
+.recommendation-card .card-body {
+  padding:0px
+ 
+}
+
+.SaveButton{
+  background-color:transparent;
+   color: #0973B1;
+   border:none;
+   font-size:16px;
+   font-weight:bold
+}
+.SaveButton:hover{
+  background-color:#cce9f9;
+  color:#0973B1
+  
+}
