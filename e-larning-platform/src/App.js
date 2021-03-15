@@ -21,7 +21,7 @@ function App(props) {
       <Route exact path="/register" component={Register} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/me" component={myLearning} />
-      <Route exact path="/learn/:courseName" component={Learn} />
+      <Route exact path="/learn" component={Learn} />
       </Router>
    
  
