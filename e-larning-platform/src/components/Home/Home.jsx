@@ -148,7 +148,7 @@ class Home extends Component {
                     {" "}
                     <Row>
                      
-                     <SingleCourse/>
+                     <SingleCourse completed="false"/>
                 
                 
                    </Row>

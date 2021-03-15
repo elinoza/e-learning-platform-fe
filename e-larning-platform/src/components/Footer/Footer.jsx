@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react"
-import "../Auth/login.css";
-
+import "./footer.css";
 const Footer = () => {
 
 

@@ -25,13 +25,6 @@
 }
 
 
-footer ul {
-    list-style:none;
-     flex-direction: row
-}
-.footer-link{
-    color: #000;
-}
 
 .signup-btn {
     border-radius: 20px;

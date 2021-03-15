@@ -1,0 +1,16 @@
+footer ul{
+    display: flex;
+    
+    list-style:none;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer-link{
+    color: #000;
+}
+
+footer li{
+    margin-right:20px;
+    font-size:12px
+}

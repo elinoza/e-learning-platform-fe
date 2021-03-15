@@ -8,6 +8,7 @@ import {Navbar,Form ,Nav,Button,FormControl,Dropdown,Container
   import {AiOutlineUnorderedList,AiOutlineSearch,AiFillLinkedin} from 'react-icons/ai';
   import { BiBookOpen,BiWorld} from 'react-icons/bi';
   import {  IoHomeOutline} from 'react-icons/io5';
+  import { Link } from "react-router-dom";
  
 const NavBar = () => {
 
@@ -35,14 +36,16 @@ const NavBar = () => {
     </Form>
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="ml-auto ">
-      <Nav.Link href="#home"> 
+      
+    <Link to="/home">
       <IoHomeOutline className="navbar-logo"/>
-	    <p className="m-0">Home</p></Nav.Link>
+	    <p className="m-0">Home</p>
+      </Link>
      
 
-      <Nav.Link href="#mylearning"> 
+      <Link to="/me">
       <BiBookOpen className="navbar-logo"/>
-	    <p className="m-0">My Learning</p></Nav.Link>
+	    <p className="m-0">My Learning</p> </Link>
       
       <Nav.Link href="#language"> 
       <BiWorld className="navbar-logo"/>
@@ -51,6 +54,7 @@ const NavBar = () => {
    
    
   </Navbar.Collapse>
+  <Link to="/me">
   <Dropdown className="me px-3">
 								<Dropdown.Toggle  className="Profile-menu">
 								<Avatar  src="https://upload.wikimedia.org/wikipedia/en/d/d7/Random_person_image.png" className="navbar-logo m-0 p-0" />
@@ -61,6 +65,7 @@ const NavBar = () => {
 									className="dropdown-menu-right"
 								/>
 							</Dropdown>
+              </Link>
 
               </Container>
 </Navbar>
