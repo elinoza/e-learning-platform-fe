@@ -3,21 +3,20 @@ import {
   Row,
   Col,
   Container,
-  Form,
-  Button,
-  Carousel,
-  Badge,
   Tabs,
   Tab,
-  Card,
 } from "react-bootstrap";
+
+import Notes from "./Notes"
+import Comments from "./Comments"
+import OverView from "./overView"
 import "./Learn.css";
 
 
-import overView from "./overView.jsx"
 
 
-import { Avatar } from "@material-ui/core";
+
+
 
 class Learn extends Component {
   state = {};
@@ -25,7 +24,7 @@ class Learn extends Component {
   render() {
     return (
       <>
-        <Row>
+        <Row className="mx-0">
           <Col xs={12} className="player-col">
             VIDEO PLAYER
           </Col>
@@ -35,16 +34,16 @@ class Learn extends Component {
                 <Tabs
                   defaultActiveKey="overview"
                   id="learn-tab"
-                  className="mt-2  d-flex justify-content-center mb-4"
+                  className="  py-5 d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
-                         <overView/>
+                   <OverView/>
                    </Tab>
                   <Tab eventKey="qa" title="QA ">
-                    <Row></Row>
+                 <Comments/>
                   </Tab>
                   <Tab eventKey="notebook" title="Notebook">
-                    <Row></Row>
+                  <Notes/>
                   </Tab>
                   <Tab eventKey="transcript" title="Trancript ">
                     <Row></Row>

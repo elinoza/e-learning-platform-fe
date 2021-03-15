@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   Row,
   Col,
+  Button
 
 } from "react-bootstrap";
 import "./Learn.css";
@@ -119,7 +120,7 @@ class overView extends Component {
                                     }}>Course Details</h3>
                         <p
               style={{ fontSize: "14px", fontWeight: "bold" }}
-              className="text-muted mb-1 "
+              className="text-muted mb-1 mt-4 "
             >
 
               52m . Intermediate . Released:6/20/2018 
@@ -127,16 +128,18 @@ class overView extends Component {
             <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit quod dolorem ab incidunt nihil voluptas non fugit, asperiores animi qui error minus debitis ea! Nemo quasi pariatur eius. Nesciunt, corrupti.
             </p>
-            <h3  style={{
+            <h3  style={{marginBottom:"30px",
                                      fontSize:"20px",
                                       fontWeight: "bold",
                                     }}>Skills Covered</h3>
-                                    <p className="d-inline  skillset-tags ">
+                                    <p className="d-inline  skillset-tags mt-3 ">
                                   <a
                                   
                                   >
                                     Front-end Development{" "}
                                   </a>
+
+					
 
                                   <a
                                    
@@ -152,6 +155,7 @@ class overView extends Component {
                     <h3  style={{
                                      fontSize:"20px",
                                       fontWeight: "bold",
+
                                     }}>Related Courses</h3>
                         <Row><SingleCourse completed="false" /></Row>
                                     
