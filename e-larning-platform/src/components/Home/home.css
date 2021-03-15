@@ -123,3 +123,14 @@ color:#046097}
 .multiple-carousel button.rec-arrow{
   display:none
 }
+
+.form-control:focus{
+  box-shadow:none;
+  border:none
+}
+.btn:focus{
+  box-shadow:none
+}
+.btn:active{
+  box-shadow:none
+}
