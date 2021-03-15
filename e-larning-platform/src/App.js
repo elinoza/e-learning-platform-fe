@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Home from './components/Home/Home';
+import Learn from './components/Learn/Learn';
 import myLearning from './components/Me/myLearning';
 import NavBar from './components/Navbar/NavBar';
 import { withRouter } from "react-router-dom";
@@ -20,6 +21,7 @@ function App(props) {
       <Route exact path="/register" component={Register} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/me" component={myLearning} />
+      <Route exact path="/learn/:courseName" component={Learn} />
       </Router>
    
  
