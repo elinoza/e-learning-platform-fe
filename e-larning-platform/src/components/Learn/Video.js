@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import "./player.css"
@@ -19,15 +19,26 @@ import "./player.css"
 
 // video.js player from the docs: https://github.com/videojs/video.js/blob/master/docs/guides/react.md
 
+
+
 class VideoPlayer extends React.Component {
+
+
   componentDidMount() {
     // instantiate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
-      console.log('onPlayerReady', this)
+      let myPlayer=this
+      console.log('onPlayerReady',myPlayer)
+      console.log( myPlayer.currentTime(),myPlayer.duration())
+      myPlayer.on('timeupdate', function() {
+        console.log("which second I am now",this.currentTime());
+      });
    
    
     });
   }
+
+ 
 
   // destroy player on unmount
   componentWillUnmount() {
@@ -56,7 +67,8 @@ class VideoPlayer extends React.Component {
   render() {
     return (
       <div data-vjs-player>
-        <video ref={ node => this.videoNode = node } className="video-js  w-100"></video>
+        <video id="videoPlayer" ref={ node => this.videoNode = node } className="video-js  w-100"></video>
+     
       </div>
     )
   }
