@@ -17,9 +17,10 @@ import "./Learn.css";
 const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
-  width: 720,
-  height: 300,
+
+  height: 400,
   controls: true,
+  responsive:true,
   sources: [
     {
       src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
