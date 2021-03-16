@@ -9,7 +9,9 @@ import Learn from './components/Learn/Learn';
 import myLearning from './components/Me/myLearning';
 import NavBar from './components/Navbar/NavBar';
 
+
 import { withRouter } from "react-router-dom";
+
 
 function App(props) {
   return (
@@ -23,6 +25,7 @@ function App(props) {
       <Route exact path="/home" component={Home} />
       <Route exact path="/me" component={myLearning} />
       <Route exact path="/learn" component={Learn} />
+      
       
       </Router>
    

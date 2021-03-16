@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import {
-  Row,
   Col,
-  Container,
-  Form,
   Button,
-  Carousel,
-  Nav,
-  
-  Badge,
-  Tabs,
-  Tab,
   Dropdown,
 Card
 } from "react-bootstrap";
