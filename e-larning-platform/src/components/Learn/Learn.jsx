@@ -18,7 +18,7 @@ const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
 
-  height: 400,
+  height: 370,
   controls: true,
   responsive:true,
   sources: [

@@ -56,8 +56,10 @@ class VideoPlayer extends React.Component {
   // destroy player on unmount
   componentWillUnmount() {
     if (this.player) {
-     
+      
+
       this.player.dispose();
+      localStorage.setItem("disposed","yes")
     }
   }
 
