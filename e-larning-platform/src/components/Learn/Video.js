@@ -29,9 +29,22 @@ class VideoPlayer extends React.Component {
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       let myPlayer=this
       console.log('onPlayerReady',myPlayer)
-      console.log( myPlayer.currentTime(),myPlayer.duration())
+      console.log('onPlayerReady',myPlayer.isReady_)
+      
+      console.log("current source",myPlayer.currentSource().src) 
+      if(myPlayer.isReady_){console.log("myplayer duration",myPlayer.duration())}
+      let currentTime= localStorage.getItem("seconLeft")
+      myPlayer.currentTime(currentTime)
       myPlayer.on('timeupdate', function() {
-        console.log("which second I am now",this.currentTime());
+        let currentTime= myPlayer.currentTime();
+        console.log("remaining time:",myPlayer.remainingTime()) 
+        console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100) 
+        localStorage.setItem("seconLeft",currentTime)
+    
+        
+    //  
+        
+
       });
    
    
@@ -43,6 +56,7 @@ class VideoPlayer extends React.Component {
   // destroy player on unmount
   componentWillUnmount() {
     if (this.player) {
+     
       this.player.dispose();
     }
   }
