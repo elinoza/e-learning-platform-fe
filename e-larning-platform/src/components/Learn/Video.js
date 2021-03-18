@@ -32,23 +32,25 @@ class VideoPlayer extends React.Component {
       console.log('onPlayerReady',myPlayer.isReady_)
       
       console.log("current source",myPlayer.currentSource().src) 
-      if(myPlayer.isReady_){console.log("myplayer duration",myPlayer.duration())}
-      let currentTime= localStorage.getItem("seconLeft")
+      // if(myPlayer.isReady_){console.log("myplayer duration",myPlayer.duration())}
+      let currentTime= localStorage.getItem("secondLeft")
       myPlayer.currentTime(currentTime)
+
+      // whenever video progressin time is updated;
       myPlayer.on('timeupdate', function() {
         let currentTime= myPlayer.currentTime();
         console.log("remaining time:",myPlayer.remainingTime()) 
         console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100) 
-        localStorage.setItem("seconLeft",currentTime)
-    
-        
-    //  
-        
+        localStorage.setItem("secondLeft",currentTime)
+ 
 
       });
    
+     
    
     });
+
+  
   }
 
  
@@ -83,7 +85,7 @@ class VideoPlayer extends React.Component {
   render() {
     return (
       <div data-vjs-player>
-        <video id="videoPlayer" ref={ node => this.videoNode = node } className="video-js  w-100"></video>
+        <video id="videoPlayer"  ref={ node => this.videoNode = node } className="video-js  "></video>
      
       </div>
     )

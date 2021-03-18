@@ -12,13 +12,13 @@ import Comments from "./Comments"
 import OverView from "./overView"
 import Videojs  from "./Video.js"
 import "./Learn.css";
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 
 const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
-
-  height: 370,
+ 
   controls: true,
   responsive:true,
   sources: [
@@ -31,11 +31,13 @@ const videoJsOptions = {
 
 
 
-
-
 class Learn extends Component {
   state = {};
 
+ componentDidMount=()=>{
+  let duration = getVideoDurationInSeconds('https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4')
+console.log("duration",duration)
+ }
   render() {
     return (
       <>
@@ -49,7 +51,7 @@ class Learn extends Component {
                 <Tabs
                   defaultActiveKey="overview"
                   id="learn-tab"
-                  className="  py-5 d-flex justify-content-center my-4"
+                  className=" d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
                    <OverView/>
