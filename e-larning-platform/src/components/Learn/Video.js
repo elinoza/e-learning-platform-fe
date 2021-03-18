@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import videojsPlaylistPlugin from 'videojs-playlist';
+
+import 'videojs-playlist';
 import "./player.css"
 
 
@@ -28,20 +31,58 @@ class VideoPlayer extends React.Component {
     // instantiate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       let myPlayer=this
+      videojs.registerPlugin('playlist', videojsPlaylistPlugin);
+      myPlayer.playlist([{
+        sources: [{
+          src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'http://media.w3.org/2010/05/sintel/poster.png'
+      }, {
+        sources: [{
+          src: 'http://vjs.zencdn.net/v/oceans.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'http://www.videojs.com/img/poster.jpg'
+      }, {
+        sources: [{
+          src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'http://media.w3.org/2010/05/bunny/poster.png'
+      }, {
+        sources: [{
+          src: 'http://media.w3.org/2010/05/video/movie_300.mp4',
+          type: 'video/mp4'
+        }],
+        poster: 'http://media.w3.org/2010/05/video/poster.png'
+      }],2);
+
+      
+      
+      // Play through the playlist automatically.
+      myPlayer.playlist.autoadvance(0);
+
       console.log('onPlayerReady',myPlayer)
       console.log('onPlayerReady',myPlayer.isReady_)
       
       console.log("current source",myPlayer.currentSource().src) 
      
       let currentTime= localStorage.getItem("secondLeft")
+      // let currentIndex= localStorage.getItem("playlistIndex")
       myPlayer.currentTime(currentTime)
 
       // whenever video progressin time is updated;
       myPlayer.on('timeupdate', function() {
         let currentTime= myPlayer.currentTime();
-        console.log("remaining time:",myPlayer.remainingTime()) 
-        console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100) 
+        // let currentIndex=myPlayer.currentItem()
+
+        // console.log("currentIndex",currentIndex)
+     
+        // console.log("remaining time:",myPlayer.remainingTime()) 
+        // console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100) 
         localStorage.setItem("secondLeft",currentTime)
+        // localStorage.setItem("playlistIndex",currentIndex)
         
 
       });

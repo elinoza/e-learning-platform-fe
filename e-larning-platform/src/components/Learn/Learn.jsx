@@ -15,19 +15,20 @@ import "./Learn.css";
 
 
 
+
 const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
  
   controls: true,
   responsive:true,
-  preload:"metadata" ,
-  sources: [
-    {
-      src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
-      type: 'video/mp4',
-    },
-  ],
+  preload:"metadata" 
+  // ,sources: [
+  //   {
+  //     src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
+  //     type: 'video/mp4',
+  //   },
+  // ],
 };
 
 
