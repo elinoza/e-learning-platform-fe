@@ -12,7 +12,7 @@ import Comments from "./Comments"
 import OverView from "./overView"
 import Videojs  from "./Video.js"
 import "./Learn.css";
-const { getVideoDurationInSeconds } = require('get-video-duration')
+
 
 
 const videoJsOptions = {
@@ -21,6 +21,7 @@ const videoJsOptions = {
  
   controls: true,
   responsive:true,
+  preload:"metadata" ,
   sources: [
     {
       src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
@@ -34,10 +35,7 @@ const videoJsOptions = {
 class Learn extends Component {
   state = {};
 
- componentDidMount=()=>{
-  let duration = getVideoDurationInSeconds('https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4')
-console.log("duration",duration)
- }
+
   render() {
     return (
       <>

@@ -32,7 +32,7 @@ class VideoPlayer extends React.Component {
       console.log('onPlayerReady',myPlayer.isReady_)
       
       console.log("current source",myPlayer.currentSource().src) 
-      // if(myPlayer.isReady_){console.log("myplayer duration",myPlayer.duration())}
+     
       let currentTime= localStorage.getItem("secondLeft")
       myPlayer.currentTime(currentTime)
 
@@ -42,10 +42,10 @@ class VideoPlayer extends React.Component {
         console.log("remaining time:",myPlayer.remainingTime()) 
         console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100) 
         localStorage.setItem("secondLeft",currentTime)
- 
+        
 
       });
-   
+      myPlayer.on('loadedmetadata', function() { console.log("metadata loadedddd",myPlayer.duration())});
      
    
     });
@@ -85,7 +85,7 @@ class VideoPlayer extends React.Component {
   render() {
     return (
       <div data-vjs-player>
-        <video id="videoPlayer"  ref={ node => this.videoNode = node } className="video-js  "></video>
+        <video id="videoPlayer"  ref={ node => this.videoNode = node } className="video-js vjs-big-play-centered "></video>
      
       </div>
     )
