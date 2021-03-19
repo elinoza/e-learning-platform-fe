@@ -27,12 +27,16 @@ class VideoPlayer extends React.Component {
       // instantiate Video.js
       this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       let myPlayer = this;
+     
       console.log("onPlayerReady", myPlayer.isReady_);
       ///set default value scale between 0-1
       let defaultVolume = 0.3;
       myPlayer.volume(defaultVolume);
 
+      let currentItem= parseInt(localStorage.getItem("playlistIndex"))
 
+      
+  
       //PLAYLIST
 
       myPlayer.playlist([
@@ -71,17 +75,20 @@ class VideoPlayer extends React.Component {
           ],
           
         },
-      ]);
+      ],currentItem);
 
       // Play through the playlist automatically.
       myPlayer.playlist.autoadvance(0);
+     
+
+      
       // Metadata's loaded before video starts.
       myPlayer.on("loadedmetadata", function () {
         console.log("metadata loadedddd", myPlayer.duration());
         console.log("current source", myPlayer.currentSource().src);
-        let currentItem = myPlayer.playlist.currentItem();
+        
         let currentIndex = myPlayer.playlist.currentIndex();
-        localStorage.setItem("playlistIndex",currentItem)
+       
 
         console.log("currentItem", currentItem);
         console.log("currentIndex", currentIndex);
@@ -92,14 +99,16 @@ class VideoPlayer extends React.Component {
       
        ///  SETTING CURRENT TIME AFTER REFRESHING PAGE OR STH FROM LOCAL STORAGE
       let currentTime = localStorage.getItem("secondLeft");
-      let currentItem= localStorage.getItem("playlistIndex")
+    
       myPlayer.currentTime(currentTime);
-      myPlayer.playlist.currentItem(currentItem);
+  
 
       // whenever video progressin time is updated;
       myPlayer.on("timeupdate", function () {
         let currentTime = myPlayer.currentTime();
         localStorage.setItem("secondLeft", currentTime);
+        let currentItem = myPlayer.playlist.currentItem();
+        localStorage.setItem("playlistIndex",currentItem)
      
 
         // console.log("remaining time:",myPlayer.remainingTime())
