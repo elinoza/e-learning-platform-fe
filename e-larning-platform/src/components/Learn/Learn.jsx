@@ -11,8 +11,9 @@ import {
 import Notes from "./Notes"
 import Comments from "./Comments"
 import OverView from "./overView"
-import videoNavbar from "./videoNavbar"
+import VideoNavBar from "./VideoNavBar"
 import Videojs  from "./Video.js"
+import SideBar  from "./SideBar"
 
 
 import "./Learn.css";
@@ -46,19 +47,14 @@ class Learn extends Component {
     return (
       <>
      
-      <div class="sidebar">
-      <a class="active" href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-    </div>
-   
+     
+       <SideBar/>
 
         <Row className="Main">
           <Col xs={12} className="player-col p-0">
           
-         <videoNavbar/>
-          {/* <Videojs {...videoJsOptions} /> */}
+         <VideoNavBar/>
+          <Videojs {...videoJsOptions} />
          
           
           </Col>

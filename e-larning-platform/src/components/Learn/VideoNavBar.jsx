@@ -8,7 +8,7 @@ import {BsBookmark} from 'react-icons/bs';
 
 import "./Learn.css";
 
-class videoNavbar extends Component {
+class VideoNavBar extends Component {
   state = {};
 
   render() {
@@ -41,4 +41,4 @@ class videoNavbar extends Component {
     );
   }
 }
-export default videoNavbar;
+export default  VideoNavBar;
