@@ -9,12 +9,17 @@ import {BsBookmark} from 'react-icons/bs';
 import "./Learn.css";
 
 class SideBar extends Component {
-  state = {};
-
+  state = {
+    showSideBar:false
+     
+  };
+  sideBarToggle=()=>{
+    this.setState({showSideBar:true})
+}
   render() {
     return (
       <>
-        <div class="sidebar">
+        <div className= {"sidebar" + this.state.showSideBar ?   "showSideBar" : " closedSideBar" } >
       <a class="active" >Home</a>
       <a href="#news">News</a>
       <a href="#contact">Contact</a>

@@ -11,12 +11,14 @@ import "./Learn.css";
 class VideoNavBar extends Component {
   state = {};
 
+ 
+
   render() {
     return (
       <>
         <Navbar id="videoNavbar" className="  py-1 " expand="lg">
           <Navbar.Brand className=" pr-1 sidebar-toggle-wrap">
-            <Button className="sidebar-toggle-Button  " size="sm">
+            <Button className="sidebar-toggle-Button  "  size="sm">
               {" "}
               <AiOutlineUnorderedList className="mr-2" />
               Contents

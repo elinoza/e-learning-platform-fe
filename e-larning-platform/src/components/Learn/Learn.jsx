@@ -40,20 +40,22 @@ const videoJsOptions = {
 
 
 class Learn extends Component {
-  state = {};
-
+  state = {
+    showSideBar:false
+   
+};
 
   render() {
     return (
       <>
      
      
-       <SideBar/>
+       {/* <SideBar /> */}
 
-        <Row className="Main">
+        <Row id="Main" className= {this.state.showSideBar === true ?   "show" : " close" }>
           <Col xs={12} className="player-col p-0">
           
-         <VideoNavBar/>
+         <VideoNavBar />
           <Videojs {...videoJsOptions} />
          
           

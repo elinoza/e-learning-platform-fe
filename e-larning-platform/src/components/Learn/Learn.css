@@ -184,7 +184,7 @@ ul.related-to-course li p {
 
   .sidebar {
     height: 100%;
-    width: 0;
+   width:0px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -225,10 +225,33 @@ ul.related-to-course li p {
     margin-left: 50px;
   }
   
+/* 
 
-
-  .Main{
-      margin-left:300px;
+  #Main{
+      
       margin-right:0px;
+     
+      
   }
 
+  
+
+
+  #Main.close{
+    
+    margin-left:0px;
+}
+#Main.show{
+    
+    margin-left:300px;
+}
+
+.sidebar.closedSideBar{
+
+    display:none
+  
+    }
+ .sidebar.showSideBar{
+      width: 300px;
+  
+ } */
