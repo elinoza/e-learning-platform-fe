@@ -42,7 +42,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Carousel>
+        <Carousel style={{marginTop:"52px"}}>
           <Carousel.Item className="carousel-item m-3">
             <img
               className="d-block w-100 bg-image"

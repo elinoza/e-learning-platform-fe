@@ -27,7 +27,7 @@ class myLearning extends Component {
   render() {
     return (
       <>
-        <Container className="mt-4">
+        <Container style={{marginTop:"52px"}} className="mt-4">
           <h4>My Learning</h4>
           <div className="myLearning"> 
           <Tabs

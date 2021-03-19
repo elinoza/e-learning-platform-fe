@@ -50,9 +50,9 @@ class Learn extends Component {
       <>
      
      
-       <SideBar />
+       <SideBar  />
 
-        <Row id="Main" className={this.state.showSideBar===true ? "show" :""} >
+        <Row id="Main" style={{marginTop:"52px"}} className={this.state.showSideBar===true ? "show" :""} >
           <Col xs={12} className="player-col p-0">
           
          <VideoNavBar />
