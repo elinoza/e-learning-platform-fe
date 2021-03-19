@@ -1,125 +1,184 @@
-.player-col{
-    height:60vh;
-    position:relative
+.player-col {
+    height: 60vh;
+    position: relative
 }
 
-.learn  .nav.nav-tabs{
-    border:none;
-    color:gray;
-    
-   
-    
-   }
-   
-   
-   .learn .nav-tabs .nav-link.active
-   {
-   font-weight:bold;
-   border:none;
-   border-bottom:2px solid #046097;
-   color:#046097;
-   }
-   
-   .learn a{
-     color:#6C767C;
-     font-weight:bold;
-     font-size:14px;
-     margin-right:50px;
-   }
+.learn .nav.nav-tabs {
+    border: none;
+    color: gray;
 
-   .showAll-tags{
+
+
+}
+
+
+.learn .nav-tabs .nav-link.active {
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid #046097;
+    color: #046097;
+}
+
+.learn a {
+    color: #6C767C;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 50px;
+}
+
+.showAll-tags {
     color: #287EB8
-   }
- 
-
- .icons{ font-size:24px;
-    color:#666666}
-
-    ul.related-to-course li{
-        list-style:none;
-     
-        
-    }
-    ul.related-to-course li p{
-       font-size:14px;
-       margin-left:10px;
-       font-weight:bold;
-       display:inline
-     
-        
-    }
-
-    .instructor .MuiAvatar-root {
-        width: 56px!important;
-        height: 56px !important;
-    }
+}
 
 
-    .skillset-tags {
-        color:#666666;
-        font-size:16px;
-       
+.icons {
+    font-size: 24px;
+    color: #666666
+}
 
-    }
-    .skillset-tags a{
-        color:#666666;
-        font-size:16px;
-        border:1px solid #666666;
-        border-radius:50rem !important; ;
-        margin-right:10px;
-        padding:10px;
-
-    }
+ul.related-to-course li {
+    list-style: none;
 
 
+}
 
-    .noManualResize {
-        resize: none;
-    }
+ul.related-to-course li p {
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: bold;
+    display: inline
+}
 
-    .a-tags{
- 
-        color:#262626}
-    
-        .a-tags:hover {
-            cursor:pointer
-        }
-
-        .profilePic-mini{
-            height: 20px;
-            width: 20px;
-        
-            display: inline-block;}
-
-            .CommentCard .card-header{
-                border-bottom:none
-            }
-    
-            .general-font{
-                font-size:14px;
-            
-            }
-           
-            .form-control:focus{
-                box-shadow:none;
-                border:none
-              }
-              .btn:focus{
-                box-shadow:none
-              }
-              .btn:active{
-                box-shadow:none
-              }
+.instructor .MuiAvatar-root {
+    width: 56px !important;
+    height: 56px !important;
+}
 
 
-              #videoNavbar{
-                  background-color:transparent;
-                  position: absolute;
+.skillset-tags {
+    color: #666666;
+    font-size: 16px;
+
+
+}
+
+.skillset-tags a {
+    color: #666666;
+    font-size: 16px;
+    border: 1px solid #666666;
+    border-radius: 50rem !important;
+    ;
+    margin-right: 10px;
+    padding: 10px;
+
+}
+
+
+
+.noManualResize {
+    resize: none;
+}
+
+.a-tags {
+
+    color: #262626
+}
+
+.a-tags:hover {
+    cursor: pointer
+}
+
+.profilePic-mini {
+    height: 20px;
+    width: 20px;
+
+    display: inline-block;
+}
+
+.CommentCard .card-header {
+    border-bottom: none
+}
+
+.general-font {
+    font-size: 14px;
+
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: none
+}
+
+.btn:focus {
+    box-shadow: none
+}
+
+.btn:active {
+    box-shadow: none
+}
+
+
+#videoNavbar {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 46%, rgb(37 37 37) 100%);
+    opacity: 0.7;
+    position: absolute;
+    color: white;
+
     top: 0px;
     left: 0px;
     right: 0px;
-    z-index:999;
+    z-index: 999;
+    box-shadow: -1px 2rem 3rem 2px rgb(0 0 0) !important;
+    border-bottom: 1px solid #626669 
 
-              }
 
-              
+}
+#videoNavbar.navbar{
+    min-height:63px
+} 
+
+#videoNavbar p {
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+
+}
+
+.icons {
+    font-size: 14px;
+    color: white;
+    font-weight: bold
+}
+
+
+
+.sidebar-toggle-Button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold
+}
+
+.sidebar-toggle-Button:hover {
+    background-color: transparent;
+
+
+}
+
+.sidebar-toggle-wrap:hover {
+    background-color: rgb(38, 38, 38);
+    
+}
+
+.sidebar-toggle-wrap {
+    border-right: 1px solid #626669
+}
+.sidebar-toggle-Button:focus{
+    box-shadow:none;
+    border:none;
+    background-color:transparent;
+  }
+

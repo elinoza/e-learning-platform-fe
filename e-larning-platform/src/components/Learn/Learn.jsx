@@ -13,6 +13,9 @@ import Comments from "./Comments"
 import OverView from "./overView"
 import Videojs  from "./Video.js"
 import videoNavbar from "./videoNavbar.js"
+import {AiOutlineUnorderedList,AiOutlineLike,} from 'react-icons/ai';
+import {RiShareForwardLine} from 'react-icons/ri';
+import {BsBookmark} from 'react-icons/bs';
 import "./Learn.css";
 
 
@@ -46,19 +49,35 @@ class Learn extends Component {
   
         <Row className="mx-0">
           <Col xs={12} className="player-col">
-          <Navbar id="videoNavbar" className=" shadow" expand="lg">
-  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
-    
-    </Nav>
+            <img src="https://annaabi.ee/thumb/a56708d3418b83a933dedea9d731fe26.jpg"/>
+         
+          {/* <Videojs {...videoJsOptions} /> */}
+          <Navbar id="videoNavbar" className="  py-1 " expand="lg">
+  <Navbar.Brand className=" pr-1 sidebar-toggle-wrap">
+  <Button className="sidebar-toggle-Button  "  size="sm"> <AiOutlineUnorderedList  className="mr-2"/>
+  Contents
+</Button>
+    {/* <p style={{color:"#aeaeaf",display:"inline", fontSize:"18px",fontWeight:"bold"}}>Contents</p> */}
+  </Navbar.Brand>
+
+
+  <div className="mr-auto ">
+    <p style={{fontWeight:"bold"}}>Course Name</p>
+    <p style={{color:"#aeaeaf"}}>Content Name</p>
+  </div>
+ 
+    <div className="ml-auto icons ">
+    <AiOutlineLike className="icons mr-2 ml-2"/>
+    474
    
-  </Navbar.Collapse>
+    <BsBookmark  className="icons mr-2 ml-2"/>
+    345
+    <RiShareForwardLine   className="icons mr-2 ml-2"/>
+    
+    </div>
+   
+
 </Navbar>
-          <Videojs {...videoJsOptions} />
           </Col>
           <Col xs={12}>
             <div className="learn">
