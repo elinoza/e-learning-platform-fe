@@ -46,7 +46,16 @@ class Learn extends Component {
   render() {
     return (
       <>
-  
+      <Row>
+        <Col  md={3}>
+      <div class="sidebar">
+      <a class="active" href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+    </div>
+    </Col>
+  <Col md={9}  >
         <Row className="mx-0">
           <Col xs={12} className="player-col">
             <img src="https://annaabi.ee/thumb/a56708d3418b83a933dedea9d731fe26.jpg"/>
@@ -103,6 +112,8 @@ class Learn extends Component {
               </Container>
             </div>
           </Col>
+        </Row>
+        </Col>
         </Row>
       </>
     );
