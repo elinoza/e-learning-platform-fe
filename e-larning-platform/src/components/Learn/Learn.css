@@ -185,7 +185,7 @@ ul.related-to-course li p {
   .sidebar {
     margin: 0;
     padding: 0;
-    width:100%;
+    width:300px;
     background-color: #f1f1f1;
     position: fixed;
     height: 100%;
@@ -209,9 +209,10 @@ ul.related-to-course li p {
     color: white;
   }
   
-  div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
+
+
+  .Main{
+      margin-left:300px;
+      margin-right:0px;
   }
 
