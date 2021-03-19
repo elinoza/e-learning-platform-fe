@@ -4,6 +4,7 @@ import {
   Col,
   Container,
   Tabs,
+  Navbar,Form,Button,NavDropdown,Nav,FormControl,
   Tab,
 } from "react-bootstrap";
 
@@ -11,6 +12,7 @@ import Notes from "./Notes"
 import Comments from "./Comments"
 import OverView from "./overView"
 import Videojs  from "./Video.js"
+import videoNavbar from "./videoNavbar.js"
 import "./Learn.css";
 
 
@@ -22,7 +24,8 @@ const videoJsOptions = {
  
   controls: true,
   responsive:true,
-  preload:"metadata" 
+  preload:"metadata" ,
+  
   // ,sources: [
   //   {
   //     src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
@@ -40,8 +43,21 @@ class Learn extends Component {
   render() {
     return (
       <>
+  
         <Row className="mx-0">
           <Col xs={12} className="player-col">
+          <Navbar id="videoNavbar" className=" shadow" expand="lg">
+  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#link">Link</Nav.Link>
+    
+    </Nav>
+   
+  </Navbar.Collapse>
+</Navbar>
           <Videojs {...videoJsOptions} />
           </Col>
           <Col xs={12}>
