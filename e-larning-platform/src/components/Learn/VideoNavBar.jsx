@@ -9,7 +9,9 @@ import {BsBookmark} from 'react-icons/bs';
 import "./Learn.css";
 
 class VideoNavBar extends Component {
-  state = {};
+  state = {
+    showSideBar:true
+  };
 
  
 
@@ -17,14 +19,16 @@ class VideoNavBar extends Component {
     return (
       <>
         <Navbar id="videoNavbar" className="  py-1 " expand="lg">
+          { !this.state.showSideBar && 
           <Navbar.Brand className=" pr-1 sidebar-toggle-wrap">
-            <Button className="sidebar-toggle-Button  "  size="sm">
+            <Button className="sidebar-toggle-Button  w-100 "  size="sm" onClick={()=>{this.setState({showSideBar:true}) }}>
               {" "}
               <AiOutlineUnorderedList className="mr-2" />
               Contents
             </Button>
             {/* <p style={{color:"#aeaeaf",display:"inline", fontSize:"18px",fontWeight:"bold"}}>Contents</p> */}
           </Navbar.Brand>
+          }
 
           <div className="mr-auto ">
             <p style={{ fontWeight: "bold" }}>Course Name</p>

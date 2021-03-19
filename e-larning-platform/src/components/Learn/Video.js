@@ -131,17 +131,17 @@ class VideoPlayer extends React.Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    // When a user moves from one title to the next, the VideoPlayer component will not be unmounted,
-    // instead its properties will be updated with the details of the new video. In this case,
-    // we can update the src of the existing player with the new video URL.
-    if (this.player) {
-      this.player.src({
-        type: newProps.video.mime_type,
-        src: newProps.video.video_url,
-      });
-    }
-  }
+  // componentWillReceiveProps(newProps) {
+  //   // When a user moves from one title to the next, the VideoPlayer component will not be unmounted,
+  //   // instead its properties will be updated with the details of the new video. In this case,
+  //   // we can update the src of the existing player with the new video URL.
+  //   if (this.player) {
+  //     this.player.src({
+  //       type: newProps.video.mime_type,
+  //       src: newProps.video.video_url,
+  //     });
+  //   }
+  // }
 
   // wrap the player in a div with a `data-vjs-player` attribute
   // so videojs won't create additional wrapper in the DOM
