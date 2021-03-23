@@ -26,7 +26,7 @@ class Login extends Component {
       const token = urlParams.get("accessToken");
       console.log(token);
       localStorage.setItem("token", token);
-      window.location.replace("/feed");
+      window.location.replace("/home");
     }
   };
 
@@ -46,7 +46,8 @@ class Login extends Component {
   //   this.setState({ token: data.accessToken });
   //   this.setState({ refreshToken: data.refreshToken });
   // };
-  login = async () => {
+  login = async (e) => {
+    e.preventDefault()
     const url = process.env.REACT_APP_URL;
     this.setState({ loading: true });
     const requestOptions = {
@@ -60,10 +61,11 @@ class Login extends Component {
     const res = await axios(url + "/users/login", requestOptions);
 
     if (res.status === 200) {
-      localStorage.setItem("token", res.data.accessToken);
-      localStorage.setItem("refreshToken", res.data.refreshToken);
-      window.location.replace("/feed");
-      console.log("res", res);
+    
+      localStorage.setItem("token", res.data);
+      // localStorage.setItem("refreshToken", res.data);
+      window.location.replace("/home");
+      // // console.log("res", res);
     } else {
       console.log(res);
     }
@@ -80,7 +82,7 @@ class Login extends Component {
   <h4>Sign In</h4>
   <p>Sign in using the same email address you use for Linkedin.com or your organization email</p>
 
-  <Form onSubmit= {this.login}>
+  <Form onSubmit= {(e)=>this.login(e)}>
  
   <Form.Group controlId="formBasicEmail">
     <Form.Label className="form-label">Email address</Form.Label>

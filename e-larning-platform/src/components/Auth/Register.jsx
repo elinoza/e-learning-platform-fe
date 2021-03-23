@@ -44,7 +44,8 @@ class Register extends Component {
     this.setState({ token: data.token });
     this.setState({ token: data.refreshToken });
   };
-  register = async () => {
+  register = async (e) => {
+    e.preventDefault()
     try{  this.setState({ loading: true });
     const requestOptions = {
       method: "POST",
@@ -75,7 +76,7 @@ class Register extends Component {
   </div>
 
   <Container>
-  <Form onSubmit={this.register}>
+  <Form onSubmit={(e)=>this.register(e)}>
   <Form.Group controlId="formBasicfullName">
     <Form.Label className="form-label">Full Name</Form.Label>
     <Form.Control type="text" placeholder="Enter fullname"  onChange={(e) => this.changeFullName(e)}/>

@@ -34,6 +34,7 @@ class VideoPlayer extends React.Component {
       myPlayer.volume(defaultVolume);
 
       let currentItem= parseInt(localStorage.getItem("playlistIndex"))
+      if (!currentItem){currentItem=0}
 
       
   
