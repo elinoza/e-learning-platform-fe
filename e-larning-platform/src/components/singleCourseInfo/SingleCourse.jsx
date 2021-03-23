@@ -23,6 +23,7 @@ class SingleCourse extends Component {
 
 
   render() {
+
     return (
       <>
 <Col xs={12}>

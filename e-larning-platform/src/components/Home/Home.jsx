@@ -144,8 +144,10 @@ class Home extends Component {
 
 
   render() {
-    const {me,myProgress}= this.props
+    const {me}= this.props.me
+    const {myProgress}= this.props.me
     const {courses}= this.props.courses
+    console.log("props",myProgress)
     return (
       <>
         <Carousel style={{marginTop:"52px"}}>
@@ -255,9 +257,21 @@ class Home extends Component {
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
+                      {myProgress && myProgress.completePercentage!==100 && myProgress.map(item=> 
                      
-                     <SingleCourse completed="false"/>
-                
+                     <SingleCourse
+                      courseId ={item.course._id} 
+                      tutorName={item.course.tutor.tutorName}
+                      tutorProfession={item.course.tutor.tutorProfession}
+                      videoName={item.course.videoName}
+                      createdAt={item.course.createdAt}
+                      remainingTime={item.remainingTime}
+                      secondLeft={item.secondLeft}
+                      playlistIndex={item.playlistIndex}
+                      completePercentage={item.completePercentage}
+                      video_cover_img={item.course.video_cover_img}
+                      completed="false"/>
+                      )}
                 
                    </Row>
                  
@@ -274,7 +288,21 @@ class Home extends Component {
                     {" "}
                     <Row>
                      
-                      <SingleCourse/>
+                    {myProgress  && myProgress.map(item=> 
+                     
+                     <SingleCourse
+                      courseId ={item.course._id} 
+                      tutorName={item.course.tutor.tutorName}
+                      tutorProfession={item.course.tutor.tutorProfession}
+                      videoName={item.course.videoName}
+                      createdAt={item.course.createdAt}
+                      remainingTime={item.remainingTime}
+                      secondLeft={item.secondLeft}
+                      playlistIndex={item.playlistIndex}
+                      completePercentage={item.completePercentage}
+                      video_cover_img={item.course.video_cover_img}
+                      completed={myProgress.completePercentage===100? "true":"false"} />
+                      )}
                  
                  
                     </Row>

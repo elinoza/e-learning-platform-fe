@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
       case "SET_MY_PROGRESS":
         return {
           ...state,
-          my_Progress: action.payload,
+          myProgress: action.payload,
         };
 
 
