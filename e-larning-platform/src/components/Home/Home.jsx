@@ -19,14 +19,111 @@ import Footer from "../Footer/Footer";
 
 
 import { GiTrophyCup } from "react-icons/gi";
+import { connect } from "react-redux";
 
+import { Link } from "react-router-dom"
 
 import { Avatar } from "@material-ui/core";
 import { Line, Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
 
 
+const mapStateToProps = (state) => state;
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchMewithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const me = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_ME",
+          payload: me,
+        });
+        console.log("me", me);
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: me,
+        });
+      }
+    }),
+    fetchMyProgresswithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/myLearning", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const myLearning = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_MY_PROGRESS",
+          payload: myLearning ,
+        });
+        console.log("myLearning ", myLearning );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: myLearning ,
+        });
+      }
+    }),
+    fetchCourseswithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const courses = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_COURSES",
+          payload: courses ,
+        });
+        console.log("courses ", courses );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: courses ,
+        });
+      }
+    }),
+
+  // addToSaved: (post) => {
+  //   dispatch((dispatch) => {
+  //     dispatch({
+  //       type: "ADD_TO_SAVED",
+  //       payload: post,
+  //     });
+  //   });
+  // },
+  // removeFromSaved: (post) => {
+  //   dispatch((dispatch) => {
+  //     dispatch({
+  //       type: "REMOVE_FROM_SAVED",
+  //       payload: post,
+  //     });
+  //   });
+  // },
+});
 
 
 
@@ -36,13 +133,23 @@ class Home extends Component {
 
   };
 
+  componentDidMount = () => {
+		this.props.fetchMewithThunk()
+		this.props.fetchMyProgresswithThunk()
+    this.props.fetchCourseswithThunk()
+
+	}
+
 
 
 
   render() {
+    const {me,myProgress}= this.props
+    const {courses}= this.props.courses
     return (
       <>
         <Carousel style={{marginTop:"52px"}}>
+          {courses && courses.map(course=> 
           <Carousel.Item className="carousel-item m-3">
             <img
               className="d-block w-100 bg-image"
@@ -63,12 +170,12 @@ class Home extends Component {
                     New
                   </Badge>
                   <span className="text-near-badge">
-                    Released two weeks ago
+                    Released at {course.createdAt}
                   </span>
                 </h5>
 
                 <h3 style={{ fontWeight: "600" }}>
-                  Defining and Achieving Personal Goals
+                 {course.videoName}
                 </h3>
                 <div className="d-flex">
                   <Avatar
@@ -81,13 +188,13 @@ class Home extends Component {
                       style={{ fontSize: "12px" }}
                       className="d-block ml-1 mb-0 p-0 "
                     >
-                      Dorie Clark
+                     {course.tutor.tutorName}
                     </p>
                     <p
                       style={{ fontSize: "12px" }}
                       className="d-block ml-1 mb-0 p-0 "
                     >
-                      Professor of Something
+                       {course.tutor.tutorProfession}
                     </p>
                   </div>
                 </div>
@@ -103,6 +210,7 @@ class Home extends Component {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
+          )}
         </Carousel>
 
         <Container>
@@ -205,4 +313,4 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
