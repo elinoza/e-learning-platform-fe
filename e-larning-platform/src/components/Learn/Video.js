@@ -6,6 +6,11 @@ import videojsPlaylistPlugin from "videojs-playlist";
 import "videojs-playlist";
 import "./player.css";
 
+
+
+
+
+
 // // City
 // import '@videojs/themes/dist/city/index.css';
 
@@ -23,6 +28,8 @@ import "./player.css";
 
 
 class VideoPlayer extends React.Component {
+
+
   componentDidMount() {
       // instantiate Video.js
       this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
@@ -32,7 +39,11 @@ class VideoPlayer extends React.Component {
       ///set default value scale between 0-1
       let defaultVolume = 0.3;
       myPlayer.volume(defaultVolume);
-
+    //  let currentItem=this.props.currentCourseProgress 
+    // let currentItem
+    // if (this.props.currentCourseProgress !== null) {
+    // currentItem= this.props.currentCourseProgress.playlistIndex }
+    // else { currentItem=0 }
       let currentItem= parseInt(localStorage.getItem("playlistIndex"))
       if (!currentItem){currentItem=0}
 

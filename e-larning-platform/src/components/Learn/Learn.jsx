@@ -1,32 +1,21 @@
 import React, { Component } from "react";
-import {
-  Row,
-  Col,
-  Container,
-  Tabs,
- 
-  Tab,
-} from "react-bootstrap";
+import { Row, Col, Container, Tabs, Tab } from "react-bootstrap";
 
-import Notes from "./Notes"
-import Comments from "./Comments"
-import OverView from "./overView"
-import VideoNavBar from "./VideoNavBar"
-import Videojs  from "./Video.js"
-import SideBar  from "./SideBar"
-
+import Notes from "./Notes";
+import Comments from "./Comments";
+import OverView from "./overView";
+import VideoNavBar from "./VideoNavBar";
+import Videojs from "./Video.js";
+import SideBar from "./SideBar";
 
 import "./Learn.css";
 
-
 import { connect } from "react-redux";
-
 
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
-
-    fetchTheCoursewithThunk: (courseId) =>
+  fetchTheCoursewithThunk: (courseId) =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
@@ -36,61 +25,59 @@ const mapDispatchToProps = (dispatch) => ({
         },
       });
 
-      const currentCourse= await response.json();
+      const currentCourse = await response.json();
 
       if (response.ok) {
         dispatch({
           type: "SET_CURRENT_COURSE",
-          payload:currentCourse ,
+          payload: currentCourse,
         });
-        console.log("currentCourse ", currentCourse );
+        console.log("currentCourse ", currentCourse);
       } else {
         dispatch({
           type: "SET_ERROR",
-          payload: currentCourse ,
+          payload: currentCourse,
         });
       }
     }),
-    fetchMyCourseProgress: (courseId) =>
+  fetchMyCourseProgress: (courseId) =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/videos/" + courseId, {
+      const response = await fetch(url + "/users/myLearning/" + courseId, {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
 
-      const progress= await response.json();
+      const progress = await response.json();
 
       if (response.ok) {
         dispatch({
           type: "SET_COURSE_PROGRESS",
-          payload:progress ,
+          payload: progress,
         });
-        console.log("progress ", progress );
+
+        
+
+        console.log("progress ", progress);
       } else {
         dispatch({
           type: "SET_ERROR",
-          payload: progress ,
+          payload: progress,
         });
       }
     }),
-
-   
- });
-   
-
-
+});
 
 const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
- 
+
   controls: true,
-  responsive:true,
-  preload:"metadata" ,
-  
+  responsive: true,
+  preload: "metadata",
+
   // ,sources: [
   //   {
   //     src: 'https://res.cloudinary.com/elinoza/video/upload/v1615916859/413B3280-BC4B-4F40-B66D-12EE82275937_mv3bjq.mp4',
@@ -99,36 +86,41 @@ const videoJsOptions = {
   // ],
 };
 
-
-
 class Learn extends Component {
   state = {
-    showSideBar:true
-   
-};
-componentDidMount = () => {
- let courseId=this.props.match.params.courseId
-  this.props.fetchTheCoursewithThunk(courseId)
-  this.props.fetchMyCourseProgress(courseId)
+    showSideBar: true,
+    isProgressed:false
+  };
 
-}
+  componentDidMount = () => {
+    let courseId = this.props.match.params.courseId;
+    this.props.fetchTheCoursewithThunk(courseId);
+    this.props.fetchMyCourseProgress(courseId);
+  };
   render() {
-    const {currentCourse,currentCourseProgress}=this.props.player
+    const { currentCourse, currentCourseProgress } = this.props.player;
+   
 
-    console.log(this.props.player)
+    console.log(this.props.player);
     return (
+      
       <>
-     
-     
-       <SideBar  />
 
-        <Row id="Main" style={{marginTop:"52px"}} className={this.state.showSideBar===true ? "show" :""} >
+
+        <SideBar />
+
+        <Row
+          id="Main"
+          style={{ marginTop: "52px" }}
+          className={this.state.showSideBar === true ? "show" : ""}
+        >
           <Col xs={12} className="player-col p-0">
-          
-         <VideoNavBar currentCourse={currentCourse}/>
-          <Videojs {...videoJsOptions} />
-         
-          
+            <VideoNavBar currentCourse={currentCourse} />
+            <Videojs
+              {...videoJsOptions}
+              currentCourse={currentCourse}
+              currentCourseProgress={currentCourseProgress}
+            />
           </Col>
           <Col xs={12} className="p-0">
             <div className="learn">
@@ -139,13 +131,13 @@ componentDidMount = () => {
                   className=" d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
-                   <OverView />
-                   </Tab>
+                    <OverView />
+                  </Tab>
                   <Tab eventKey="qa" title="QA ">
-                 <Comments/>
+                    <Comments />
                   </Tab>
                   <Tab eventKey="notebook" title="Notebook">
-                  <Notes/>
+                    <Notes />
                   </Tab>
                   <Tab eventKey="transcript" title="Trancript ">
                     <Row></Row>
@@ -155,9 +147,8 @@ componentDidMount = () => {
             </div>
           </Col>
         </Row>
-      
       </>
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Learn);;
+export default connect(mapStateToProps, mapDispatchToProps)(Learn);
