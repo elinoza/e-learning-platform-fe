@@ -11,8 +11,9 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import "../Home/home.css";
 import "./SingleCourse.css";
+import { connect } from "react-redux";
 
-
+const mapStateToProps = (state) => state;
 
 class SingleCourse extends Component {
   state = {
@@ -23,9 +24,12 @@ class SingleCourse extends Component {
 
 
   render() {
-
+    const{videoName,tutorName,tutorProfession,video_cover_img,updatedAt,remainingTime,createdAt,completePercentage}=this.props
+   console.log(this.props)
     return (
       <>
+
+
 <Col xs={12}>
    <div className={this.props.style ?"d-flex big-single-course ": "d-flex single-course"}>
                       <div
@@ -52,7 +56,7 @@ class SingleCourse extends Component {
                           style={{ fontWeight: "bold" }}
                           className="mb-0"
                         >
-                          Code Challenges: JavaScript
+                          {videoName}
                         </p>
 
                         {!this.props.style &&  
@@ -61,18 +65,18 @@ class SingleCourse extends Component {
               className="text-muted mb-1 "
             >
 
-               COURSE . 48 m 48 s left
+               COURSE . {remainingTime}
             </p>  }
 
             {this.props.style && 
                         <p  style={{ fontSize:"14px" }}
                          >
 
-                    By: Christina Gordon . Released 14 Dec,2020
+                    By: {tutorName} . Released {createdAt}
                         </p> }
                         {this.props.completed === "false" ?
                         <Line
-                          percent="10"
+                          percent={completePercentage}
                           strokeWidth="2.0"
                           strokeColor="#0573B1"
                           className="w-50"
@@ -80,14 +84,14 @@ class SingleCourse extends Component {
                         style={{  fontSize:"14px" ,fontWeight:"bold", color:"#307B16"}}
                         className=" ml-2 mb-0 d-inline"
                       >
-                      <AiFillCheckCircle/> Completed 3/14/2021
+                      <AiFillCheckCircle/> Completed {updatedAt}
                       </p> }
 
                            {this.props.style &&  this.props.completed === "false" && <p
                           style={{  fontSize:"14px" }}
                           className="text-muted ml-2 mb-0 d-inline"
                         >
-                         48 m 48 s left
+                        {remainingTime}
                         </p>}
                       </div>
                       {this.props.style &&  <div
@@ -114,4 +118,4 @@ class SingleCourse extends Component {
     );
   }
 }
-export default SingleCourse;
+export default connect(mapStateToProps)(SingleCourse);

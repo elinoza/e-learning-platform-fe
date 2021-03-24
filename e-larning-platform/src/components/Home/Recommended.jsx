@@ -22,12 +22,36 @@ import "./home.css";
 
 class Recommended extends Component {
   state = {
-    showDetail:false
+    showDetail:false,
+    courses:[]
   };
   handleHover=()=>{
     this.setState({showDetail:!this.state.showDetail})
   }
+
+componentDidMount=async()=>{
+  const token = localStorage.getItem("token");
+  const url = process.env.REACT_APP_URL;
+  const response = await fetch(url + "/videos?category="+this.props.category, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+
+  const courses = await response.json();
+
+  if (response.ok) {
+   
+    console.log("courses", courses);
+    this.setState(courses)
+  } else {
+   
+    console.log(response)
+  }
+}
+
   render() {
+    const {courses}=this.state
     return (
       <>
      

@@ -15,9 +15,7 @@ import "./home.css";
       <Carousel className="multiple-carousel" itemsToShow={3}>
               
       <Recommended />
-      <Recommended/>
-      <Recommended/>
-      <Recommended/>
+  
   
    </Carousel>
 

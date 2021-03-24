@@ -144,10 +144,12 @@ class Home extends Component {
 
 
   render() {
-    const {me}= this.props.me
+    const {savedVideos}= this.props.me.me
     const {myProgress}= this.props.me
+   
+    
     const {courses}= this.props.courses
-    console.log("props",myProgress)
+    console.log("saved",savedVideos)
     return (
       <>
         <Carousel style={{marginTop:"52px"}}>
@@ -257,20 +259,26 @@ class Home extends Component {
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
-                      {myProgress && myProgress.completePercentage!==100 && myProgress.map(item=> 
+                      {myProgress  && myProgress.map(item=> 
+                 
+
+                       item.completePercentage!=100 &&
+            
                      
                      <SingleCourse
-                      courseId ={item.course._id} 
+                      courseId ={item._id} 
                       tutorName={item.course.tutor.tutorName}
                       tutorProfession={item.course.tutor.tutorProfession}
                       videoName={item.course.videoName}
                       createdAt={item.course.createdAt}
+                      updatedAt={item.course.updatedAt}
                       remainingTime={item.remainingTime}
                       secondLeft={item.secondLeft}
                       playlistIndex={item.playlistIndex}
                       completePercentage={item.completePercentage}
                       video_cover_img={item.course.video_cover_img}
                       completed="false"/>
+                   
                       )}
                 
                    </Row>
@@ -279,7 +287,7 @@ class Home extends Component {
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All (1) </a>
+                      <a>Show All {savedVideos && savedVideos.length}</a>
                     </div>
                   </div>
                 </Tab>
@@ -288,20 +296,21 @@ class Home extends Component {
                     {" "}
                     <Row>
                      
-                    {myProgress  && myProgress.map(item=> 
-                     
+                    {savedVideos && savedVideos.map(item=> 
+                    
+                    
                      <SingleCourse
-                      courseId ={item.course._id} 
-                      tutorName={item.course.tutor.tutorName}
-                      tutorProfession={item.course.tutor.tutorProfession}
-                      videoName={item.course.videoName}
-                      createdAt={item.course.createdAt}
-                      remainingTime={item.remainingTime}
-                      secondLeft={item.secondLeft}
-                      playlistIndex={item.playlistIndex}
-                      completePercentage={item.completePercentage}
-                      video_cover_img={item.course.video_cover_img}
-                      completed={myProgress.completePercentage===100? "true":"false"} />
+                      courseId ={item._id} 
+                      tutorName={item.tutor.tutorName}
+                      tutorProfession={item.tutor.tutorProfession}
+                      videoName={item.videoName}
+                      createdAt={item.createdAt}
+                      // remainingTime={item.remainingTime}
+                      // secondLeft={item.secondLeft}
+                      // playlistIndex={item.playlistIndex}
+                      // completePercentage={item.completePercentage}
+                      video_cover_img={item.video_cover_img}
+                      completed="false"/>
                       )}
                  
                  
@@ -313,7 +322,7 @@ class Home extends Component {
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All (1) </a>
+                      <a>Show All {savedVideos &&savedVideos.length}</a>
                     </div>
                   </div>
                 </Tab>
@@ -324,7 +333,7 @@ class Home extends Component {
       <div className="my-5 ">
         <h4>Top Picks For Hilal</h4>
         <MultiCarousel 
-        title="top picks"/>
+        title="top picks" category="software"/>
         </div>
 
         <div className="my-5 ">

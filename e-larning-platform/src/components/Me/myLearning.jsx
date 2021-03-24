@@ -18,13 +18,15 @@ import { RiShareForwardLine } from "react-icons/ri";
 
 import "./me.css";
 import "../Home/home.css";
-
+import { connect } from "react-redux";
 import Footer from "../Footer/Footer";
-
+const mapStateToProps = (state) => state;
 class myLearning extends Component {
   state = {};
 
   render() {
+    const {myProgress}= this.props.me
+    const {savedVideos}= this.props.me.me
     return (
       <>
         <Container style={{marginTop:"52px"}} className="mt-4">
@@ -37,8 +39,25 @@ class myLearning extends Component {
           >
             <Tab eventKey="progress" title="In Progress (1)">
               <Row>
-               
-                <SingleCourse completed = "false" style="big" />
+              {myProgress &&  myProgress.map(item=> 
+                        item.completePercentage!==100 && 
+                     <SingleCourse
+                      courseId ={item._id} 
+                      tutorName={item.course.tutor.tutorName}
+                      tutorProfession={item.course.tutor.tutorProfession}
+                      videoName={item.course.videoName}
+                      createdAt={item.course.createdAt}
+                      updatedAt={item.course.updatedAt}
+                      remainingTime={item.remainingTime}
+                      secondLeft={item.secondLeft}
+                      playlistIndex={item.playlistIndex}
+                      completePercentage={item.completePercentage}
+                      video_cover_img={item.course.video_cover_img}
+                      completed="false"
+                      style="big"/>
+                      )}
+                
+             
               
           
               </Row>
@@ -46,7 +65,23 @@ class myLearning extends Component {
             <Tab eventKey="saved" title="Saved (1) ">
             <Row>
                
-               <SingleCourse completed = "false" style="big" />
+            {savedVideos && savedVideos.map(item=> 
+                    
+                    
+                    <SingleCourse
+                     courseId ={item._id} 
+                     tutorName={item.tutor.tutorName}
+                     tutorProfession={item.tutor.tutorProfession}
+                     videoName={item.videoName}
+                     createdAt={item.createdAt}
+                     // remainingTime={item.remainingTime}
+                     // secondLeft={item.secondLeft}
+                     // playlistIndex={item.playlistIndex}
+                     // completePercentage={item.completePercentage}
+                     video_cover_img={item.video_cover_img}
+                     completed="false"
+                     style="big"/>
+                     )}
              
          
              </Row>
@@ -54,7 +89,26 @@ class myLearning extends Component {
             <Tab eventKey="Learning History" title="Learning History (1)">
             <Row>
                
-               <SingleCourse completed = "true" style="big" />
+            {myProgress && myProgress.map(item=> 
+                     item.completePercentage===100 && 
+                     <SingleCourse
+                      courseId ={item._id} 
+                      tutorName={item.course.tutor.tutorName}
+                      tutorProfession={item.course.tutor.tutorProfession}
+                      videoName={item.course.videoName}
+                      createdAt={item.course.createdAt}
+                      updatedAt={item.course.updatedAt}
+                      remainingTime={item.remainingTime}
+                      secondLeft={item.secondLeft}
+                      playlistIndex={item.playlistIndex}
+                      completePercentage={item.completePercentage}
+                      video_cover_img={item.course.video_cover_img}
+                      completed="true"
+                      style="big"/>
+                      )}
+                
+             
+              
              
          
              </Row>
@@ -75,4 +129,4 @@ class myLearning extends Component {
     );
   }
 }
-export default myLearning;
+export default connect(mapStateToProps)(myLearning);
