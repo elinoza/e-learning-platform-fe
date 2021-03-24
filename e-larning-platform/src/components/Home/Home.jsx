@@ -157,7 +157,7 @@ class Home extends Component {
           <Carousel.Item className="carousel-item m-3">
             <img
               className="d-block w-100 bg-image"
-              src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
+              src={course.video_cover_img}
               alt="First slide"
             />
             <Carousel.Caption className="d-flex flex-row justify-content-between  ">
@@ -183,7 +183,7 @@ class Home extends Component {
                 </h3>
                 <div className="d-flex">
                   <Avatar
-                    src="https://upload.wikimedia.org/wikipedia/en/d/d7/Random_person_image.png"
+                    src= {course.tutor.tutorImg}
                     className="navbar-logo m-0 mt-1 p-0 d-inline"
                   />
                   <div>
@@ -208,8 +208,10 @@ class Home extends Component {
                 {" "}
                 <img
                   className="d-block w-100 "
-                  src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg"
-                  alt="First slide"
+                  src= {course.video_cover_img}
+                  alt="tiny img"
+                  style={{ height: "13vw",
+                 objectFit: "cover"}}
                 />
               </div>
             </Carousel.Caption>
@@ -333,6 +335,7 @@ class Home extends Component {
       <div className="my-5 ">
         <h4>Top Picks For Hilal</h4>
         <MultiCarousel 
+         
         title="top picks" category="software"/>
         </div>
 

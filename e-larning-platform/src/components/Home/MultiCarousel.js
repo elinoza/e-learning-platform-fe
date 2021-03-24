@@ -46,13 +46,14 @@ render(){
       <Carousel className="multiple-carousel" itemsToShow={3}>
         {courses && courses.map(item => 
            <Recommended 
+      
            courseId ={item._id} 
            tutorName={item.tutor.tutorName}
            tutorProfession={item.tutor.tutorProfession}
            videoName={item.videoName}
            createdAt={item.createdAt}
            duration={item.duration}
-           tutorImg={item.tutorImg}
+           tutorImg={item.tutor.tutorImg}
            videoInfo={item.videoInfo}
           //  remainingTime={item.remainingTime}
           //  secondLeft={item.secondLeft}

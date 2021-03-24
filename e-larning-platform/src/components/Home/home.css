@@ -94,7 +94,7 @@ color:#046097}
 
 
 .recommendation-card:hover{
-  
+  cursor:pointer;
   transform: scale(1.1);
   border:0.2px solid #DEE2E6;
   

@@ -22,10 +22,10 @@ function App(props) {
       {console.log(props.history.location.pathname)}
       <Route exact path="/" component={Login} />
       <Route exact path="/register" component={Register} />
-      <Route exact path="/home" component={Home} />
+      <Route  exact path="/home" component={Home}/>
       <Route exact path="/me" component={myLearning} />
-      <Route exact path="/learn" component={Learn} />
-      
+      <Route exact path="/learn/:courseId" component={Learn} />
+     
       
       </Router>
    

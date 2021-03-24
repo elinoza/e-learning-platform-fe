@@ -15,7 +15,10 @@ Card
 import { BsPlay ,BsBookmark,BsBookmarkFill} from "react-icons/bs";
 import { Avatar } from "@material-ui/core";
 import "./home.css";
+import {compose} from "redux";
+import { withRouter } from "react-router-dom"; 
 import { connect } from "react-redux";
+
 
 const mapStateToProps = (state) => state;
 
@@ -56,6 +59,7 @@ class Recommended extends Component {
   state = {
     showDetail:false
   };
+
   handleHover=()=>{
     this.setState({showDetail:!this.state.showDetail})
   }
@@ -91,7 +95,7 @@ class Recommended extends Component {
     try {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/videos/save/"+courseId, {
+      const response = await fetch(url + "/videos/unsave/"+courseId, {
         method: 'POST', 
         headers: {
           Authorization: "Bearer " + token,
@@ -128,17 +132,19 @@ class Recommended extends Component {
     videoName,
     duration,
     createdAt,video_cover_img}=this.props
-
+   
     return (
+      
       <>
-     
-     {console.log("find",savedVideos.find( savedItem => savedItem._id===courseId))}
-<Card className="recommendation-card" style={{ width: '18rem' }} onMouseEnter={
+
+<Card className="recommendation-card" style={{ width: '18rem' }} 
+onClick={()=>this.props.history.push(`/learn/${courseId}`)}
+onMouseEnter={
       this.handleHover
      } onMouseLeave={
    this.handleHover
      }>
-<Card.Img variant="top" src={video_cover_img } style={{ height: "15vw",
+<Card.Img variant="top" src={video_cover_img } style={{ height: "13vw",
               objectFit: "cover"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold"  }}
@@ -221,10 +227,14 @@ Save
 </Card.Body>
 </Card>
 
+
         
      
       </>
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps) (Recommended);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Recommended);
