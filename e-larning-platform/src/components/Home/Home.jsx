@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_ME",
           payload: me,
         });
-        console.log("me", me);
+        console.log("me endpoint", me);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_MY_PROGRESS",
           payload: myLearning ,
         });
-        console.log("myLearning ", myLearning );
+        console.log("myLearning endpoint ", myLearning );
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -98,7 +98,7 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_COURSES",
           payload: courses ,
         });
-        console.log("courses ", courses );
+        console.log("courses /videos endpoint ", courses );
       } else {
         dispatch({
           type: "SET_ERROR",

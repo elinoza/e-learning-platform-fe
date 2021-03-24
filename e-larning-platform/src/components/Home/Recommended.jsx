@@ -12,58 +12,136 @@ import {
 Card
 } from "react-bootstrap";
 
-import { BsPlay ,BsBookmark} from "react-icons/bs";
-
+import { BsPlay ,BsBookmark,BsBookmarkFill} from "react-icons/bs";
 import { Avatar } from "@material-ui/core";
-
-
-
 import "./home.css";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => state;
+
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchMewithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const me = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_ME",
+          payload: me,
+        });
+        console.log("me endpoint", me);
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: me,
+        });
+      }
+    }),
+
+});
+
+
+
 
 class Recommended extends Component {
   state = {
-    showDetail:false,
-    courses:[]
+    showDetail:false
   };
   handleHover=()=>{
     this.setState({showDetail:!this.state.showDetail})
   }
 
-componentDidMount=async()=>{
-  const token = localStorage.getItem("token");
-  const url = process.env.REACT_APP_URL;
-  const response = await fetch(url + "/videos?category="+this.props.category, {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+  saveCourse = async (courseId)=> {
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos/save/"+courseId, {
+        method: 'POST', 
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      
+  
+      if (response.ok) {
+       this.props.fetchMewithThunk()
+       
+      } else {
+     console.log("save error",response)
+      }
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+  }}
 
-  const courses = await response.json();
+  unSaveCourse = async (courseId)=> {
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos/save/"+courseId, {
+        method: 'POST', 
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      
+  
+      if (response.ok) {
+       this.props.fetchMewithThunk()
+       
+      } else {
+     console.log("save error",response)
+      }
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+  }}
+  
 
-  if (response.ok) {
-   
-    console.log("courses", courses);
-    this.setState(courses)
-  } else {
-   
-    console.log(response)
-  }
-}
+
 
   render() {
-    const {courses}=this.state
+    const {savedVideos}= this.props.me.me
+    const {
+      courseId,
+    tutorName,
+    tutorProfession,
+    tutorImg,
+    videoInfo,
+    videoName,
+    duration,
+    createdAt,video_cover_img}=this.props
+
     return (
       <>
      
-
+     {console.log("find",savedVideos.find( savedItem => savedItem._id===courseId))}
 <Card className="recommendation-card" style={{ width: '18rem' }} onMouseEnter={
       this.handleHover
      } onMouseLeave={
    this.handleHover
      }>
-<Card.Img variant="top" src="https://mysominotes.files.wordpress.com/2017/07/powerpointlecture.jpg" className="border"/>
+<Card.Img variant="top" src={video_cover_img } style={{ height: "15vw",
+              objectFit: "cover"}} className="border"/>
 <p
-              style={{ fontSize: "12px", fontWeight: "bold" }}
+              style={{ fontSize: "12px", fontWeight: "bold"  }}
               className="text-muted mb-1 "
             >
 
@@ -72,13 +150,13 @@ componentDidMount=async()=>{
 <Card.Body>
 
 <Card.Text>
-Code Challenges: JavaScript
+{videoName}
 <p
               style={{ fontSize: "14px"}}
               className={this.state.showDetail === true ? "d-none text-muted mt-1 mb-0" :"d-block"} 
             >
 
-            By: Christina Gordon
+            By: {tutorName}
             </p>
             <div className= {this.state.showDetail === true ? "d-block" :"d-none"} 
            
@@ -88,11 +166,11 @@ Code Challenges: JavaScript
               style={{ fontSize: "12px", fontWeight: "bold" }}
               className=" mb-0"
             >
-              Intermediate . 48 m 48 s left .Dec/1 2020
+              Intermediate .{duration} .{createdAt}
             </p>
             <div className="d-flex my-2">
       <Avatar
-        src="https://upload.wikimedia.org/wikipedia/en/d/d7/Random_person_image.png"
+        src={tutorImg}
         className="navbar-logo m-0 mt-1 p-0 d-inline"
       />
       <div>
@@ -100,14 +178,13 @@ Code Challenges: JavaScript
         <p
           style={{ fontSize: "12px" }}
           className="d-block ml-1 mb-0 p-0 "
-        >
-          Dorie Clark
+        >{tutorName}
         </p>
         <p
           style={{ fontSize: "12px" }}
           className="d-block ml-1 mb-0 p-0 "
         >
-          Professor of Something
+          {tutorProfession}
         </p>
       </div>
     </div>
@@ -117,7 +194,7 @@ Code Challenges: JavaScript
               className="text-muted mt-1 mb-0"
             >
 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam rem eveniet culpa enim a nostrum. Natus accusantium recusandae labore accusamus, voluptatum quas mollitia dolorem quos consectetur dolor est molestias.
+           {videoInfo}
             </p>
             <div className="d-flex">
             <p
@@ -128,9 +205,12 @@ Code Challenges: JavaScript
            1.787 Learners
             </p>
 
-<Button className="SaveButton ml-auto"  size="sm"><BsBookmark/>
+           {savedVideos && savedVideos.find( savedItem => savedItem._id===courseId)?
+<Button className="SaveButton ml-auto"  onClick={()=>this.unSaveCourse(courseId)} size="sm"><BsBookmarkFill/>
+Saved
+</Button>: <Button className="SaveButton ml-auto"  onClick={()=>this.saveCourse(courseId)} size="sm"><BsBookmark/>
 Save
-</Button>
+</Button> }
             </div>
 
             </div>
@@ -147,4 +227,4 @@ Save
     );
   }
 }
-export default Recommended;
+export default connect(mapStateToProps, mapDispatchToProps) (Recommended);
