@@ -16,6 +16,7 @@ class VideoNavBar extends Component {
  
 
   render() {
+    const {currentCourse}=this.props
     return (
       <>
         <Navbar id="videoNavbar" className="  py-1 " expand="lg">
@@ -31,7 +32,7 @@ class VideoNavBar extends Component {
           }
 
           <div className="mr-auto ">
-            <p style={{ fontWeight: "bold" }}>Course Name</p>
+            <p style={{ fontWeight: "bold" }}>{currentCourse.videoName}</p>
             <p style={{ color: "#aeaeaf" }}>Content Name</p>
           </div>
 

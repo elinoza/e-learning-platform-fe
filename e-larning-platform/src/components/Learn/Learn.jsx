@@ -19,6 +19,68 @@ import SideBar  from "./SideBar"
 import "./Learn.css";
 
 
+import { connect } from "react-redux";
+
+
+const mapStateToProps = (state) => state;
+
+const mapDispatchToProps = (dispatch) => ({
+
+    fetchTheCoursewithThunk: (courseId) =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos/" + courseId, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const currentCourse= await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_CURRENT_COURSE",
+          payload:currentCourse ,
+        });
+        console.log("currentCourse ", currentCourse );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: currentCourse ,
+        });
+      }
+    }),
+    fetchMyCourseProgress: (courseId) =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos/" + courseId, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const progress= await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_COURSE_PROGRESS",
+          payload:progress ,
+        });
+        console.log("progress ", progress );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: progress ,
+        });
+      }
+    }),
+
+   
+ });
+   
+
 
 
 const videoJsOptions = {
@@ -44,8 +106,16 @@ class Learn extends Component {
     showSideBar:true
    
 };
+componentDidMount = () => {
+ let courseId=this.props.match.params.courseId
+  this.props.fetchTheCoursewithThunk(courseId)
+  this.props.fetchMyCourseProgress(courseId)
 
+}
   render() {
+    const {currentCourse,currentCourseProgress}=this.props.player
+
+    console.log(this.props.player)
     return (
       <>
      
@@ -55,7 +125,7 @@ class Learn extends Component {
         <Row id="Main" style={{marginTop:"52px"}} className={this.state.showSideBar===true ? "show" :""} >
           <Col xs={12} className="player-col p-0">
           
-         <VideoNavBar />
+         <VideoNavBar currentCourse={currentCourse}/>
           <Videojs {...videoJsOptions} />
          
           
@@ -69,7 +139,7 @@ class Learn extends Component {
                   className=" d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
-                   <OverView/>
+                   <OverView />
                    </Tab>
                   <Tab eventKey="qa" title="QA ">
                  <Comments/>
@@ -90,4 +160,4 @@ class Learn extends Component {
     );
   }
 }
-export default Learn;
+export default connect(mapStateToProps, mapDispatchToProps)(Learn);;

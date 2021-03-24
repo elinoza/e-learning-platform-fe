@@ -19,13 +19,14 @@ import Footer from "../Footer/Footer";
 
 
 import { GiTrophyCup } from "react-icons/gi";
-import { connect } from "react-redux";
+
 
 import { Link } from "react-router-dom"
 
 import { Avatar } from "@material-ui/core";
 import { Line, Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
+import { connect } from "react-redux";
 
 
 const mapStateToProps = (state) => state;

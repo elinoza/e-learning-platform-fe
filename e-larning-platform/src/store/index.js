@@ -1,6 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import coursesReducers from "../reducers/courses";
-// import Reducers from "../reducers/users";
+import playerReducers from "../reducers/player";
 import meReducers from "../reducers/me";
 
 import thunk from "redux-thunk";
@@ -14,11 +14,12 @@ export const initialState = {
  
   },
 
-//   users: {
-//     users: [],
-//     single_user: {},
-//     single_user_id: "",
-//   },
+player:{
+    currentCourse:{},
+    currentCourseProgress:{}
+  },
+
+
 
   courses: [],
 };
@@ -27,6 +28,7 @@ const combinedReducer = combineReducers({
 //   users: usersReducers,
   me: meReducers,
  courses: coursesReducers,
+ player:playerReducers
 });
 
 export default function configureStore() {
