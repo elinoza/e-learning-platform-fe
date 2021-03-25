@@ -5,7 +5,7 @@ import Notes from "./Notes";
 import Comments from "./Comments";
 import OverView from "./overView";
 import VideoNavBar from "./VideoNavBar";
-import Videojs from "./Video.js";
+import Videojs from "./Video";
 import SideBar from "./SideBar";
 
 import "./Learn.css";
@@ -70,6 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 
+
 const videoJsOptions = {
   autoplay: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
@@ -77,6 +78,7 @@ const videoJsOptions = {
   controls: true,
   responsive: true,
   preload: "metadata",
+
 
   // ,sources: [
   //   {
@@ -89,7 +91,7 @@ const videoJsOptions = {
 class Learn extends Component {
   state = {
     showSideBar: true,
-    isProgressed:false
+    
   };
 
   componentDidMount = () => {
@@ -100,7 +102,7 @@ class Learn extends Component {
   render() {
     const { currentCourse, currentCourseProgress } = this.props.player;
    
-
+   
     console.log(this.props.player);
     return (
       
@@ -116,11 +118,14 @@ class Learn extends Component {
         >
           <Col xs={12} className="player-col p-0">
             <VideoNavBar currentCourse={currentCourse} />
+            {currentCourse && currentCourse._id!== undefined &&
             <Videojs
               {...videoJsOptions}
               currentCourse={currentCourse}
-              currentCourseProgress={currentCourseProgress}
-            />
+           
+              currentPlaylist={currentCourse.playList}
+             
+            /> }
           </Col>
           <Col xs={12} className="p-0">
             <div className="learn">
@@ -131,7 +136,7 @@ class Learn extends Component {
                   className=" d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
-                    <OverView />
+                    <OverView currentCourse={currentCourse}/>
                   </Tab>
                   <Tab eventKey="qa" title="QA ">
                     <Comments />
