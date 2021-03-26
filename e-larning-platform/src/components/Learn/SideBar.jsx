@@ -22,6 +22,18 @@ class SideBar extends Component {
     this.setState({showSideBar:true})
 }
 
+findCompletedContent=(activeIndex,index)=>{
+
+  const isLargeNumber = (element) => activeIndex === element;
+ let firstMatch= this.props.player.currentCourse.playList.findIndex(isLargeNumber)
+ console.log("findCompletedContent,",firstMatch)
+ if(index<firstMatch){
+   return true
+ }
+
+
+
+}
   render() {
     const { currentCourse, currentCourseProgress} = this.props.player;
     const activeIndex=currentCourseProgress.playlistIndex
@@ -41,16 +53,17 @@ class SideBar extends Component {
 
 { currentCourse.playList && currentCourse.playList.map((item,index)=>
 
-            
+ 
+       
+
             <li className={ activeIndex === index ? "activeContent d-flex": "d-flex" } >
-            {!this.state.isCompleted ? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
+            {index >= activeIndex ? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
             <div><p className="m-0">{item.contentName}</p>
             <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
             </div> <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
-          
-              </li>
+           </li>
 
-)  }
+            )  }
          
             </ul>
         </div>
