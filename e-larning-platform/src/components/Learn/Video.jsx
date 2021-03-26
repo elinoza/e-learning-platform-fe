@@ -38,8 +38,8 @@ class Video extends React.Component {
 
   componentDidMount() {
 
-     console.log("current----",this.source())
-    // instantiate Video.js
+     console.log("current----",this.props.currentPlaylist)
+    // inititate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       let myPlayer = this;
 console.log("hello",myPlayer.currentCourse)
