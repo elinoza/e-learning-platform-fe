@@ -61,11 +61,13 @@ const mapDispatchToProps = (dispatch) => ({
         
 
         console.log("progress ", progress);
+       
       } else {
         dispatch({
           type: "SET_ERROR",
           payload: progress,
         });
+    
       }
     }),
 });
@@ -93,7 +95,13 @@ class Learn extends Component {
     showSideBar: true,
     
   };
+  triggerParentComponentforRedux=(setMode)=>{
+    if(setMode=== true){
+      let courseId = this.props.match.params.courseId;
+      this.props.fetchMyCourseProgress(courseId);}
+    
 
+  }
   componentDidMount = () => {
     let courseId = this.props.match.params.courseId;
     this.props.fetchTheCoursewithThunk(courseId);
@@ -119,12 +127,14 @@ class Learn extends Component {
         >
           <Col xs={12} className="player-col p-0">
             <VideoNavBar currentCourse={currentCourse} />
-            {currentCourse && currentCourse._id!== undefined &&
+
+          
+           {currentCourseProgress && currentCourse._id !==undefined  && currentCourseProgress._id !==undefined && 
             <Video
+            currentProgress={currentCourseProgress}
+            currentCourse={currentCourse}
               {...videoJsOptions}
-              currentCourse={currentCourse}
-           
-              currentProgress={currentCourseProgress}
+              triggerParentComponentforRedux={this.triggerParentComponentforRedux}
              
             /> }
           </Col>

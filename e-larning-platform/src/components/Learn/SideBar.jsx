@@ -8,7 +8,10 @@ import {FcCheckmark} from 'react-icons/fc';
 import {BsBookmark } from 'react-icons/bs';
 
 import "./Learn.css";
+import { connect } from "react-redux";
 
+
+const mapStateToProps = (state) => state;
 class SideBar extends Component {
   state = {
     showSideBar:true,
@@ -20,6 +23,8 @@ class SideBar extends Component {
 }
 
   render() {
+    const { currentCourse, currentCourseProgress} = this.props.player;
+    console.log("sidebar",currentCourse.playList)
     return (
       <>
         <div className= { this.state.showSideBar ?   "sidebar showSideBar" : " sidebar closedSideBar" } >
@@ -32,6 +37,9 @@ class SideBar extends Component {
         
           
             <ul className="m-0 p-0">
+
+
+            
             <li className="d-flex">
             {!this.state.isCompleted ? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
             <div><p className="m-0">Introduction</p>
@@ -46,4 +54,4 @@ class SideBar extends Component {
     );
   }
 }
-export default SideBar;
+export default connect(mapStateToProps)(SideBar);

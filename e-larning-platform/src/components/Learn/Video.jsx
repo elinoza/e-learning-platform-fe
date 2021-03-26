@@ -23,59 +23,55 @@ import "./player.css";
 
 class Video extends React.Component {
 
-  postProgress= async (courseId,currentIndex)=> {
 
-    let data= {
-      playlistIndex:currentIndex
 
-    }
+  triggerParentComponentforRedux=()=>{
+    this.props.triggerParentComponentforRedux(true)
+
+  }
+
+  postProgress = async (courseId, currentIndex) => {
+    let data = {
+      playlistIndex: currentIndex,
+    };
     try {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/users/myLearning/"+courseId, {
-        method: 'POST', 
+      const response = await fetch(url + "/users/myLearning/" + courseId, {
+        method: "POST",
         headers: {
           Authorization: "Bearer " + token,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
-        
+        body: JSON.stringify(data),
       });
-  
-      
-  
+
       if (response.ok) {
         console.log("progress saved to server")
-       
+        this.triggerParentComponentforRedux()
       } else {
-     console.log("save error",response)
+        console.log("save error", response);
       }
-  
-      
     } catch (error) {
-      console.log(error)
-      
-  }}
-
+      console.log(error);
+    }
+  };
 
 
   componentDidMount() {
     console.log("current----", this.props.currentCourse);
 
     const self = this; // thıs = <Vıdeo>
-    let courseId=self.props.currentCourse._id
+    let courseId = self.props.currentCourse._id;
     const myPlaylist = self.props.currentCourse.playList.map(
       ({ src, type }) => {
         return {
           sources: [{ src, type }],
-       
         };
       }
     );
-    const currentProgress= self.props.currentProgress
 
-    console.log("my playlist:",{ myPlaylist})
-    
+    console.log("my playlist:", { myPlaylist });
 
     // inititate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
@@ -84,15 +80,20 @@ class Video extends React.Component {
       // thıs  = onPlayerReady
       // self = <Vıdeo>
 
-  
       console.log("onPlayerReady", this);
       ///set default value scale between 0-1
       let defaultVolume = 0.3;
       myPlayer.volume(defaultVolume);
-  
-      // let currentItem = parseInt(localStorage.getItem("playlistIndex"));
 
-      let currentItem= currentProgress.currentIndex
+ 
+
+      let currentProgress = self.props.currentProgress;
+      console.log("currentItem from database", currentProgress.playlistIndex);
+
+      //WHICH INDEX OF PLAYLIST USER'PROGRESS COMING FROM BACKEND AND SETTING THE PLAYER BASED ON IT
+      let currentItem = currentProgress.playlistIndex;
+      console.log("currentItem fcheck", currentItem);
+
       if (!currentItem) {
         currentItem = 0;
       }
@@ -107,22 +108,41 @@ class Video extends React.Component {
         console.log("metadata loadedddd", myPlayer.duration());
         console.log("current source", myPlayer.currentSource().src);
 
+        //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
         let currentIndex = myPlayer.playlist.currentIndex();
-        self.postProgress(courseId,currentIndex)
-        console.log("currentIndex", currentIndex);
+        if (currentItem !== currentIndex) {
+          self.postProgress(courseId, currentIndex);
+        }
+
+        console.log("currentIndex in loadedmetadata function", currentIndex);
+
+
       });
 
       ///  SETTING CURRENT TIME AFTER REFRESHING PAGE OR STH FROM LOCAL STORAGE
-      let currentTime = localStorage.getItem("secondLeft");
+        let resumeInfo = JSON.parse(window.localStorage.getItem('resumeInfo'));
+          console.log(resumeInfo.courseId)
 
-      myPlayer.currentTime(currentTime);
+          if(courseId=== resumeInfo.courseId){
+            let currentTime = resumeInfo.secondLeft;
+            myPlayer.currentTime(currentTime);
+          }
+       
 
       // whenever video progressin time is updated;
       myPlayer.on("timeupdate", function () {
         let currentTime = myPlayer.currentTime();
-        localStorage.setItem("secondLeft", currentTime);
-        let currentItem = myPlayer.playlist.currentItem();
-        localStorage.setItem("playlistIndex", currentItem);
+
+        let resumeInfo = {
+          secondLeft: currentTime,
+          courseId: courseId,
+        };
+
+        window.localStorage.setItem("resumeInfo", JSON.stringify(resumeInfo));
+
+        // localStorage.setItem("secondLeft", currentTime);
+       
+        // not necessary anymore, using backend --->localStorage.setItem("playlistIndex", currentItem);
 
         // console.log("remaining time:",myPlayer.remainingTime())
         // console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100)
@@ -131,7 +151,7 @@ class Video extends React.Component {
       myPlayer.on("duringplaylistchange", function () {
         // Remember, this will not trigger a "playlistsorted" event!
       });
-
+      //it is triggered when play change except the first time
       myPlayer.on("playlistchange", function () {});
     });
   }
@@ -162,7 +182,7 @@ class Video extends React.Component {
 
   // use `ref` to give Video JS a reference to the video DOM element: https://reactjs.org/docs/refs-and-the-dom
   render() {
-    console.log(this.props.currentCourse);
+    console.log("from vifdeo render", this.props.currentProgress);
     return (
       <div data-vjs-player>
         <video
