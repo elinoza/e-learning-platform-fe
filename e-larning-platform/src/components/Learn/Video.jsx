@@ -23,56 +23,81 @@ import "./player.css";
 
 class Video extends React.Component {
 
+  postProgress= async (courseId,currentIndex)=> {
 
-  source = (myPlayer,currentItem) => {
- 
-     let x =`     sources: [
-            {
-              src: "http://media.w3.org/2010/05/sintel/trailer.mp4",
-              type: "video/mp4",
-            },
-          ]`
-     
-  return this.props.currentPlaylist
-  };
+    let data= {
+      playlistIndex:currentIndex
+
+    }
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/myLearning/"+courseId, {
+        method: 'POST', 
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+        
+      });
+  
+      
+  
+      if (response.ok) {
+        console.log("progress saved to server")
+       
+      } else {
+     console.log("save error",response)
+      }
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+  }}
+
+
 
   componentDidMount() {
+    console.log("current----", this.props.currentCourse);
 
-     console.log("current----",this.props.currentPlaylist)
+    const self = this; // thıs = <Vıdeo>
+    let courseId=self.props.currentCourse._id
+    const myPlaylist = self.props.currentCourse.playList.map(
+      ({ src, type }) => {
+        return {
+          sources: [{ src, type }],
+       
+        };
+      }
+    );
+    const currentProgress= self.props.currentProgress
+
+    console.log("my playlist:",{ myPlaylist})
+    
+
     // inititate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       let myPlayer = this;
-console.log("hello",myPlayer.currentCourse)
-      console.log("onPlayerReady", myPlayer.isReady_);
+
+      // thıs  = onPlayerReady
+      // self = <Vıdeo>
+
+  
+      console.log("onPlayerReady", this);
       ///set default value scale between 0-1
       let defaultVolume = 0.3;
       myPlayer.volume(defaultVolume);
-      //  let currentItem=this.props.currentCourseProgress
-      // let currentItem
-      // if (this.props.currentCourseProgress !== null) {
-      // currentItem= this.props.currentCourseProgress.playlistIndex }
-      // else { currentItem=0 }
-      let currentItem = parseInt(localStorage.getItem("playlistIndex"));
+  
+      // let currentItem = parseInt(localStorage.getItem("playlistIndex"));
+
+      let currentItem= currentProgress.currentIndex
       if (!currentItem) {
         currentItem = 0;
       }
 
-      // console.log(this.props.currentPlaylist)
-      //PLAYLIST 
-      myPlayer.playlist(
-        [
-          {
-            sources: [
-              {
-                src: "http://media.w3.org/2010/05/sintel/trailer.mp4",
-                type: "video/mp4",
-              },
-            ],
-          },
-        ],
-  
-        currentItem
-      );
+      myPlayer.playlist(myPlaylist, currentItem);
 
       // Play through the playlist automatically.
       myPlayer.playlist.autoadvance(0);
@@ -83,8 +108,7 @@ console.log("hello",myPlayer.currentCourse)
         console.log("current source", myPlayer.currentSource().src);
 
         let currentIndex = myPlayer.playlist.currentIndex();
-
-        console.log("currentItem", currentItem);
+        self.postProgress(courseId,currentIndex)
         console.log("currentIndex", currentIndex);
       });
 
@@ -138,7 +162,7 @@ console.log("hello",myPlayer.currentCourse)
 
   // use `ref` to give Video JS a reference to the video DOM element: https://reactjs.org/docs/refs-and-the-dom
   render() {
-    console.log(this.props.currentPlaylist);
+    console.log(this.props.currentCourse);
     return (
       <div data-vjs-player>
         <video

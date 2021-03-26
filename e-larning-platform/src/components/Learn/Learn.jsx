@@ -5,7 +5,7 @@ import Notes from "./Notes";
 import Comments from "./Comments";
 import OverView from "./overView";
 import VideoNavBar from "./VideoNavBar";
-import Videojs from "./Video";
+import Video from "./Video";
 import SideBar from "./SideBar";
 
 import "./Learn.css";
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_CURRENT_COURSE",
           payload: currentCourse,
         });
-        console.log("currentCourse ", currentCourse);
+        console.log("currentCourse from learn component ", currentCourse);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -101,6 +101,7 @@ class Learn extends Component {
   };
   render() {
     const { currentCourse, currentCourseProgress } = this.props.player;
+
    
    
     console.log(this.props.player);
@@ -119,11 +120,11 @@ class Learn extends Component {
           <Col xs={12} className="player-col p-0">
             <VideoNavBar currentCourse={currentCourse} />
             {currentCourse && currentCourse._id!== undefined &&
-            <Videojs
+            <Video
               {...videoJsOptions}
               currentCourse={currentCourse}
            
-              currentPlaylist={currentCourse.playList}
+              currentProgress={currentCourseProgress}
              
             /> }
           </Col>
