@@ -208,6 +208,7 @@ ul.related-to-course li p {
     font-weight:bold;
     width: 100%;
     display: flex;
+    cursor:pointer;
    
   }
    
@@ -219,6 +220,10 @@ ul.related-to-course li p {
   }
   .sidebar li:hover {
     color: #f1f1f1;
+  }
+
+  .sidebar .activeContent{
+   background-color: rgb(23, 23, 23)
   }
 
   .sidebar .closebtn {

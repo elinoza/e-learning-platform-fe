@@ -24,6 +24,7 @@ class SideBar extends Component {
 
   render() {
     const { currentCourse, currentCourseProgress} = this.props.player;
+    const activeIndex=currentCourseProgress.playlistIndex
     console.log("sidebar",currentCourse.playList)
     return (
       <>
@@ -38,15 +39,18 @@ class SideBar extends Component {
           
             <ul className="m-0 p-0">
 
+{ currentCourse.playList && currentCourse.playList.map((item,index)=>
 
             
-            <li className="d-flex">
+            <li className={ activeIndex === index ? "activeContent d-flex": "d-flex" } >
             {!this.state.isCompleted ? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
-            <div><p className="m-0">Introduction</p>
+            <div><p className="m-0">{item.contentName}</p>
             <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
-            </div>  <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
+            </div> <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
           
               </li>
+
+)  }
          
             </ul>
         </div>
