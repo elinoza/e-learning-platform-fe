@@ -72,7 +72,7 @@ let data;
         try {
           const token = localStorage.getItem("token");
           const url = process.env.REACT_APP_URL;
-          const response = await fetch(url + "/users/myLearning/" + courseId, {
+          const response = await fetch(url + "/users/myLearning/" + courseId +"/complete", {
             method: "POST",
             headers: {
               Authorization: "Bearer " + token,
