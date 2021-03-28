@@ -27,23 +27,14 @@ class Video extends React.Component {
   };
 
 
-  postProgress = async (courseId, currentIndex,isCompleted) => {
+  postProgress = async (courseId, currentIndex) => {
 let data;
-    if(isCompleted){
-
-     data = {
-        playlistIndex: currentIndex+1,
-        completed:{
-          index:currentIndex,
-          isCompleted }
-      };
-    }
-    else{
+ 
   data = {
-        playlistIndex: currentIndex+1,
+        playlistIndex: currentIndex
        
     }
-  }
+  
     
     try {
       const token = localStorage.getItem("token");
@@ -67,6 +58,39 @@ let data;
       console.log(error);
     }
   };
+
+  postCompleteProgress = async (courseId, currentIndex) => {
+
+  
+    
+       let   data = {
+         index:currentIndex
+          };
+     
+      
+        
+        try {
+          const token = localStorage.getItem("token");
+          const url = process.env.REACT_APP_URL;
+          const response = await fetch(url + "/users/myLearning/" + courseId, {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+    
+          if (response.ok) {
+            console.log("progress saved to server");
+            this.triggerParentComponentforRedux();
+          } else {
+            console.log("save error", response);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
   componentDidMount() {
     console.log("current----", this.props.currentCourse);
@@ -117,7 +141,13 @@ let data;
         console.log("metadata loadedddd", myPlayer.duration());
         console.log("current source", myPlayer.currentSource().src);
 
+        //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
         let currentIndex = myPlayer.playlist.currentIndex();
+        if (currentItem !== currentIndex) {
+          self.postProgress(courseId, currentIndex);
+        }
+
+        
 
         console.log("currentIndex in loadedmetadata function", currentIndex);
       });
@@ -181,7 +211,9 @@ console.log("Completed", isCompleted)
 //WHENEVER INDEX CHANGE && END POST PROGRESS TO THE BACKEND--->
 let currentIndex = myPlayer.playlist.currentIndex();
 console.log("ended",currentIndex,currentItem)
-    self.postProgress(courseId, currentIndex,isCompleted)
+
+if(isCompleted){self.postCompleteProgress(courseId, currentIndex)}
+    
  
 
       });
