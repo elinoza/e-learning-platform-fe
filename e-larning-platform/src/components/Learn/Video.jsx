@@ -26,16 +26,16 @@ class Video extends React.Component {
     this.props.triggerParentComponentforRedux(true);
   };
 
-
   postProgress = async (courseId, currentIndex) => {
-let data;
- 
-  data = {
-        playlistIndex: currentIndex
-       
+    let data;
+    if (currentIndex) {
+      data = {
+        playlistIndex: currentIndex,
+      };
+    } else {
+      data = {};
     }
-  
-    
+
     try {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
@@ -60,37 +60,35 @@ let data;
   };
 
   postCompleteProgress = async (courseId, currentIndex) => {
+    let data = {
+      index: currentIndex,
+    };
 
-  
-    
-       let   data = {
-         index:currentIndex
-          };
-     
-      
-        
-        try {
-          const token = localStorage.getItem("token");
-          const url = process.env.REACT_APP_URL;
-          const response = await fetch(url + "/users/myLearning/" + courseId +"/complete", {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
-    
-          if (response.ok) {
-            console.log("progress saved to server");
-            this.triggerParentComponentforRedux();
-          } else {
-            console.log("save error", response);
-          }
-        } catch (error) {
-          console.log(error);
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(
+        url + "/users/myLearning/" + courseId + "/complete",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         }
-      };
+      );
+
+      if (response.ok) {
+        console.log("Complete progress saved to server");
+        this.triggerParentComponentforRedux();
+      } else {
+        console.log("save error", response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   componentDidMount() {
     console.log("current----", this.props.currentCourse);
@@ -115,6 +113,7 @@ let data;
       // self = <Vıdeo>
 
       console.log("onPlayerReady", this);
+
       ///set default value scale between 0-1
       let defaultVolume = 0.3;
       myPlayer.volume(defaultVolume);
@@ -128,18 +127,19 @@ let data;
 
       if (!currentItem) {
         currentItem = 0;
+      
       }
-
+      self.postProgress(courseId)
       myPlayer.playlist(myPlaylist, currentItem);
-
+      
       // Play through the playlist automatically.
       myPlayer.playlist.autoadvance(0);
 
       // Metadata's loaded before video starts.
       myPlayer.on("loadedmetadata", function () {
-       
         console.log("metadata loadedddd", myPlayer.duration());
         console.log("current source", myPlayer.currentSource().src);
+
 
         //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
         let currentIndex = myPlayer.playlist.currentIndex();
@@ -147,27 +147,27 @@ let data;
           self.postProgress(courseId, currentIndex);
         }
 
-        
+        //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
 
         console.log("currentIndex in loadedmetadata function", currentIndex);
       });
 
       ///  SETTING CURRENT TIME AFTER REFRESHING PAGE OR STH FROM LOCAL STORAGE
       let resumeInfo = JSON.parse(window.localStorage.getItem("resumeInfo"));
-      console.log(resumeInfo.courseId);
 
-      if (courseId === resumeInfo.courseId) {
+      if (resumeInfo && courseId === resumeInfo.courseId) {
         let currentTime = resumeInfo.secondLeft;
         myPlayer.currentTime(currentTime);
       }
 
       // whenever video progressin time is updated;
       myPlayer.on("timeupdate", function () {
-
-
         //get current second of player to resume
 
         let currentTime = myPlayer.currentTime();
+        // if (currentTime === "60.00") {
+        //   self.postProgress(courseId);
+        // }
 
         let resumeInfo = {
           secondLeft: currentTime,
@@ -184,38 +184,36 @@ let data;
         // console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100)
       });
       myPlayer.on("ended", function () {
-                let played = myPlayer.played();
-          
-      
+        let played = myPlayer.played();
+
         //WHEN IT IS ended , CALCULATE THE TIME RANGE OF WATCHED, AND SUM THEM AND
         // IF IT IS MORE THAN DURATION IT MEANS COMPLETED
-        let duration=myPlayer.duration()
+        let duration = myPlayer.duration();
 
-        
-            let i;
-            let totalWatch=0
-            let isCompleted;
-for (i = 0; i < played.length; i++) {
-  console.log(played.start(i), played.end(i))
- let playedRange =  played.end(i) - played.start(i)
- totalWatch+=playedRange
+        let i;
+        let totalWatch = 0;
+        let isCompleted;
+        for (i = 0; i < played.length; i++) {
+          console.log(played.start(i), played.end(i));
+          let playedRange = played.end(i) - played.start(i);
+          totalWatch += playedRange;
+        }
+        console.log(duration, totalWatch);
 
- 
-}
-console.log( duration,totalWatch)
+        if (totalWatch >= duration) {
+          isCompleted = true;
+        } else {
+          isCompleted = false;
+        }
 
-if(totalWatch>= duration) { isCompleted =true}
-else {isCompleted =false}
+        console.log("Completed", isCompleted);
+        //WHENEVER INDEX CHANGE && END POST PROGRESS TO THE BACKEND--->
+        let currentIndex = myPlayer.playlist.currentIndex();
+        console.log("ended", currentIndex, currentItem);
 
-console.log("Completed", isCompleted)
-//WHENEVER INDEX CHANGE && END POST PROGRESS TO THE BACKEND--->
-let currentIndex = myPlayer.playlist.currentIndex();
-console.log("ended",currentIndex,currentItem)
-
-if(isCompleted){self.postCompleteProgress(courseId, currentIndex)}
-    
- 
-
+        if (isCompleted) {
+          self.postCompleteProgress(courseId, currentIndex);
+        }
       });
       myPlayer.on("duringplaylistchange", function () {
         // Remember, this will not trigger a "playlistsorted" event!
