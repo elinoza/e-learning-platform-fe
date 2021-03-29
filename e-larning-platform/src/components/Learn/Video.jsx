@@ -28,7 +28,7 @@ class Video extends React.Component {
 
   postProgress = async (courseId, currentIndex) => {
     let data;
-    if (currentIndex) {
+    if (Number.isInteger(currentIndex)) {
       data = {
         playlistIndex: currentIndex + 1,
       };
@@ -37,6 +37,7 @@ class Video extends React.Component {
     }
 
     try {
+      console.log("progress saved as data--->", JSON.stringify(data))
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
       const response = await fetch(url + "/users/myLearning/" + courseId, {
@@ -89,32 +90,28 @@ class Video extends React.Component {
     }
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.currentProgress.playlistIndex !==
-      this.props.currentProgress.playlistIndex
-    ) {
-    
-      
 
-      
-      console.log("props changed");
-  
-        }
-  }
-
-  play = () => {
-    const self = this; // thıs = <Vıdeo>
-    let courseId = self.props.currentCourse._id;
-    const myPlaylist = self.props.currentCourse.playList.map(
+  handlePlaylist=()=>{
+  console.log("handleplaylist function",this.props.currentCourse.playList)
+    let courseId = this.props.currentCourse._id;
+  let myplaylist= this.props.currentCourse.playList.map(
       ({ src, type }) => {
         return {
           sources: [{ src, type }],
         };
       }
     );
+    return myplaylist
+  }
 
-    console.log("my playlist:", { myPlaylist });
+  
+
+  play = () => {
+    const self = this; // thıs = <Vıdeo>
+    let courseId = self.props.currentCourse._id;
+    const myPlaylist = self.handlePlaylist()
+
+    console.log("my playlist:", myPlaylist );
 
     // inititate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
@@ -136,7 +133,8 @@ class Video extends React.Component {
       let currentItem = currentProgress.playlistIndex;
       console.log("currentItem fcheck", currentItem);
 
-      if (!currentItem) {
+      if (currentItem=== undefined) {
+        console.log("there is no current item")
         currentItem = 0;
         self.postProgress(courseId);
       }
@@ -225,7 +223,7 @@ class Video extends React.Component {
           self.postCompleteProgress(courseId, currentIndex);
         }
 
-        self.postProgress(courseId, currentIndex);
+        Number.isInteger(currentIndex) && self.postProgress(courseId, currentIndex);
       });
    
     });
@@ -244,17 +242,24 @@ class Video extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   // When a user moves from one title to the next, the VideoPlayer component will not be unmounted,
-  //   // instead its properties will be updated with the details of the new video. In this case,
-  //   // we can update the src of the existing player with the new video URL.
-  //   if (this.player) {
-  //     this.player.src({
-  //       type: newProps.video.mime_type,
-  //       src: newProps.video.video_url,
-  //     });
-  //   }
-  // }
+  componentWillReceiveProps(newProps) {
+    // When a user moves from one title to the next, the VideoPlayer component will not be unmounted,
+    // instead its properties will be updated with the details of the new video. In this case,
+    // we can update the src of the existing player with the new video URL.
+    
+    console.log("newProps,",newProps.currentProgress.playlistIndex)
+    if (this.player) {
+      const self= this
+      let myPlaylist = self.handlePlaylist()
+     let  newCurrentItem=newProps.currentProgress.playlistIndex
+
+      //     console.log("hello from props changin videoplayer")
+      this.player.playlist(myPlaylist, newCurrentItem);
+
+
+      this.player.playlist.autoadvance(0);
+    }
+  }
 
   // wrap the player in a div with a `data-vjs-player` attribute
   // so videojs won't create additional wrapper in the DOM

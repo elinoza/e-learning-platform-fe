@@ -129,7 +129,7 @@ class Learn extends Component {
             <VideoNavBar currentCourse={currentCourse} />
 
           
-           {currentCourseProgress  && currentCourse._id !==undefined  &&  
+           { currentCourse._id !==undefined   &&  
             <Video
             currentProgress={currentCourseProgress}
             currentCourse={currentCourse}
