@@ -90,7 +90,7 @@ class myLearning extends Component {
             <Row>
                
             {myProgress && myProgress.map(item=> 
-                     item.completePercentage===100 && 
+                     item.completePercentage===1 && 
                      <SingleCourse
                       courseId ={item._id} 
                       tutorName={item.course.tutor.tutorName}

@@ -34,7 +34,7 @@ class Video extends React.Component {
         totalWatch:totalWatch
       };
     } else {
-      data = {};
+      data = { };
     }
 
     try {
@@ -230,6 +230,7 @@ class Video extends React.Component {
         if (isCompleted) {
           self.postCompleteProgress(courseId, currentIndex);
         }
+        
 
         Number.isInteger(currentIndex) && self.postProgress(courseId, currentIndex,totalWatch);
       });

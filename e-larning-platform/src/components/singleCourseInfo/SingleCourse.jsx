@@ -65,7 +65,7 @@ class SingleCourse extends Component {
               className="text-muted mb-1 "
             >
 
-               COURSE . {remainingTime}
+               COURSE . {remainingTime} left
             </p>  }
 
             {this.props.style && 
@@ -76,10 +76,10 @@ class SingleCourse extends Component {
                         </p> }
                         {this.props.completed === "false" ?
                         <Line
-                          percent={completePercentage}
+                          percent={completePercentage*100}
                           strokeWidth="2.0"
                           strokeColor="#0573B1"
-                          className="w-50"
+                          className="w-75"
                         />: <p
                         style={{  fontSize:"14px" ,fontWeight:"bold", color:"#307B16"}}
                         className=" ml-2 mb-0 d-inline"

@@ -138,13 +138,13 @@ class Recommended extends Component {
       <>
 
 <Card className="recommendation-card" style={{ width: '18rem' }} 
-onClick={()=>this.props.history.push(`/learn/${courseId}`)}
+
 onMouseEnter={
       this.handleHover
      } onMouseLeave={
    this.handleHover
      }>
-<Card.Img variant="top" src={video_cover_img } style={{ height: "13vw",
+<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{ height: "13vw",
               objectFit: "cover"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold"  }}

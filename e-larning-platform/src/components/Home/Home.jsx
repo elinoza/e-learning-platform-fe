@@ -153,7 +153,7 @@ class Home extends Component {
     console.log("saved",savedVideos)
     return (
       <>
-        <Carousel style={{marginTop:"52px"}}>
+        <Carousel fade="true "style={{marginTop:"52px"}}>
           {courses && courses.map(course=> 
           <Carousel.Item className="carousel-item m-3">
             <img
@@ -340,11 +340,7 @@ class Home extends Component {
         title="top picks" category="software"/>
         </div>
 
-        <div className="my-5 ">
-        <h4>Because you watched java</h4>
-        <MultiCarousel 
-        title="java"/>
-        </div>
+    
         
         
          

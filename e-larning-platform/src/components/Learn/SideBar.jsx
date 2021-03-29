@@ -24,7 +24,10 @@ class SideBar extends Component {
     this.setState({showSideBar:true})
 }
 completed=(array,index)=>{
-  let completed= this.props.player.currentCourseProgress && array.find(item => item.index===index) 
+  let completed
+  if(array){  completed= this.props.player.currentCourseProgress && array.find(item => item.index===index) }
+  else{completed=false}
+ 
  
   return completed
 }
@@ -38,6 +41,8 @@ postProgress = async (courseId, currentIndex) => {
 
     data = {
       playlistIndex: currentIndex,
+      totalWatch:0
+
     };
 
 
@@ -54,7 +59,7 @@ postProgress = async (courseId, currentIndex) => {
     });
 
     if (response.ok) {
-      console.log("progress saved to server");
+      console.log("progress saved to server from sidebar");
       this.triggerParentComponentforRedux();
     } else {
       console.log("save error", response);
@@ -81,12 +86,13 @@ postProgress = async (courseId, currentIndex) => {
           
             <ul className="m-0 p-0">
 
-{ currentCourseProgress.completed && currentCourse.playList && currentCourse.playList.map((item,index)=>
+{ currentCourse.playList && currentCourse.playList.map((item,index)=>
 
 
        
 
             <li className={ activeIndex === index ? "activeContent d-flex": "d-flex" }  onClick={()=>this.postProgress(currentCourse._id,index)}>
+            
             { !this.completed(currentCourseProgress.completed,index)? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
             <div><p className="m-0">{item.contentName}</p>
             <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
