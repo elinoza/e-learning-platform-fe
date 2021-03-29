@@ -26,11 +26,12 @@ class Video extends React.Component {
     this.props.triggerParentComponentforRedux(true);
   };
 
-  postProgress = async (courseId, currentIndex) => {
+  postProgress = async (courseId, currentIndex,totalWatch) => {
     let data;
     if (Number.isInteger(currentIndex)) {
       data = {
         playlistIndex: currentIndex + 1,
+        totalWatch:totalWatch
       };
     } else {
       data = {};
@@ -133,8 +134,8 @@ class Video extends React.Component {
       let currentItem = currentProgress.playlistIndex;
       console.log("currentItem fcheck", currentItem,myPlaylist.length);
 
-    /// If user has already finished this course, index number= playlist length in database, so we should manipulate it here.
-      if (currentItem >= myPlaylist.length){ currentItem = 0; console.log("here------>",currentItem )}
+    // /// If user has already finished this course, index number= playlist length in database, so we should manipulate it here.
+    //   if (currentItem >= myPlaylist.length){ currentItem = 0; console.log("here------>",currentItem )}
 
 
       //If user havent started this course, this logic creates a new progress
@@ -230,7 +231,7 @@ class Video extends React.Component {
           self.postCompleteProgress(courseId, currentIndex);
         }
 
-        Number.isInteger(currentIndex) && self.postProgress(courseId, currentIndex);
+        Number.isInteger(currentIndex) && self.postProgress(courseId, currentIndex,totalWatch);
       });
    
     });
