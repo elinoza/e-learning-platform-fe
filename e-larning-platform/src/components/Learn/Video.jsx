@@ -131,13 +131,20 @@ class Video extends React.Component {
 
       //WHICH INDEX OF PLAYLIST USER'PROGRESS COMING FROM BACKEND AND SETTING THE PLAYER BASED ON IT
       let currentItem = currentProgress.playlistIndex;
-      console.log("currentItem fcheck", currentItem);
+      console.log("currentItem fcheck", currentItem,myPlaylist.length);
 
-      if (currentItem=== undefined) {
+    /// If user has already finished this course, index number= playlist length in database, so we should manipulate it here.
+      if (currentItem >= myPlaylist.length){ currentItem = 0; console.log("here------>",currentItem )}
+
+
+      //If user havent started this course, this logic creates a new progress
+      if (!Number.isInteger(currentItem)) {
         console.log("there is no current item")
         currentItem = 0;
         self.postProgress(courseId);
       }
+
+
 
       myPlayer.playlist(myPlaylist, currentItem);
 
@@ -217,7 +224,7 @@ class Video extends React.Component {
         console.log("Completed", isCompleted);
         //WHENEVER INDEX CHANGE && END POST PROGRESS TO THE BACKEND--->
         let currentIndex = myPlayer.playlist.currentIndex();
-        console.log("ended", currentIndex, currentItem);
+        console.log("ended", currentIndex, currentItem,totalWatch);
 
         if (isCompleted) {
           self.postCompleteProgress(courseId, currentIndex);
