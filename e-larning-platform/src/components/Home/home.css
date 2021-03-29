@@ -81,7 +81,8 @@ color:#046097}
   font-size:14px
 }
 
-.recommendation-card{
+/* .recommendation-card{
+
   border:none;
   transition:  0.3s;
   transition-timing-function:ease-in;
@@ -99,13 +100,58 @@ color:#046097}
   border:0.2px solid #DEE2E6;
   
   
-}
+} */
 
 
 .recommendation-card .card-body {
   padding:0px
  
 }
+
+
+.infos-container {
+  position: absolute;
+  right: 0;
+  left: 0;
+  
+  transform: translateY(-3.3rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+
+}
+
+
+
+.infos-content {
+
+  padding: 1rem 1.5rem;
+  padding-top: 38px;
+  
+  overflow: hidden;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+
+}
+
+
+.recommendation-card:hover  {
+
+  transform: scale(1.5);
+
+}
+
+.recommendation-card:hover .infos-container {
+  opacity: 1;
+  
+  pointer-events: initial;
+}
+
+
+
+
+
 
 .SaveButton{
   background-color:transparent;

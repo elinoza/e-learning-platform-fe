@@ -340,6 +340,51 @@ class Home extends Component {
         title="top picks" category="software"/>
         </div>
 
+        <div><Card className="position-relative" style={{ width: '18rem' }} 
+
+
+>    <div className="infos-container">
+              <div className="infos-content">
+           
+   <p>HELLO</p>
+
+          
+            </div>
+            </div>
+           
+    
+<Card.Img  variant="top" src="https://www.imgonline.com.ua/examples/random-pixels-wallpaper-big.jpg" style={{ height: "13vw",
+              objectFit: "cover"}} className="border"/>
+<p
+              style={{ fontSize: "12px", fontWeight: "bold"  }}
+              className="text-muted mb-1 "
+            >
+
+               COURSE 
+            </p>
+<Card.Body>
+
+<Card.Text>
+NAME
+<p
+              style={{ fontSize: "14px"}}
+             
+            >
+
+            By: TUTOR
+            </p>
+
+
+
+      
+        
+
+</Card.Text>
+
+</Card.Body>
+
+</Card></div>
+
     
         
         

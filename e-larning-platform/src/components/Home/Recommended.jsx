@@ -137,13 +137,11 @@ class Recommended extends Component {
       
       <>
 
-<Card className="recommendation-card" style={{ width: '18rem' }} 
+<Card className="recommendation-card position-relative" style={{ width: '18rem' }} 
 
-onMouseEnter={
-      this.handleHover
-     } onMouseLeave={
-   this.handleHover
-     }>
+
+>
+   
 <Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{ height: "13vw",
               objectFit: "cover"}} className="border"/>
 <p
@@ -164,9 +162,13 @@ onMouseEnter={
 
             By: {tutorName}
             </p>
-            <div className= {this.state.showDetail === true ? "d-block" :"d-none"} 
-           
-   >
+
+
+
+            {/* <div className= {this.state.showDetail === true ? "d-block" :"d-none"} > */}
+            <div className="infos-container">
+              <div className="infos-content">
+
 
             <p
               style={{ fontSize: "12px", fontWeight: "bold" }}
@@ -218,13 +220,14 @@ Saved
 Save
 </Button> }
             </div>
-
+            </div>
             </div>
            
 
 </Card.Text>
 
 </Card.Body>
+
 </Card>
 
 
