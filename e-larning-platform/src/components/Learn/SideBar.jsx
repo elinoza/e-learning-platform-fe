@@ -18,15 +18,56 @@ class SideBar extends Component {
     isCompleted:false
      
   };
+
+
   sideBarToggle=()=>{
     this.setState({showSideBar:true})
 }
+completed=(array,index)=>{
+  let completed= this.props.player.currentCourseProgress && array.find(item => item.index===index) 
+ 
+  return completed
+}
 
+triggerParentComponentforRedux = () => {
+  this.props.triggerParentComponentforRedux(true);
+};
+
+postProgress = async (courseId, currentIndex) => {
+  let data;
+
+    data = {
+      playlistIndex: currentIndex,
+    };
+
+
+  try {
+    const token = localStorage.getItem("token");
+    const url = process.env.REACT_APP_URL;
+    const response = await fetch(url + "/users/myLearning/" + courseId, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      console.log("progress saved to server");
+      this.triggerParentComponentforRedux();
+    } else {
+      console.log("save error", response);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   render() {
     const { currentCourse, currentCourseProgress} = this.props.player;
     const activeIndex=currentCourseProgress.playlistIndex
-    console.log("sidebar",currentCourse.playList)
+    console.log("sidebar",this.props.player)
     return (
       <>
         <div className= { this.state.showSideBar ?   "sidebar showSideBar" : " sidebar closedSideBar" } >
@@ -40,17 +81,17 @@ class SideBar extends Component {
           
             <ul className="m-0 p-0">
 
-{ currentCourse.playList && currentCourse.playList.map((item,index)=>
+{ currentCourseProgress.completed && currentCourse.playList && currentCourse.playList.map((item,index)=>
 
 
        
 
-          //   <li className={ activeIndex && activeIndex === index ? "activeContent d-flex": "d-flex" } >
-          //   {currentCourseProgress && currentCourseProgress.completed.index !== index ? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
-          //   <div><p className="m-0">{item.contentName}</p>
-          //   <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
-          //   </div> <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
-          //  </li>
+            <li className={ activeIndex === index ? "activeContent d-flex": "d-flex" }  onClick={()=>this.postProgress(currentCourse._id,index)}>
+            { !this.completed(currentCourseProgress.completed,index)? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
+            <div><p className="m-0">{item.contentName}</p>
+            <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
+            </div> <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
+           </li>
 
             )  }
          

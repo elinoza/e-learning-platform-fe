@@ -30,7 +30,7 @@ class Video extends React.Component {
     let data;
     if (currentIndex) {
       data = {
-        playlistIndex: currentIndex,
+        playlistIndex: currentIndex + 1,
       };
     } else {
       data = {};
@@ -81,7 +81,6 @@ class Video extends React.Component {
 
       if (response.ok) {
         console.log("Complete progress saved to server");
-        this.triggerParentComponentforRedux();
       } else {
         console.log("save error", response);
       }
@@ -90,9 +89,21 @@ class Video extends React.Component {
     }
   };
 
-  componentDidMount() {
-    console.log("current----", this.props.currentCourse);
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.currentProgress.playlistIndex !==
+      this.props.currentProgress.playlistIndex
+    ) {
+    
+      
 
+      
+      console.log("props changed");
+  
+        }
+  }
+
+  play = () => {
     const self = this; // thıs = <Vıdeo>
     let courseId = self.props.currentCourse._id;
     const myPlaylist = self.props.currentCourse.playList.map(
@@ -127,11 +138,11 @@ class Video extends React.Component {
 
       if (!currentItem) {
         currentItem = 0;
-      
+        self.postProgress(courseId);
       }
-      self.postProgress(courseId)
+
       myPlayer.playlist(myPlaylist, currentItem);
-      
+
       // Play through the playlist automatically.
       myPlayer.playlist.autoadvance(0);
 
@@ -140,12 +151,11 @@ class Video extends React.Component {
         console.log("metadata loadedddd", myPlayer.duration());
         console.log("current source", myPlayer.currentSource().src);
 
-
         //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
         let currentIndex = myPlayer.playlist.currentIndex();
-        if (currentItem !== currentIndex) {
-          self.postProgress(courseId, currentIndex);
-        }
+        // if (currentItem !== currentIndex) {
+        //   self.postProgress(courseId, currentIndex);
+        // }
 
         //WHENEVER INDEX CHANGE POST PROGRESS TO THE BACKEND--->
 
@@ -178,7 +188,7 @@ class Video extends React.Component {
 
         // localStorage.setItem("secondLeft", currentTime);
 
-        // not necessary anymore, using backend --->localStorage.setItem("playlistIndex", currentItem);
+        // not necessary anymore, since using backend --->localStorage.setItem("playlistIndex", currentItem);
 
         // console.log("remaining time:",myPlayer.remainingTime())
         // console.log("percentage of my progress:",myPlayer.currentTime()/myPlayer.duration()*100)
@@ -214,13 +224,16 @@ class Video extends React.Component {
         if (isCompleted) {
           self.postCompleteProgress(courseId, currentIndex);
         }
+
+        self.postProgress(courseId, currentIndex);
       });
-      myPlayer.on("duringplaylistchange", function () {
-        // Remember, this will not trigger a "playlistsorted" event!
-      });
-      //it is triggered when play change except the first time
-      myPlayer.on("playlistchange", function () {});
+   
     });
+  };
+
+  componentDidMount() {
+    console.log("current----", this.props.currentCourse);
+    this.play();
   }
 
   // destroy player on unmount

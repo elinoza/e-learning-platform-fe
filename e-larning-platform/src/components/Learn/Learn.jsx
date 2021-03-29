@@ -118,7 +118,7 @@ class Learn extends Component {
       <>
 
 
-        <SideBar />
+        <SideBar   triggerParentComponentforRedux={this.triggerParentComponentforRedux}/>
 
         <Row
           id="Main"
@@ -129,7 +129,7 @@ class Learn extends Component {
             <VideoNavBar currentCourse={currentCourse} />
 
           
-           {currentCourseProgress && currentCourseProgress._id !==undefined && currentCourse._id !==undefined  &&  
+           {currentCourseProgress  && currentCourse._id !==undefined  &&  
             <Video
             currentProgress={currentCourseProgress}
             currentCourse={currentCourse}
