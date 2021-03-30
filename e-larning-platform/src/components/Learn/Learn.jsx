@@ -92,7 +92,7 @@ const videoJsOptions = {
 
 class Learn extends Component {
   state = {
-    showSideBar: true,
+ 
     
   };
   triggerParentComponentforRedux=(setMode)=>{
@@ -109,7 +109,7 @@ class Learn extends Component {
    
   };
   render() {
-    const { currentCourse, currentCourseProgress } = this.props.player;
+    const { currentCourse, currentCourseProgress,showSideBar } = this.props.player;
 
    
    
@@ -124,10 +124,11 @@ class Learn extends Component {
         <Row
           id="Main"
           style={{ marginTop: "52px" }}
-          className={this.state.showSideBar === true ? "show" : ""}
+          className={showSideBar === true ? "show" : ""}
         >
           <Col xs={12} className="player-col p-0">
-            <VideoNavBar currentCourse={currentCourse} />
+
+          { currentCourse._id !==undefined   &&  <VideoNavBar />}
 
           
            { currentCourse._id !==undefined   &&  
@@ -141,7 +142,7 @@ class Learn extends Component {
           </Col>
           <Col xs={12} className="p-0">
             <div className="learn">
-              <Container>
+              <Container className="mb-5">
                 <Tabs
                   defaultActiveKey="overview"
                   id="learn-tab"

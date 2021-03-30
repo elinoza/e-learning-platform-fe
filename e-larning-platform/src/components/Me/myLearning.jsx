@@ -21,6 +21,87 @@ import "../Home/home.css";
 import { connect } from "react-redux";
 import Footer from "../Footer/Footer";
 const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch) => ({
+  fetchMewithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const me = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_ME",
+          payload: me,
+        });
+        console.log("me endpoint", me);
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: me,
+        });
+      }
+    }),
+    fetchMyProgresswithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/myLearning", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const myLearning = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_MY_PROGRESS",
+          payload: myLearning ,
+        });
+        console.log("myLearning endpoint ", myLearning );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: myLearning ,
+        });
+      }
+    }),
+    fetchCourseswithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/videos", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const courses = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_COURSES",
+          payload: courses ,
+        });
+        console.log("courses /videos endpoint ", courses );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: courses ,
+        });
+      }
+    }),
+
+
+});
+
+
 class myLearning extends Component {
   state = {};
   isProgressed=(id)=>{
@@ -30,7 +111,16 @@ class myLearning extends Component {
   
     return  myProgress
     
+
   }
+
+  componentDidMount = () => {
+		this.props.fetchMewithThunk()
+		this.props.fetchMyProgresswithThunk()
+    this.props.fetchCourseswithThunk()
+
+	}
+
   render() {
     const {myProgress}= this.props.me
     const {savedVideos}= this.props.me.me
@@ -50,6 +140,7 @@ class myLearning extends Component {
                         item.completePercentage!==100 && 
                      <SingleCourse
                       courseId ={item._id} 
+                      duration={item.duration}
                       tutorName={item.course.tutor.tutorName}
                       tutorProfession={item.course.tutor.tutorProfession}
                       videoName={item.course.videoName}
@@ -83,6 +174,7 @@ class myLearning extends Component {
 
    <SingleCourse
     courseId ={item._id} 
+    duration={item.duration}
     tutorName={item.tutor.tutorName}
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
@@ -99,6 +191,7 @@ class myLearning extends Component {
 
     <SingleCourse
     courseId ={item._id} 
+    duration={item.duration}
     tutorName={item.tutor.tutorName}
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
@@ -119,6 +212,7 @@ class myLearning extends Component {
                      item.completePercentage===1 && 
                      <SingleCourse
                       courseId ={item._id} 
+                      duration={item.duration}
                       tutorName={item.course.tutor.tutorName}
                       tutorProfession={item.course.tutor.tutorProfession}
                       videoName={item.course.videoName}
@@ -156,4 +250,4 @@ class myLearning extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(myLearning);
+export default connect(mapStateToProps,mapDispatchToProps)(myLearning);

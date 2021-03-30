@@ -10,14 +10,18 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { GoFileDirectory } from "react-icons/go";
 import { BiCertification } from "react-icons/bi";
 import SingleCourse from "../singleCourseInfo/SingleCourse"
-
+import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
 import { Avatar } from "@material-ui/core";
 
 class overView extends Component {
   state = {};
 
-
+  formatSeconds = (seconds) => {
+    let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
+    let formatted = `${duration.hours}hr${duration.minutes}min `;
+    return formatted;
+  };
 
   render() {
 
@@ -30,9 +34,9 @@ class overView extends Component {
       {currentCourse && currentCourse._id!== undefined &&
 
                     <Row>
-                      <Col xs={12} md={8} className="border-right">
+                      <Col xs={12} md={8} className="border-right mb-5">
                         <Row>
-                          <Col xs={12} md={6} className="border-right">
+                          <Col xs={12} md={6} className="border-right ">
                             {" "}
                             <p
                               style={{ fontSize: "14px", fontWeight: "bold" }}
@@ -131,7 +135,7 @@ class overView extends Component {
               className="text-muted mb-1 mt-4 "
             >
 
-{currentCourse.duration} . Intermediate . Released:{currentCourse.createdAt}
+{this.formatSeconds(currentCourse.duration)} . Intermediate . Released:{format(parseISO(currentCourse.createdAt), "MM/dd/yyyy")}
             </p> 
             <p>
             {currentCourse.videoInfo}
@@ -159,7 +163,7 @@ class overView extends Component {
                                       fontWeight: "bold",
 
                                     }}>Related Courses</h3>
-                        <Row><SingleCourse completed="false" /></Row>
+                        {/* <Row><SingleCourse completed="false" /></Row> */}
                                     
 
                     </Col></Row>

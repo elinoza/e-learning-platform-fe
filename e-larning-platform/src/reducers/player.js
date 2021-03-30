@@ -11,6 +11,11 @@ export default function (state = initialState, action) {
           ...state,
           currentCourse: action.payload,
         };
+        case "SHOWSIDEBAR":
+        return {
+          ...state,
+          showSideBar: action.payload,
+        };
   
 
     default:

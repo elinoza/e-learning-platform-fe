@@ -16,7 +16,8 @@ export const initialState = {
 
 player:{
     currentCourse:{},
-    currentCourseProgress:{}
+    currentCourseProgress:{},
+    showSideBar:"true"
   },
 
 

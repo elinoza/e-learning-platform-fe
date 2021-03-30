@@ -152,7 +152,7 @@ console.log("isprogresses?",myProgress)
       <>
         <Carousel fade="true "style={{marginTop:"52px"}}>
           {courses && courses.map(course=> 
-          <Carousel.Item className="carousel-item m-3">
+          <Carousel.Item  className="carousel-item m-3"  onClick={()=>this.props.history.push(`/learn/${course._id}`)}>
             <img
               className="d-block w-100 bg-image"
               src={course.video_cover_img}
@@ -266,7 +266,8 @@ console.log("isprogresses?",myProgress)
             
                      
                      <SingleCourse
-                      courseId ={item._id} 
+                      courseId ={item._id}
+                      duration={item.duration} 
                       tutorName={item.course.tutor.tutorName}
                       tutorProfession={item.course.tutor.tutorProfession}
                       videoName={item.course.videoName}
@@ -278,7 +279,8 @@ console.log("isprogresses?",myProgress)
                       completePercentage={item.completePercentage}
                       video_cover_img={item.course.video_cover_img}
                       completed="false"
-                      isProgressed="true"/>
+                      isProgressed="true"
+                      style="small"/>
                    
                       )}
                 
@@ -307,6 +309,7 @@ console.log("isprogresses?",myProgress)
 
    <SingleCourse
     courseId ={item._id} 
+    duration={item.duration}
     tutorName={item.tutor.tutorName}
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
@@ -317,19 +320,22 @@ console.log("isprogresses?",myProgress)
     completePercentage={isProgressed.completePercentage}
     video_cover_img={item.video_cover_img}
     completed={ isProgressed.completePercentage===100 ?"true":"false"}
-    isProgressed="true"/>
+    isProgressed="true"
+    style="small"/>
     
     :
 
     <SingleCourse
     courseId ={item._id} 
+    duration={item.duration}
     tutorName={item.tutor.tutorName}
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
     video_cover_img={item.video_cover_img}
     completed="false"
-    isProgressed="false"/>
+    isProgressed="false"
+    style="small"/>
                      } )}
 
 

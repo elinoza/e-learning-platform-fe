@@ -6,23 +6,40 @@ import {AiOutlineUnorderedList} from 'react-icons/ai';
 import {IoMdRadioButtonOff} from 'react-icons/io';
 import {FcCheckmark} from 'react-icons/fc';
 import {BsBookmark } from 'react-icons/bs';
-
+import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 import "./Learn.css";
 import { connect } from "react-redux";
 
 
 const mapStateToProps = (state) => state;
+
+
+const mapDispatchToProps = (dispatch) => ({
+
+
+  sideBarToggle: (payload) =>
+  dispatch({
+    type: "SHOWSIDEBAR",
+    payload:payload,
+  })
+ 
+});
+
 class SideBar extends Component {
   state = {
-    showSideBar:true,
+  
     isCompleted:false
      
   };
+  formatSeconds = (seconds) => {
+    let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
+    let formatted = `${duration.minutes}min ${duration.seconds}sec `;
+    return formatted;
+  };
 
-
-  sideBarToggle=()=>{
-    this.setState({showSideBar:true})
-}
+//   sideBarToggle=()=>{
+//     this.setState({showSideBar:true})
+// }
 completed=(array,index)=>{
   let completed
   if(array){  completed= this.props.player.currentCourseProgress && array.find(item => item.index===index) }
@@ -69,15 +86,20 @@ postProgress = async (courseId, currentIndex) => {
   }
 };
 
+
+componentDidMount=()=>{
+  this.props.sideBarToggle(true)
+
+}
   render() {
-    const { currentCourse, currentCourseProgress} = this.props.player;
+    const { currentCourse, currentCourseProgress,showSideBar} = this.props.player;
     const activeIndex=currentCourseProgress.playlistIndex
-    console.log("sidebar",this.props.player)
+    console.log("sidebar showSidebar",this.props.player)
     return (
       <>
-        <div className= { this.state.showSideBar ?   "sidebar showSideBar" : " sidebar closedSideBar" } >
-        <a className="closebtn" onClick={()=>this.setState({showSideBar:false})}>×</a>
-        <div className="sidebar-toggle-wrapper "><Button className="sidebar-toggle-Button  pt-3 w-100 d-flex align-items-start"  onClick={()=>this.setState({showSideBar:false})} size="sm">
+        <div className= { showSideBar ?   "sidebar showSideBar" : " sidebar closedSideBar" } >
+        <a className="closebtn" onClick={()=>this.props.sideBarToggle(false)}>×</a>
+        <div className="sidebar-toggle-wrapper "><Button className="sidebar-toggle-Button  pt-3 w-100 d-flex align-items-start"  onClick={()=>this.props.sideBarToggle(false)} size="sm">
               {" "}
               <AiOutlineUnorderedList className="mr-2 mt-1" />
               Contents
@@ -95,7 +117,7 @@ postProgress = async (courseId, currentIndex) => {
             
             { !this.completed(currentCourseProgress.completed,index)? <IoMdRadioButtonOff className="icons mr-2 mt-3"/>: <FcCheckmark className="icons mr-2 mt-3"/>} 
             <div><p className="m-0">{item.contentName}</p>
-            <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> 3m 13 s</p>
+            <p className="m-0" style={{color:"#b7b0b0", fontSize:"14px"}}> {this.formatSeconds(item.duration)}</p>
             </div> <BsBookmark style={{fontSize:"20px"}} className="icons  ml-auto mt-2" />
            </li>
 
@@ -107,4 +129,4 @@ postProgress = async (courseId, currentIndex) => {
     );
   }
 }
-export default connect(mapStateToProps)(SideBar);
+export default connect(mapStateToProps,mapDispatchToProps)(SideBar);
