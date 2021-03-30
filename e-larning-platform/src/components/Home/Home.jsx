@@ -14,6 +14,7 @@ Card
 } from "react-bootstrap";
 import "./home.css";
 import SingleCourse from "../singleCourseInfo/SingleCourse"
+import { format,parseISO } from 'date-fns'
 
 import Footer from "../Footer/Footer";
 
@@ -175,7 +176,7 @@ class Home extends Component {
                     New
                   </Badge>
                   <span className="text-near-badge">
-                    Released at {course.createdAt}
+                    Released at {format(parseISO(course.createdAt),'MM/dd/yyyy')}
                   </span>
                 </h5>
 

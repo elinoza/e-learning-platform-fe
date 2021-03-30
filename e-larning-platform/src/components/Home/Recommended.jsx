@@ -11,6 +11,7 @@ import {
 
 Card
 } from "react-bootstrap";
+import { format,parseISO,formatDistance } from 'date-fns'
 
 import { BsPlay ,BsBookmark,BsBookmarkFill} from "react-icons/bs";
 import { Avatar } from "@material-ui/core";
@@ -18,6 +19,7 @@ import "./home.css";
 import {compose} from "redux";
 import { withRouter } from "react-router-dom"; 
 import { connect } from "react-redux";
+
 
 
 const mapStateToProps = (state) => state;
@@ -132,7 +134,7 @@ class Recommended extends Component {
     videoName,
     duration,
     createdAt,video_cover_img}=this.props
-   
+    const dur = s => formatDistance(0, s * 1000, { includeSeconds: true })
     return (
       
       <>
@@ -172,7 +174,7 @@ onMouseEnter={
               style={{ fontSize: "12px", fontWeight: "bold" }}
               className=" mb-0"
             >
-              Intermediate .{duration} .{createdAt}
+              Intermediate .{dur(duration)} .{format(parseISO(createdAt),'MM/dd/yyyy')}
             </p>
             <div className="d-flex my-2">
       <Avatar

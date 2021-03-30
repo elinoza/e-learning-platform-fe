@@ -35,28 +35,26 @@
   color: white;
   background-color:#004282;
   font-weight: 500;
-  letter-spacing: 1px;
-  padding:20px;
+  letter-spacing: 2px;
+  height:2rem;
  
-  display:flex;
-  flex-flow:column;
-  align-items:center
+
   }
 
   .google-btn{
   border-radius: 20px;
   width: 100%;
-  height: 30px;
+
   border: 2px solid #004282;;
   border-radius: 30px;
   color:  #004282;
   background-color:white;
   font-weight: 500;
-  letter-spacing: 1px;
-  padding:20px;
- 
-  display:flex;
-  flex-flow:column;
-  align-items:center}
+  
+}
 
+  .main-wrapper{
+    width: 50%;
+    margin: auto;
+  }
  

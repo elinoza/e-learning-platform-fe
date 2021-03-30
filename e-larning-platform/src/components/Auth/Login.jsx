@@ -79,6 +79,7 @@ class Login extends Component {
  
   </div>
   <Container>
+    <div className="main-wrapper">
   <h4>Sign In</h4>
   <p>Sign in using the same email address you use for Linkedin.com or your organization email</p>
 
@@ -129,7 +130,7 @@ class Login extends Component {
                   Join Now
                 </a>
               </Row>
-              
+              </div>         
               
   </Container>
   <Footer/>

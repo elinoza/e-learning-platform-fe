@@ -76,6 +76,7 @@ class Register extends Component {
   </div>
 
   <Container>
+  <div className="main-wrapper w-75">
   <Form onSubmit={(e)=>this.register(e)}>
   <Form.Group controlId="formBasicfullName">
     <Form.Label className="form-label">Full Name</Form.Label>
@@ -119,7 +120,7 @@ class Register extends Component {
                   Sign In
                 </a>
      </div>
-     
+  </div>
   </Container>
   <Footer/>
        

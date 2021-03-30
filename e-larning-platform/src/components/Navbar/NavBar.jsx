@@ -15,8 +15,8 @@ const NavBar = () => {
 
 	return (
    
-		<Navbar  expand="lg" className="shadow">
-       <Container>
+		<Navbar  expand="lg" className="shadow ">
+       <Container className="d-flex">
   <Navbar.Brand href="#home">
     <div className="navbar-icon"> 
   <AiFillLinkedin className="logo"/> L E A R N I N G 
@@ -34,29 +34,27 @@ const NavBar = () => {
   <FormControl type="text" placeholder="Search" style={{fontSize:"12px"}} className="p-0 m-0 search d-inline" />
      
     </Form>
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="ml-auto ">
-      
-    <Link to="/home">
+  <Navbar.Collapse id="basic-navbar-nav" className="ml-auto  ">
+
+    <Link to="/home" className="mr-2">
       <IoHomeOutline className="navbar-logo"/>
 	    <p className="m-0">Home</p>
       </Link>
      
 
-      <Link to="/me">
+      <Link to="/me" className="mr-2">
       <BiBookOpen className="navbar-logo"/>
 	    <p className="m-0">My Learning</p> </Link>
       
-      <Nav.Link href="#language"> 
+      <Link to="/languages" className="mr-2">
       <BiWorld className="navbar-logo"/>
-	    <p className="m-0">En</p></Nav.Link>
-    </Nav>
-   
-   
-  </Navbar.Collapse>
+	    <p className="m-0">En</p></Link>
+
+    
+ 
   <Link to="/me">
-  <Dropdown className="me px-3">
-								<Dropdown.Toggle  className="Profile-menu">
+  <Dropdown className="me ">
+								<Dropdown.Toggle  className="profile-menu">
 								<Avatar  src="https://upload.wikimedia.org/wikipedia/en/d/d7/Random_person_image.png" className="navbar-logo m-0 p-0" />
 									<p style={{fontSize:"12px"}} className="m-0">Me</p>
 								</Dropdown.Toggle>
@@ -66,6 +64,8 @@ const NavBar = () => {
 								/>
 							</Dropdown>
               </Link>
+              
+              </Navbar.Collapse>
 
               </Container>
 </Navbar>

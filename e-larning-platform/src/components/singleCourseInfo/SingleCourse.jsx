@@ -12,6 +12,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import "../Home/home.css";
 import "./SingleCourse.css";
 import { connect } from "react-redux";
+import { format,parseISO,formatDistance,intervalToDuration } from 'date-fns'
 
 const mapStateToProps = (state) => state;
 
@@ -21,10 +22,16 @@ class SingleCourse extends Component {
   };
 
 
+formatSeconds=(seconds)=>{
 
+ 
+    console.log(intervalToDuration({ start: 0, end: seconds * 1000 }))
+return formatted
+}
 
   render() {
     const{videoName,tutorName,tutorProfession,video_cover_img,updatedAt,remainingTime,createdAt,completePercentage}=this.props
+    
    console.log(this.props)
     return (
       <>
@@ -72,7 +79,7 @@ class SingleCourse extends Component {
                         <p  style={{ fontSize:"14px" }}
                          >
 
-                    By: {tutorName} . Released {createdAt}
+                    By: {tutorName} . Released { format(parseISO(createdAt),'MM/dd/yyyy')}
                         </p> }
                         {this.props.completed === "false" ?
                         <Line

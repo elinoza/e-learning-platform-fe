@@ -18,8 +18,9 @@
     color: #fff;
     background-color: transparent;
     border-color:transparent;
-    width:53px;
-    height:53px;
+    width: fit-content!important;
+    height: auto!important
+  
 }
 
 
@@ -31,7 +32,7 @@
     font-size:20px ;
     display: block;
 	margin: auto;
-	fill: #0009!important
+	color: #0009!important
 }
 
 .navbar-logo:active {
@@ -70,12 +71,19 @@
  
 }
 .navbar .MuiAvatar-root {
-    width: 20px!important;
-    height: 20px !important;
+    width: 16px!important;
+    height: 16px !important;
 }
 
 .carousel .MuiAvatar-root {
     width: 35px!important;
     height: 35px !important;
 }
+.navbar-collapse {
+    flex-grow: 0;}
 
+.profile-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
