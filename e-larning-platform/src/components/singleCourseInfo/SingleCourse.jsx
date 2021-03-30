@@ -25,14 +25,15 @@ class SingleCourse extends Component {
 formatSeconds=(seconds)=>{
 
  
-    console.log(intervalToDuration({ start: 0, end: seconds * 1000 }))
+let duration = intervalToDuration({ start: 0, end: seconds * 1000 })
+let formatted = `${duration.hours}hr${duration.minutes}min `
 return formatted
 }
 
   render() {
-    const{videoName,tutorName,tutorProfession,video_cover_img,updatedAt,remainingTime,createdAt,completePercentage}=this.props
+    const{videoName,tutorName,tutorProfession,video_cover_img,updatedAt,remainingTime,createdAt,completePercentage, isProgressed}=this.props
     
-   console.log(this.props)
+   console.log("remaining Time",remainingTime)
     return (
       <>
 
@@ -66,14 +67,23 @@ return formatted
                           {videoName}
                         </p>
 
-                        {!this.props.style &&  
+
+
+
+                        {!this.props.style &&
+
+isProgressed ? 
                         <p
               style={{ fontSize: "12px", fontWeight: "bold" }}
               className="text-muted mb-1 "
             >
 
-               COURSE . {remainingTime} left
-            </p>  }
+               COURSE . {isProgressed} left
+            </p> :   <p  style={{ fontSize:"12px" }}
+                         >
+
+                    By: {tutorName} . Released { format(parseISO(createdAt),'MM/dd/yyyy')}
+                        </p>  }
 
             {this.props.style && 
                         <p  style={{ fontSize:"14px" }}

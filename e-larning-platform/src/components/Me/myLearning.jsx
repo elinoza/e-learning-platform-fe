@@ -23,7 +23,14 @@ import Footer from "../Footer/Footer";
 const mapStateToProps = (state) => state;
 class myLearning extends Component {
   state = {};
-
+  isProgressed=(id)=>{
+    let myProgress= this.props.me.myProgress.find(item=> item.course._id === id)
+  
+  console.log("isprogresses?",myProgress)
+  
+    return  myProgress
+    
+  }
   render() {
     const {myProgress}= this.props.me
     const {savedVideos}= this.props.me.me
@@ -54,7 +61,8 @@ class myLearning extends Component {
                       completePercentage={item.completePercentage}
                       video_cover_img={item.course.video_cover_img}
                       completed="false"
-                      style="big"/>
+                      style="big"
+                      isProgressed="true"/>
                       )}
                 
              
@@ -65,23 +73,41 @@ class myLearning extends Component {
             <Tab eventKey="saved" title="Saved (1) ">
             <Row>
                
-            {savedVideos && savedVideos.map(item=> 
-                    
-                    
-                    <SingleCourse
-                     courseId ={item._id} 
-                     tutorName={item.tutor.tutorName}
-                     tutorProfession={item.tutor.tutorProfession}
-                     videoName={item.videoName}
-                     createdAt={item.createdAt}
-                     // remainingTime={item.remainingTime}
-                     // secondLeft={item.secondLeft}
-                     // playlistIndex={item.playlistIndex}
-                     // completePercentage={item.completePercentage}
-                     video_cover_img={item.video_cover_img}
-                     completed="false"
-                     style="big"/>
-                     )}
+            {savedVideos && savedVideos.map((item)=> {
+  let isProgressed=this.isProgressed(item._id)
+
+
+  return   isProgressed?
+
+
+
+   <SingleCourse
+    courseId ={item._id} 
+    tutorName={item.tutor.tutorName}
+    tutorProfession={item.tutor.tutorProfession}
+    videoName={item.videoName}
+    createdAt={item.createdAt}
+    remainingTime={isProgressed.remainingTime}
+    secondLeft={isProgressed.secondLeft}
+    playlistIndex={isProgressed.playlistIndex}
+    completePercentage={isProgressed.completePercentage}
+    video_cover_img={item.video_cover_img}
+    completed={ isProgressed.completePercentage===100 ?"true":"false"}
+    style="big"
+    isProgressed="true"/>
+    :
+
+    <SingleCourse
+    courseId ={item._id} 
+    tutorName={item.tutor.tutorName}
+    tutorProfession={item.tutor.tutorProfession}
+    videoName={item.videoName}
+    createdAt={item.createdAt}
+    video_cover_img={item.video_cover_img}
+    completed="false"
+    style="big"
+    isProgressed="false"/>
+                     } )}
              
          
              </Row>
@@ -104,7 +130,8 @@ class myLearning extends Component {
                       completePercentage={item.completePercentage}
                       video_cover_img={item.course.video_cover_img}
                       completed="true"
-                      style="big"/>
+                      style="big"
+                      isProgressed="true"/>
                       )}
                 
              
@@ -116,7 +143,7 @@ class myLearning extends Component {
                 <Tab eventKey="Skills" title="Skills ">
                 <Row>
                
-                <SingleCourse style="big" />
+              
               
           
               </Row>

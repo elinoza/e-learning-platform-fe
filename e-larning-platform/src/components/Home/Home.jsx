@@ -109,22 +109,7 @@ const mapDispatchToProps = (dispatch) => ({
       }
     }),
 
-  // addToSaved: (post) => {
-  //   dispatch((dispatch) => {
-  //     dispatch({
-  //       type: "ADD_TO_SAVED",
-  //       payload: post,
-  //     });
-  //   });
-  // },
-  // removeFromSaved: (post) => {
-  //   dispatch((dispatch) => {
-  //     dispatch({
-  //       type: "REMOVE_FROM_SAVED",
-  //       payload: post,
-  //     });
-  //   });
-  // },
+
 });
 
 
@@ -134,6 +119,17 @@ class Home extends Component {
   state = {
 
   };
+
+
+
+isProgressed=(id)=>{
+  let myProgress= this.props.me.myProgress.find(item=> item.course._id === id)
+
+console.log("isprogresses?",myProgress)
+
+  return  myProgress
+  
+}
 
   componentDidMount = () => {
 		this.props.fetchMewithThunk()
@@ -266,7 +262,7 @@ class Home extends Component {
                       {myProgress  && myProgress.map(item=> 
                  
 
-                       item.completePercentage!=100 &&
+                       item.completePercentage!==100 &&
             
                      
                      <SingleCourse
@@ -281,7 +277,8 @@ class Home extends Component {
                       playlistIndex={item.playlistIndex}
                       completePercentage={item.completePercentage}
                       video_cover_img={item.course.video_cover_img}
-                      completed="false"/>
+                      completed="false"
+                      isProgressed="true"/>
                    
                       )}
                 
@@ -300,23 +297,48 @@ class Home extends Component {
                     {" "}
                     <Row>
                      
-                    {savedVideos && savedVideos.map(item=> 
+                    {savedVideos && savedVideos.map((item)=> {
+  let isProgressed=this.isProgressed(item._id)
+
+
+  return   isProgressed?
+
+
+
+   <SingleCourse
+    courseId ={item._id} 
+    tutorName={item.tutor.tutorName}
+    tutorProfession={item.tutor.tutorProfession}
+    videoName={item.videoName}
+    createdAt={item.createdAt}
+    remainingTime={isProgressed.remainingTime}
+    secondLeft={isProgressed.secondLeft}
+    playlistIndex={isProgressed.playlistIndex}
+    completePercentage={isProgressed.completePercentage}
+    video_cover_img={item.video_cover_img}
+    completed={ isProgressed.completePercentage===100 ?"true":"false"}
+    isProgressed="true"/>
+    
+    :
+
+    <SingleCourse
+    courseId ={item._id} 
+    tutorName={item.tutor.tutorName}
+    tutorProfession={item.tutor.tutorProfession}
+    videoName={item.videoName}
+    createdAt={item.createdAt}
+    video_cover_img={item.video_cover_img}
+    completed="false"
+    isProgressed="false"/>
+                     } )}
+
+
                     
-                    
-                     <SingleCourse
-                      courseId ={item._id} 
-                      tutorName={item.tutor.tutorName}
-                      tutorProfession={item.tutor.tutorProfession}
-                      videoName={item.videoName}
-                      createdAt={item.createdAt}
-                      // remainingTime={item.remainingTime}
-                      // secondLeft={item.secondLeft}
-                      // playlistIndex={item.playlistIndex}
-                      // completePercentage={item.completePercentage}
-                      video_cover_img={item.video_cover_img}
-                      completed="false"/>
-                      )}
-                 
+              
+
+
+
+                   
                  
                     </Row>
                   
