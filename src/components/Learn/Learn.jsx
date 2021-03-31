@@ -128,7 +128,7 @@ class Learn extends Component {
         >
           <Col xs={12} className="player-col p-0">
 
-          { currentCourse._id !==undefined   &&  <VideoNavBar />}
+          {<VideoNavBar />}
 
           
            { currentCourse._id !==undefined   &&  
