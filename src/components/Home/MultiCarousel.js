@@ -42,8 +42,8 @@ render(){
 
     return(
       <>
-    
-      <Carousel className="multiple-carousel" itemsToShow={3}>
+     <h7>{this.props.title} </h7>
+      <Carousel className="multiple-carousel" itemsToShow={4}>
         {courses && courses.map(item => 
            <Recommended 
       

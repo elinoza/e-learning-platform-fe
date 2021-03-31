@@ -366,7 +366,11 @@ console.log("isprogresses?",myProgress)
         <h4>Top Picks For Hilal</h4>
         <MultiCarousel 
          
-        title="top picks" category="software"/>
+        title="Software Related Courses" category="software"/>
+
+<MultiCarousel 
+         
+         title="self-improvement" category="Self-improvement"/>
         </div>
 
     
