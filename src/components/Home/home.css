@@ -107,10 +107,12 @@ color:#046097}
   right: 0;
   left: 0;
   
-  transform: translateY(-3.3rem);
+  transform: translateY(-1.0rem);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:  0.3s;
+  transition-timing-function:ease-in;
   z-index: 10;
 
 }
@@ -119,19 +121,23 @@ color:#046097}
 
 .infos-content {
 
-  padding: 1rem 1.5rem;
-  padding-top: 38px;
+  /* padding: 1rem 1.5rem;
+  padding-top: 38px; */
+  padding-left: 10px;
+  padding-right:10px;
   
   overflow: hidden;
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+  background-color:white
 
 }
 
 
 .recommendation-card:hover  {
 
-  transform: scale(1.5);
+  transform: scale(1.25);
+  border:none
 
 }
 
@@ -139,9 +145,20 @@ color:#046097}
   opacity: 1;
   
   pointer-events: initial;
+
 }
 
 
+
+
+
+
+
+
+
+.recommendation-card{
+  z-index:0
+}
 
 
 .recommendation-card .card-body {

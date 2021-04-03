@@ -11,7 +11,7 @@ import {
 
 Card
 } from "react-bootstrap";
-import { format,parseISO,formatDistance } from 'date-fns'
+import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
 import { BsPlay ,BsBookmark,BsBookmarkFill} from "react-icons/bs";
 import { Avatar } from "@material-ui/core";
@@ -60,6 +60,12 @@ const mapDispatchToProps = (dispatch) => ({
 class Recommended extends Component {
   state = {
     showDetail:false
+  };
+
+  formatSeconds = (seconds) => {
+    let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
+    let formatted = `${duration.hours}hr${duration.minutes}min `;
+    return formatted;
   };
 
   handleHover=()=>{
@@ -134,23 +140,22 @@ class Recommended extends Component {
     videoName,
     duration,
     createdAt,video_cover_img}=this.props
-    const dur = s => formatDistance(0, s * 1000, { includeSeconds: true })
+  
     return (
       
       <>
       <Col xs={12} md={3} >
 
-<Card className="recommendation-card" 
+      <Card className="recommendation-card position-relative "  
 
-onMouseEnter={
-      this.handleHover
-     } onMouseLeave={
-   this.handleHover
-     }>
-<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{height:"8rem",
+
+>
+   
+<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{ height: "8rem",
               objectFit: "contain"}} className="border"/>
 <p
-              style={{ fontSize: "12px", fontWeight: "bold"  }}
+              style={{ fontSize: "12px", fontWeight: "bold",paddingLeft: "10px",
+              paddingRight:"10px"}}
               className="text-muted mb-1 "
             >
 
@@ -158,24 +163,29 @@ onMouseEnter={
             </p>
 <Card.Body>
 
-<Card.Text>
+<Card.Text style={{paddingLeft: "10px",
+              paddingRight:"10px"}}>
 {videoName}
 <p
               style={{ fontSize: "14px"}}
-              className={this.state.showDetail === true ? "d-none text-muted mt-1 mb-0" :"d-block"} 
+              className= " text-muted mt-1 mb-0" 
             >
 
             By: {tutorName}
             </p>
-            <div className= {this.state.showDetail === true ? "d-block" :"d-none"} 
-           
-   >
+
+
+
+            {/* <div className= {this.state.showDetail === true ? "d-block" :"d-none"} > */}
+            <div className="infos-container">
+              <div className="infos-content">
+
 
             <p
               style={{ fontSize: "12px", fontWeight: "bold" }}
               className=" mb-0"
             >
-              Intermediate .{dur(duration)} .{format(parseISO(createdAt),'MM/dd/yyyy')}
+              Intermediate .{this.formatSeconds(duration)} . {format(parseISO(createdAt), "MM/dd/yyyy")}
             </p>
             <div className="d-flex my-2">
       <Avatar
@@ -221,15 +231,15 @@ Saved
 Save
 </Button> }
             </div>
-
+            </div>
             </div>
            
 
 </Card.Text>
 
 </Card.Body>
-</Card>
 
+</Card>
 
 </Col> 
      
