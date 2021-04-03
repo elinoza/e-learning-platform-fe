@@ -53,8 +53,8 @@ class SingleCourse extends Component {
                 className="d-block w-100 d-inline border mr-2 "
                 src={video_cover_img}
                 alt="progress video"
-                style={{ height: "5vw",
-                objectFit: "cover"}}
+                style={{ 
+                objectFit: "contain"}}
               />
             </div>
             <div className="d-inline  w-50">
