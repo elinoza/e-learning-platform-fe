@@ -34,7 +34,9 @@ class Video extends React.Component {
         totalWatch:totalWatch
       };
     } else {
-      data = { };
+      data = {
+
+      };
     }
 
     try {

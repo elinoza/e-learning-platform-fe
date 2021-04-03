@@ -224,7 +224,7 @@ console.log("isprogresses?",myProgress)
               <div className="d-flex flex-row justify-content-between border-top mt-4 pt-2">
                 <div className="goal-parent m-0  ">
                   <Circle
-                    percent="90"
+                    percent="70"
                     strokeWidth="6"
                     strokeColor="#0573B1"
                     id="goal-progress"

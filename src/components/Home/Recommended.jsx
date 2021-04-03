@@ -138,16 +138,17 @@ class Recommended extends Component {
     return (
       
       <>
+      <Col xs={12} md={3} >
 
-<Card className="recommendation-card" style={{ width: '18rem' }} 
+<Card className="recommendation-card" 
 
 onMouseEnter={
       this.handleHover
      } onMouseLeave={
    this.handleHover
      }>
-<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{ height: "13vw",
-              objectFit: "cover"}} className="border"/>
+<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{height:"8rem",
+              objectFit: "contain"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold"  }}
               className="text-muted mb-1 "
@@ -230,7 +231,7 @@ Save
 </Card>
 
 
-        
+</Col> 
      
       </>
     );

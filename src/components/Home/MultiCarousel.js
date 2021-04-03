@@ -3,6 +3,10 @@ import React, { Component } from "react";
 
 import Carousel from "react-elastic-carousel";
 import Recommended from "./Recommended"
+import {
+  Row
+
+} from "react-bootstrap";
 import "./home.css";
 
 
@@ -43,7 +47,8 @@ render(){
     return(
       <>
      <h7>{this.props.title} </h7>
-      <Carousel className="multiple-carousel" itemsToShow={4}>
+      <Row className="multiple-carousel" >
+
         {courses && courses.map(item => 
            <Recommended 
       
@@ -66,7 +71,7 @@ render(){
    
   
   
-   </Carousel>
+   </Row>
 
 </>        
     )
