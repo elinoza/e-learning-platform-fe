@@ -31,13 +31,16 @@ class SingleCourse extends Component {
       createdAt,
       completePercentage,
       isProgressed,
-      duration
+      duration,
+      courseId
     } = this.props;
 
     console.log("remaining Time", remainingTime);
     return (
       <>
-        <Col xs={12}>
+        <Col xs={12} className="mb-3 singleCourse-col"  
+        // onClick={()=>this.props.history.push(`/learn/${courseId}`)}
+        >
           <div
             className={
               this.props.style === "big"
@@ -50,10 +53,11 @@ class SingleCourse extends Component {
               // style={{ width: "98px", height: "55px" }}
             >
               <img
-                className="d-block w-100 d-inline border mr-2 "
+                className="d-block w-100 d-inline border mr-2  "
                 src={video_cover_img}
                 alt="progress video"
                 style={{ 
+                  height:"auto",
                 objectFit: "contain"}}
               />
             </div>

@@ -117,6 +117,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 class Home extends Component {
   state = {
+    categories:["software","Self-improvement"]
 
   };
 
@@ -152,8 +153,8 @@ console.log("isprogresses?",myProgress)
       <>
         <Carousel fade="true "style={{marginTop:"52px"}}>
           {courses && courses.map(course=> 
-          <Carousel.Item  className="carousel-item m-3"  onClick={() => (window.location = `/learn/${course._id}`)}
-          //  onClick={()=>this.props.history.push(`/learn/${course._id}`)}
+          <Carousel.Item  className="carousel-item m-3"  
+           onClick={()=>this.props.history.push(`/learn/${course._id}`)}
            >
             <img
               className="d-block w-100 bg-image"
@@ -268,6 +269,7 @@ console.log("isprogresses?",myProgress)
             
                      
                      <SingleCourse
+                    
                       courseId ={item._id}
                       duration={item.duration} 
                       tutorName={item.course.tutor.tutorName}
@@ -292,7 +294,7 @@ console.log("isprogresses?",myProgress)
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All {savedVideos && savedVideos.length}</a>
+                      <a>Show All {myProgress && myProgress.length}</a>
                     </div>
                   </div>
                 </Tab>
@@ -363,16 +365,15 @@ console.log("isprogresses?",myProgress)
               </Tabs>
             </Col>
           </Row>
-      
-      <div className="my-5 ">
-        <h4>Top Picks For Hilal</h4>
-        <MultiCarousel 
-         
-        title="Software Related Courses" category="software"/>
+     
+      <div className="my-5  blur-container">
+        <h4 >Top Picks For Hilal</h4>
 
-<MultiCarousel 
+        {this.state.categories.map(category =>  <MultiCarousel  className="mb-5"
          
-         title="self-improvement" category="Self-improvement"/>
+         title={category.toUpperCase() + ` Related Courses`} category={category}/> )}
+       
+
         </div>
 
     

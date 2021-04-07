@@ -17,11 +17,11 @@ const NavBar = () => {
    
 		<Navbar  expand="lg" className="shadow ">
        <Container className="d-flex">
-  <Navbar.Brand href="#home">
+       <Link to="/home"> <Navbar.Brand href="#home">
     <div className="navbar-icon"> 
   <AiFillLinkedin className="logo"/> L E A R N I N G 
  
-  </div></Navbar.Brand>
+  </div></Navbar.Brand></Link>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
   <Nav.Link href="#home">

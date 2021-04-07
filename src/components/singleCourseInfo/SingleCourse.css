@@ -17,3 +17,8 @@
     font-size: 1.3em;
     
   }
+
+  .singleCourse-col:hover{
+    cursor:pointer;
+    background-color:rgb(249, 249, 249)
+  }

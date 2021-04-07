@@ -144,14 +144,14 @@ class Recommended extends Component {
     return (
       
       <>
-      <Col xs={12} md={3} className="rec-col">
+      <Col  md={4} lg={3} lgclassName="rec-col ">
 
       <Card className="recommendation-card  position-relative "  
 
 
 >
    
-<Card.Img onClick={()=>this.props.history.push(`/learn/${courseId}`)} variant="top" src={video_cover_img } style={{ height: "8rem",
+<Card.Img  onClick={()=>this.props.history.push(`/learn/${courseId}`)}variant="top" src={video_cover_img } style={{ height: "auto",
               objectFit: "contain"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold",paddingLeft: "10px",
@@ -217,7 +217,7 @@ style={{paddingLeft: "10px",
 
     <p
               style={{ fontSize: "12px"}}
-              className="text-muted mt-1 mb-0"
+              className="text-muted mt-1 mb-0 text-truncate"
             >
 
            {videoInfo}
