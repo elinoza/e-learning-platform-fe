@@ -40,7 +40,9 @@ class Video extends React.Component {
     }
 
     try {
+      console.log(courseId,currentIndex,totalWatch)
       console.log("progress saved as data--->", JSON.stringify(data))
+      
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
       const response = await fetch(url + "/users/myLearning/" + courseId, {
@@ -134,7 +136,7 @@ class Video extends React.Component {
 
       //WHICH INDEX OF PLAYLIST USER'PROGRESS COMING FROM BACKEND AND SETTING THE PLAYER BASED ON IT
       let currentItem = currentProgress.playlistIndex;
-      console.log("currentItem fcheck", currentItem,myPlaylist.length);
+      console.log("currentItem fcheck", currentItem,"myplaylist length",myPlaylist.length);
 
     // /// If user has already finished this course, index number= playlist length in database, so we should manipulate it here.
     //   if (currentItem >= myPlaylist.length){ currentItem = 0; console.log("here------>",currentItem )}
@@ -142,10 +144,11 @@ class Video extends React.Component {
 
       //If user havent started this course, this logic creates a new progress
       if (!Number.isInteger(currentItem)) {
-        console.log("there is no current item")
+        console.log("there is no current item",currentItem)
+        self.postProgress(courseId,currentItem,0);
         currentItem = 0;
-        self.postProgress(courseId);
       }
+
 
 
 
@@ -242,6 +245,7 @@ class Video extends React.Component {
 
   componentDidMount() {
     console.log("current----", this.props.currentCourse);
+    
     this.play();
   }
 

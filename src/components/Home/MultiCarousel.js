@@ -65,6 +65,7 @@ render(){
           //  playlistIndex={item.playlistIndex}
           //  completePercentage={item.completePercentage}
           //saved=
+          learners={item.myProgress.length}
            video_cover_img={item.video_cover_img}
            />
          ) }     

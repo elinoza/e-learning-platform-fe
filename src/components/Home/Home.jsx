@@ -152,7 +152,9 @@ console.log("isprogresses?",myProgress)
       <>
         <Carousel fade="true "style={{marginTop:"52px"}}>
           {courses && courses.map(course=> 
-          <Carousel.Item  className="carousel-item m-3"  onClick={()=>this.props.history.push(`/learn/${course._id}`)}>
+          <Carousel.Item  className="carousel-item m-3"  onClick={() => (window.location = `/learn/${course._id}`)}
+          //  onClick={()=>this.props.history.push(`/learn/${course._id}`)}
+           >
             <img
               className="d-block w-100 bg-image"
               src={course.video_cover_img}

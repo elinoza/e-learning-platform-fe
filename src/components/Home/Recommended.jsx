@@ -64,7 +64,7 @@ class Recommended extends Component {
 
   formatSeconds = (seconds) => {
     let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
-    let formatted = `${duration.hours}hr${duration.minutes}min `;
+    let formatted = `${duration.hours}hr  ${duration.minutes}min `;
     return formatted;
   };
 
@@ -139,14 +139,14 @@ class Recommended extends Component {
     videoInfo,
     videoName,
     duration,
-    createdAt,video_cover_img}=this.props
+    createdAt,video_cover_img,learners}=this.props
   
     return (
       
       <>
-      <Col xs={12} md={3} >
+      <Col xs={12} md={3} className="rec-col">
 
-      <Card className="recommendation-card position-relative "  
+      <Card className="recommendation-card  position-relative "  
 
 
 >
@@ -161,11 +161,13 @@ class Recommended extends Component {
 
              <BsPlay style={{fontSize:"16px"}}/>  COURSE 
             </p>
+
 <Card.Body>
 
-<Card.Text style={{paddingLeft: "10px",
+<Card.Text 
+style={{paddingLeft: "10px",
               paddingRight:"10px"}}>
-{videoName}
+<p  className= "  mb-0" >{videoName}</p>
 <p
               style={{ fontSize: "14px"}}
               className= " text-muted mt-1 mb-0" 
@@ -176,31 +178,36 @@ class Recommended extends Component {
 
 
 
-            {/* <div className= {this.state.showDetail === true ? "d-block" :"d-none"} > */}
-            <div className="infos-container">
+        
+           
+
+</Card.Text>
+
+</Card.Body>
+<div className="infos-container ">
               <div className="infos-content">
 
 
             <p
-              style={{ fontSize: "12px", fontWeight: "bold" }}
+              style={{ fontSize: "12px"}}
               className=" mb-0"
             >
-              Intermediate .{this.formatSeconds(duration)} . {format(parseISO(createdAt), "MM/dd/yyyy")}
+              Intermediate .  {this.formatSeconds(duration)}  .   {format(parseISO(createdAt), "MM/dd/yyyy")}
             </p>
             <div className="d-flex my-2">
       <Avatar
         src={tutorImg}
         className="navbar-logo m-0 mt-1 p-0 d-inline"
       />
-      <div>
+      <div  style={{ marginTop: "7 px" }}>
         {" "}
         <p
-          style={{ fontSize: "12px" }}
-          className="d-block ml-1 mb-0 p-0 "
+          style={{ fontSize: "12px" ,fontWeight:"bold"}}
+          className="d-block ml-1 mb-0 p-0  "
         >{tutorName}
         </p>
         <p
-          style={{ fontSize: "12px" }}
+          style={{ fontSize: "11px" }}
           className="d-block ml-1 mb-0 p-0 "
         >
           {tutorProfession}
@@ -221,7 +228,7 @@ class Recommended extends Component {
               className="text-muted mt-2 mb-0"
             >
 
-           1.787 Learners
+           {learners} Learners
             </p>
 
            {savedVideos && savedVideos.find( savedItem => savedItem._id===courseId)?
@@ -233,11 +240,6 @@ Save
             </div>
             </div>
             </div>
-           
-
-</Card.Text>
-
-</Card.Body>
 
 </Card>
 

@@ -103,9 +103,11 @@ class Learn extends Component {
 
   }
   componentDidMount = () => {
+   
     let courseId = this.props.match.params.courseId;
     this.props.fetchMyCourseProgress(courseId);
     this.props.fetchTheCoursewithThunk(courseId);
+    
    
   };
   render() {
