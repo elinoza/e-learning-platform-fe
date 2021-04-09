@@ -46,7 +46,7 @@ render(){
 
     return(
       <>
-     <h7 >{this.props.title} </h7>
+     <h6 >{this.props.title} </h6>
       <Row className="multiple-carousel mb-5 mt-2" >
 
         {courses && courses.map(item => 
@@ -66,7 +66,7 @@ render(){
           //  completePercentage={item.completePercentage}
           //saved=
           learners={item.myProgress.length}
-           video_cover_img={item.video_cover_img}
+           video_thumbnail_img={item.video_thumbnail_img}
            />
          ) }     
    

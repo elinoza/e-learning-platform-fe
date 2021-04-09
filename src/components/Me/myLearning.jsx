@@ -114,6 +114,9 @@ class myLearning extends Component {
 
   }
 
+  learningHistoryCount=()=>{let completedCourses = this.props.me.myProgress.filter(item=> item.completePercentage===1 ) 
+  return completedCourses.length}
+
   componentDidMount = () => {
 		this.props.fetchMewithThunk()
 		this.props.fetchMyProgresswithThunk()
@@ -134,7 +137,7 @@ class myLearning extends Component {
             id="myprogresss-tab"
             className="mt-2 pb-2"
           >
-            <Tab eventKey="progress" title="In Progress (1)">
+            <Tab eventKey="progress" title={`In Progress(${myProgress && myProgress.length})`}>
               <Row>
               {myProgress &&  myProgress.map(item=> 
                         item.completePercentage!==100 && 
@@ -150,7 +153,7 @@ class myLearning extends Component {
                       secondLeft={item.secondLeft}
                       playlistIndex={item.playlistIndex}
                       completePercentage={item.completePercentage}
-                      video_cover_img={item.course.video_cover_img}
+                      video_thumbnail_img={item.course.video_thumbnail_img}
                       completed="false"
                       style="big"
                       isProgressed="true"/>
@@ -161,7 +164,7 @@ class myLearning extends Component {
           
               </Row>
             </Tab>
-            <Tab eventKey="saved" title="Saved (1) ">
+            <Tab eventKey="saved" title={`Saved(${savedVideos && savedVideos.length})`}>
             <Row>
                
             {savedVideos && savedVideos.map((item)=> {
@@ -183,7 +186,7 @@ class myLearning extends Component {
     secondLeft={isProgressed.secondLeft}
     playlistIndex={isProgressed.playlistIndex}
     completePercentage={isProgressed.completePercentage}
-    video_cover_img={item.video_cover_img}
+    video_thumbnail_img={item.video_thumbnail_img}
     completed={ isProgressed.completePercentage===100 ?"true":"false"}
     style="big"
     isProgressed="true"/>
@@ -196,7 +199,7 @@ class myLearning extends Component {
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
-    video_cover_img={item.video_cover_img}
+    video_thumbnail_img={item.video_thumbnail_img}
     completed="false"
     style="big"
     isProgressed="false"/>
@@ -205,9 +208,9 @@ class myLearning extends Component {
          
              </Row>
             </Tab>
-            <Tab eventKey="Learning History" title="Learning History (1)">
+            <Tab eventKey="Learning History" title={`Learning History(${myProgress && this.learningHistoryCount()})`}>
             <Row>
-               
+            
             {myProgress && myProgress.map(item=> 
                      item.completePercentage===1 && 
                      <SingleCourse
@@ -222,7 +225,7 @@ class myLearning extends Component {
                       secondLeft={item.secondLeft}
                       playlistIndex={item.playlistIndex}
                       completePercentage={item.completePercentage}
-                      video_cover_img={item.course.video_cover_img}
+                      video_thumbnail_img={item.course.video_thumbnail_img}
                       completed="true"
                       style="big"
                       isProgressed="true"/>

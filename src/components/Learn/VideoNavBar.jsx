@@ -41,7 +41,7 @@ class VideoNavBar extends Component {
             <Button className="sidebar-toggle-Button  w-100 "  size="sm" onClick={()=>this.props.sideBarToggle(true)}>
               {" "}
               <AiOutlineUnorderedList className="mr-2" />
-              {currentCourseProgress&&currentCourseProgress._id!== undefined ? currentCourse.playList[currentCourseProgress.playlistIndex].contentName :currentCourse.playList[0].contentName }
+              {/* {currentCourseProgress&&currentCourseProgress._id!== undefined ? currentCourse.playList[currentCourseProgress.playlistIndex].contentName :currentCourse.playList[0].contentName } */}
             </Button>
             {/* <p style={{color:"#aeaeaf",display:"inline", fontSize:"18px",fontWeight:"bold"}}>Contents</p> */}
           </Navbar.Brand>
@@ -49,7 +49,7 @@ class VideoNavBar extends Component {
 
           <div className="mr-auto ">
             <p style={{ fontWeight: "bold" }}>{currentCourse.videoName}</p>
-            <p style={{ color: "#aeaeaf" }}>    {currentCourseProgress&&currentCourseProgress._id!== undefined ? currentCourse.playList[currentCourseProgress.playlistIndex].contentName :currentCourse.playList[0].contentName } </p>
+            {/* <p style={{ color: "#aeaeaf" }}>    {currentCourseProgress&&currentCourseProgress._id!== undefined ? currentCourse.playList[currentCourseProgress.playlistIndex].contentName :currentCourse.playList[0].contentName } </p> */}
           </div>
 
           <div className="ml-auto icons ">

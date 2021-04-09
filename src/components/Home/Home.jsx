@@ -209,10 +209,10 @@ console.log("isprogresses?",myProgress)
                 {" "}
                 <img
                   className="d-block w-100 "
-                  src= {course.video_cover_img}
+                  src= {course.video_thumbnail_img}
                   alt="tiny img"
                   style={{ height: "13vw",
-                 objectFit: "cover"}}
+                 objectFit: "contain"}}
                 />
               </div>
             </Carousel.Caption>
@@ -281,7 +281,7 @@ console.log("isprogresses?",myProgress)
                       secondLeft={item.secondLeft}
                       playlistIndex={item.playlistIndex}
                       completePercentage={item.completePercentage}
-                      video_cover_img={item.course.video_cover_img}
+                      video_thumbnail_img={item.course.video_thumbnail_img}
                       completed="false"
                       isProgressed="true"
                       style="small"/>
@@ -322,7 +322,7 @@ console.log("isprogresses?",myProgress)
     secondLeft={isProgressed.secondLeft}
     playlistIndex={isProgressed.playlistIndex}
     completePercentage={isProgressed.completePercentage}
-    video_cover_img={item.video_cover_img}
+    video_thumbnail_img={item.video_thumbnail_img}
     completed={ isProgressed.completePercentage===100 ?"true":"false"}
     isProgressed="true"
     style="small"/>
@@ -336,7 +336,7 @@ console.log("isprogresses?",myProgress)
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
-    video_cover_img={item.video_cover_img}
+    video_thumbnail_img={item.video_thumbnail_img}
     completed="false"
     isProgressed="false"
     style="small"/>
@@ -369,7 +369,7 @@ console.log("isprogresses?",myProgress)
       <div className="my-5  blur-container">
         <h4 >Top Picks For Hilal</h4>
 
-        {this.state.categories.map(category =>  <MultiCarousel  className="mb-5"
+        {this.state.categories.map(category =>  <MultiCarousel  className="mb-5 mt-5"
          
          title={category.toUpperCase() + ` Related Courses`} category={category}/> )}
        

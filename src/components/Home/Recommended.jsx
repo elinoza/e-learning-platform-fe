@@ -139,7 +139,7 @@ class Recommended extends Component {
     videoInfo,
     videoName,
     duration,
-    createdAt,video_cover_img,learners}=this.props
+    createdAt,video_thumbnail_img,learners}=this.props
   
     return (
       
@@ -151,7 +151,7 @@ class Recommended extends Component {
 
 >
    
-<Card.Img  onClick={()=>this.props.history.push(`/learn/${courseId}`)}variant="top" src={video_cover_img } style={{ height: "auto",
+<Card.Img  onClick={()=>this.props.history.push(`/learn/${courseId}`)}variant="top" src={video_thumbnail_img } style={{ height: "auto",minHeight:"8rem",
               objectFit: "contain"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold",paddingLeft: "10px",

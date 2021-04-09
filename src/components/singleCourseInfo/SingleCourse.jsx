@@ -25,7 +25,7 @@ class SingleCourse extends Component {
       videoName,
       tutorName,
       tutorProfession,
-      video_cover_img,
+      video_thumbnail_img,
       updatedAt,
       remainingTime,
       createdAt,
@@ -54,7 +54,7 @@ class SingleCourse extends Component {
             >
               <img
                 className="d-block w-100 d-inline border mr-2  "
-                src={video_cover_img}
+                src={video_thumbnail_img}
                 alt="progress video"
                 style={{ 
                   height:"auto",
