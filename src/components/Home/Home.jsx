@@ -265,7 +265,7 @@ console.log("isprogresses?",myProgress)
                       {myProgress  && myProgress.map(item=> 
                  
 
-                       item.completePercentage!==100 &&
+                       item.completePercentage!==1 &&
             
                      
                      <SingleCourse

@@ -140,7 +140,7 @@ class myLearning extends Component {
             <Tab eventKey="progress" title={`In Progress(${myProgress && myProgress.length})`}>
               <Row>
               {myProgress &&  myProgress.map(item=> 
-                        item.completePercentage!==100 && 
+                        item.completePercentage!==1 && 
                      <SingleCourse
                       courseId ={item._id} 
                       duration={item.duration}
@@ -187,7 +187,7 @@ class myLearning extends Component {
     playlistIndex={isProgressed.playlistIndex}
     completePercentage={isProgressed.completePercentage}
     video_thumbnail_img={item.video_thumbnail_img}
-    completed={ isProgressed.completePercentage===100 ?"true":"false"}
+    completed={ isProgressed.completePercentage===1 ?"true":"false"}
     style="big"
     isProgressed="true"/>
     :
