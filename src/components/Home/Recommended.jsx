@@ -199,7 +199,7 @@ style={{paddingLeft: "10px",
         src={tutorImg}
         className="navbar-logo m-0 mt-1 p-0 d-inline"
       />
-      <div  style={{ marginTop: "7 px" }}>
+      <div  style={{ marginTop: "5px" }}>
         {" "}
         <p
           style={{ fontSize: "12px" ,fontWeight:"bold"}}

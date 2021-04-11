@@ -47,7 +47,7 @@ render(){
     return(
       <>
      <h6 >{this.props.title} </h6>
-      <Row className="multiple-carousel mb-5 mt-2" >
+      <Row className="multiple-carousel mb-5 mt-3" >
 
         {courses && courses.map(item => 
            <Recommended 

@@ -57,13 +57,13 @@ class overView extends Component {
                                     color: "#666666",
                                     fontWeight: "bold",
                                   }}
-                                  className="d-block ml-1 mb-0 p-0 "
+                                  className="d-block  mb-0 p-0 "
                                 >
                                  {currentCourse.tutor.tutorName}
                                 </p>
                                 <p
                                   style={{ fontSize: "14px" }}
-                                  className="d-block ml-1 mb-0 p-0 "
+                                  className="d-block  mb-0 p-0 "
                                 >
                                    {currentCourse.tutor.tutorProfession}
                                 </p>

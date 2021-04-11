@@ -371,7 +371,7 @@ console.log("isprogresses?",myProgress)
       <div className="my-5  blur-container">
         <h4 >Top Picks For Hilal</h4>
 
-        {this.state.categories.map(category =>  <MultiCarousel  className="mb-5 mt-5"
+        {this.state.categories.map(category =>  <MultiCarousel  style={{marginBottom:"10rem",marginTop:"3rem"}}
          
          title={category.toUpperCase() + ` Related Courses`} category={category}/> )}
        
