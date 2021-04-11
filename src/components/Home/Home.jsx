@@ -318,12 +318,13 @@ console.log("isprogresses?",myProgress)
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
+    updatedAt={item.updatedAt}
     remainingTime={isProgressed.remainingTime}
     secondLeft={isProgressed.secondLeft}
     playlistIndex={isProgressed.playlistIndex}
     completePercentage={isProgressed.completePercentage}
     video_thumbnail_img={item.video_thumbnail_img}
-    completed={ isProgressed.completePercentage===100 ?"true":"false"}
+    completed={ isProgressed.completePercentage===1 ?"true":"false"}
     isProgressed="true"
     style="small"/>
     
@@ -336,6 +337,7 @@ console.log("isprogresses?",myProgress)
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
+    updatedAt={item.updatedAt}
     video_thumbnail_img={item.video_thumbnail_img}
     completed="false"
     isProgressed="false"

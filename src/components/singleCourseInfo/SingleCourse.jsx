@@ -16,7 +16,7 @@ class SingleCourse extends Component {
 
   formatSeconds = (seconds) => {
     let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
-    let formatted = `${duration.hours}hr${duration.minutes}min `;
+    let formatted = `${duration.hours}hr ${duration.minutes}min ${duration.seconds}sec`;
     return formatted;
   };
 
@@ -132,7 +132,7 @@ class SingleCourse extends Component {
                   }}
                   className=" ml-2 mb-0 d-inline"
                 >
-                  <AiFillCheckCircle /> Completed {updatedAt}
+                  <AiFillCheckCircle /> Completed at {updatedAt && format(parseISO(updatedAt), "MM/dd/yyyy") }
                 </p>
               ): <p style={{ fontSize: "12px",fontWeight: "bold" }} className="text-muted mb-1 ">Duration . {this.formatSeconds(duration)}</p>}
 
@@ -141,7 +141,7 @@ class SingleCourse extends Component {
                   style={{ fontSize: "14px" }}
                   className="text-muted ml-2 mb-0 d-inline"
                 >
-                  {remainingTime}
+                  {remainingTime &&  this.formatSeconds(remainingTime)}
                 </p>
               )}
             </div>

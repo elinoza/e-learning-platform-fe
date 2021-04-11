@@ -127,6 +127,7 @@ class myLearning extends Component {
   render() {
     const {myProgress}= this.props.me
     const {savedVideos}= this.props.me.me
+    const {skills}= this.props.me.me
     return (
       <>
         <Container style={{marginTop:"52px"}} className="mt-4">
@@ -182,6 +183,7 @@ class myLearning extends Component {
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
+    updatedAt={item.updatedAt}
     remainingTime={isProgressed.remainingTime}
     secondLeft={isProgressed.secondLeft}
     playlistIndex={isProgressed.playlistIndex}
@@ -199,6 +201,7 @@ class myLearning extends Component {
     tutorProfession={item.tutor.tutorProfession}
     videoName={item.videoName}
     createdAt={item.createdAt}
+    updatedAt={item.updatedAt}
     video_thumbnail_img={item.video_thumbnail_img}
     completed="false"
     style="big"
@@ -238,12 +241,59 @@ class myLearning extends Component {
              </Row>
                 </Tab>
                 <Tab eventKey="Skills" title="Skills ">
-                <Row>
+              
+                <div className="px-4 text-muted mt-3">
+                
+                                    <div>
+                                      
+                                      
+                                    <h8  className="d-block" style={{marginBottom:"30px",
+                                      fontWeight: "bold"
+                                    }}>My Skills</h8>
+
+{skills && skills.map(skill=> 
+                                      <p className="d-inline  skillset-tags mt-3 ">
+                                   
+                                  <a
+                                  
+                                  >
+                                    {skill.skillName}{" "}
+                                  </a> 
+
+                                
+                                  </p>)} </div>
+                                  <div>
+                                      
+                                      
+                                    <h8  className="d-block" style={{marginBottom:"30px",
+                                      fontWeight: "bold"
+                                    }}>Suggested Skills</h8>
+
+<Form.Control
+															id="text"
+															type="text"
+															placeholder="Find Skills..."
+															className="rq-form-element  "
+															// value={this.state.comment.text}
+															// onChange={this.updateField}
+														/>
+
+{skills && skills.map(skill=> 
+                                      <p className="d-inline  skillset-tags mt-3 ">
+                                   
+                                  <a
+                                  
+                                  >
+                                    {skill.skillName}{" "}
+                                  </a> 
+
+                                
+                                  </p>)} </div>
+               
                
               
-              
           
-              </Row>
+              </div>
                 </Tab>
           </Tabs>
           </div>

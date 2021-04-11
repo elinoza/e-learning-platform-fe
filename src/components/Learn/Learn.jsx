@@ -120,7 +120,6 @@ class Learn extends Component {
       
       <>
 
-
         <SideBar   triggerParentComponentforRedux={this.triggerParentComponentforRedux}/>
 
         <Row
