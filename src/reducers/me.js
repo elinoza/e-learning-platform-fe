@@ -15,30 +15,7 @@ export default function (state = initialState, action) {
         };
 
 
-    // case "LIKE_COMMENT":
-    //   return {
-    //     ...state,
-    //     likedComments: state.liked.concat(action.payload),
-    //   };
-    // case "REMOVE_LIKE_FROM_COMMENT":
-    //   return {
-    //     ...state,
-    //     likedComments: state.liked.filter(
-    //       (album) => album.id !== action.payload
-    //     ),
-    //   };
-    // case "ADD_TO_SAVED":
-    //   return {
-    //     ...state,
-    //     savedPosts: state.savedPosts.concat(action.payload),
-    //   };
-    // case "REMOVE_FROM_SAVED":
-    //   return {
-    //     ...state,
-    //     savedPosts: state.savedPosts.filter(
-    //       (post) => post._id !== action.payload._id
-    //     ),
-    //   };
+
 
 
 

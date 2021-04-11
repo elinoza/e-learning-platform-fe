@@ -144,6 +144,8 @@ class overView extends Component {
                                      fontSize:"20px",
                                       fontWeight: "bold",
                                     }}>Skills Covered</h3>
+
+                                    <div className="skillset-wrap">
                                       {currentCourse.skills && currentCourse.skills.map(skill=> 
                                     <p className="d-inline  skillset-tags mt-3 ">
                                   
@@ -155,6 +157,7 @@ class overView extends Component {
 
                                 
                                   </p>)}
+                                  </div>
                                   
                      
                       </Col>

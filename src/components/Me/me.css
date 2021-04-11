@@ -87,13 +87,14 @@
 
     .skillset-tags-me {
     color: #666666;
-    font-size: 16px;
-    margin-bottom:5px;
-    margin-top:5px;
-    border: 1px solid #D5DCE1;
+    font-size: 14px;
+    margin-right:3px;
+  margin-left:3px;
+
+    border: 1px solid #e6ecf1;
     border-radius: 50rem !important;
-    padding: 7px;
-   background-color: #D5DCE1
+ 
+   background-color: #e6ecf1
     
 
  
@@ -114,5 +115,40 @@ cursor:pointer
 
 }
 
+.skill-set-tags-fill{
+  background-color:#485D69;
+  color: #ffffff;
+  font-size: 16px;
+  margin-right:3px;
+  margin-left:3px;
+  border: 1px solid #e6ecf1;
+  border-radius: 50rem !important;
+
+  padding-left:10px;
+  padding-right:10px;
+
+
+}
+
+.skillset-tags-fill a {
+  
+  color: #ffffff;
+  font-size: 14px;
+ 
+
+
+}
+
+.skillset-tags-fill:hover {
+  cursor:pointer
+    
+  }
+
+  .skillset-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: flex-start;
+  }
  
  

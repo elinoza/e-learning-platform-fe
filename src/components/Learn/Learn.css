@@ -58,11 +58,10 @@ ul.related-to-course li p {
 .skillset-tags {
     color: #666666;
     font-size: 16px;
-    margin-bottom:5px;
-    margin-top:5px;
+    margin:5px;
     border: 1px solid #666666;
     border-radius: 50rem !important;
-    padding: 7px;
+    padding: 5px;
   
     
 
@@ -73,12 +72,19 @@ ul.related-to-course li p {
 .skillset-tags a {
     color: #666666;
     font-size: 16px;
-    margin-right: 10px;
+
    
     
   
 
 }
+
+.skillset-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: flex-start;
+  }
 
 
 
