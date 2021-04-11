@@ -73,11 +73,13 @@
 .navbar .MuiAvatar-root {
     width: 16px!important;
     height: 16px !important;
+    display: flex!important;
 }
 
 .carousel .MuiAvatar-root {
     width: 35px!important;
     height: 35px !important;
+    display: flex!important;
 }
 .navbar-collapse {
     flex-grow: 0;}

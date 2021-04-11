@@ -57,13 +57,13 @@ class overView extends Component {
                                     color: "#666666",
                                     fontWeight: "bold",
                                   }}
-                                  className="d-block ml-1 mb-0 p-0 "
+                                  className="d-block  mb-0 p-0 "
                                 >
                                  {currentCourse.tutor.tutorName}
                                 </p>
                                 <p
                                   style={{ fontSize: "14px" }}
-                                  className="d-block ml-1 mb-0 p-0 "
+                                  className="d-block  mb-0 p-0 "
                                 >
                                    {currentCourse.tutor.tutorProfession}
                                 </p>
@@ -144,16 +144,20 @@ class overView extends Component {
                                      fontSize:"20px",
                                       fontWeight: "bold",
                                     }}>Skills Covered</h3>
+
+                                    <div className="skillset-wrap">
+                                      {currentCourse.skills && currentCourse.skills.map(skill=> 
                                     <p className="d-inline  skillset-tags mt-3 ">
-                                    {currentCourse.skills && currentCourse.skills.map(skill=> 
+                                  
                                   <a
                                   
                                   >
                                     {skill}{" "}
-                                  </a> )}
+                                  </a> 
 
                                 
-                                  </p>
+                                  </p>)}
+                                  </div>
                                   
                      
                       </Col>

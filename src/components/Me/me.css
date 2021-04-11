@@ -69,5 +69,86 @@
      font-size:14px
    }
 
+
+
+   .skill-form-element{
+    border-radius: 16px;
+   
+    width:400px
+
+   }
+
+   .skill-form-element:focus{
+
+    border: 2px solid #0573B1;
+   
+   }
+
+
+    .skillset-tags-me {
+    color: #666666;
+    font-size: 14px;
+    margin-right:3px;
+  margin-left:3px;
+
+    border: 1px solid #e6ecf1;
+    border-radius: 50rem !important;
+ 
+   background-color: #e6ecf1
+    
+
+ 
+
+}
+
+.skillset-tags-me:hover {
+cursor:pointer
+  
+
+}
+
+.skillset-tags-me a {
+    color: #666666;
+    font-size: 16px;
+    margin-right: 10px;
+  
+
+}
+
+.skill-set-tags-fill{
+  background-color:#485D69;
+  color: #ffffff;
+  font-size: 16px;
+  margin-right:3px;
+  margin-left:3px;
+  border: 1px solid #e6ecf1;
+  border-radius: 50rem !important;
+
+  padding-left:10px;
+  padding-right:10px;
+
+
+}
+
+.skillset-tags-fill a {
+  
+  color: #ffffff;
+  font-size: 14px;
+ 
+
+
+}
+
+.skillset-tags-fill:hover {
+  cursor:pointer
+    
+  }
+
+  .skillset-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: flex-start;
+  }
  
  

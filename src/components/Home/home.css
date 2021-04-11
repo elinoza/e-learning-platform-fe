@@ -212,3 +212,8 @@ padding-bottom:10px;
 .btn:active{
   box-shadow:none
 }
+
+ .MuiAvatar-root {
+ 
+  display: flex!important;
+}
