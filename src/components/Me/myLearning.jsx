@@ -97,6 +97,31 @@ const mapDispatchToProps = (dispatch) => ({
         });
       }
     }),
+    fetchSkillswithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/skills", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const skills = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_SKILLS",
+          payload: skills ,
+        });
+        console.log("skills ", skills );
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: skills ,
+        });
+      }
+    }),
 
 
 });
@@ -121,6 +146,7 @@ class myLearning extends Component {
 		this.props.fetchMewithThunk()
 		this.props.fetchMyProgresswithThunk()
     this.props.fetchCourseswithThunk()
+    this.props.fetchSkillswithThunk()
 
 	}
 
@@ -128,6 +154,8 @@ class myLearning extends Component {
     const {myProgress}= this.props.me
     const {savedVideos}= this.props.me.me
     const {skills}= this.props.me.me
+    console.log("skills render",this.props.skills)
+   
     return (
       <>
         <Container style={{marginTop:"52px"}} className="mt-4">
@@ -265,6 +293,24 @@ class myLearning extends Component {
                                   <div>
                                       
                                       
+                                      <h8  className="d-block" style={{marginBottom:"30px",
+                                        fontWeight: "bold"
+                                      }}>My Skills</h8>
+  
+  {skills && skills.map(skill=> 
+                                        <p className="d-inline  skillset-tags mt-3 ">
+                                     
+                                    <a
+                                    
+                                    >
+                                      {skill.skillName}{" "}
+                                    </a> 
+  
+                                  
+                                    </p>)} </div>
+                                  <div>
+                                      
+                                      
                                     <h8  className="d-block" style={{marginBottom:"30px",
                                       fontWeight: "bold"
                                     }}>Suggested Skills</h8>
@@ -273,18 +319,18 @@ class myLearning extends Component {
 															id="text"
 															type="text"
 															placeholder="Find Skills..."
-															className="rq-form-element  "
+															className="skill-form-element mb-4  "
 															// value={this.state.comment.text}
 															// onChange={this.updateField}
 														/>
 
-{skills && skills.map(skill=> 
-                                      <p className="d-inline  skillset-tags mt-3 ">
+{this.props.skills.skills && this.props.skills.skills.slice(0,10).map(skill=> 
+                                      <p className="d-inline  skillset-tags-me mt-3 mb-3 ">
                                    
-                                  <a
+                                  <a className=""
                                   
                                   >
-                                    {skill.skillName}{" "}
+                                    {skill.skillName}{" "} +
                                   </a> 
 
                                 

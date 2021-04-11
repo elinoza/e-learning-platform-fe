@@ -69,5 +69,50 @@
      font-size:14px
    }
 
+
+
+   .skill-form-element{
+    border-radius: 16px;
+   
+    width:400px
+
+   }
+
+   .skill-form-element:focus{
+
+    border: 2px solid #0573B1;
+   
+   }
+
+
+    .skillset-tags-me {
+    color: #666666;
+    font-size: 16px;
+    margin-bottom:5px;
+    margin-top:5px;
+    border: 1px solid #D5DCE1;
+    border-radius: 50rem !important;
+    padding: 7px;
+   background-color: #D5DCE1
+    
+
+ 
+
+}
+
+.skillset-tags-me:hover {
+cursor:pointer
+  
+
+}
+
+.skillset-tags-me a {
+    color: #666666;
+    font-size: 16px;
+    margin-right: 10px;
+  
+
+}
+
  
  

@@ -2,6 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import coursesReducers from "../reducers/courses";
 import playerReducers from "../reducers/player";
 import meReducers from "../reducers/me";
+import skillsReducers from "../reducers/skills";
 
 import thunk from "redux-thunk";
 
@@ -23,13 +24,16 @@ player:{
 
 
   courses: [],
+
+  skills:[]
 };
 
 const combinedReducer = combineReducers({
 //   users: usersReducers,
   me: meReducers,
  courses: coursesReducers,
- player:playerReducers
+ player:playerReducers,
+ skills:skillsReducers
 });
 
 export default function configureStore() {
