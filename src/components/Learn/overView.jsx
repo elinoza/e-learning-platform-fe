@@ -19,7 +19,7 @@ class overView extends Component {
 
   formatSeconds = (seconds) => {
     let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
-    let formatted = `${duration.hours}hr${duration.minutes}min `;
+    let formatted = `${duration.hours}hr ${duration.minutes}min ${duration.seconds}sec`;
     return formatted;
   };
 
@@ -103,21 +103,21 @@ class overView extends Component {
                             </p>
                             <ul className="p-0 related-to-course">
                               <li>
-                                <HiOutlineUserGroup className="icons" />{" "}
+                                <HiOutlineUserGroup className="icons notWhiteIcons" />
                                 <p>Learning Groups .</p>
                                 <p className="ml-2 d-inline showAll-tags ">
                                   <a>Show All </a>
                                 </p>{" "}
                               </li>
                               <li>
-                                <GoFileDirectory className="icons" />
+                                <GoFileDirectory className="icons notWhiteIcons" />
                                 <p>Exercise Files .</p>
                                 <p className="ml-2 d-inline  showAll-tags">
                                   <a>Show All </a>
                                 </p>
                               </li>
                               <li>
-                                <BiCertification className="icons" />
+                                <BiCertification className="icons notWhiteIcons" />
                                 <p>Certificates .</p>
                                 <p className="ml-2 d-inline  showAll-tags">
                                   <a>Show All </a>
@@ -140,7 +140,7 @@ class overView extends Component {
             <p>
             {currentCourse.videoInfo}
             </p>
-            <h3  style={{marginBottom:"30px",
+            <h3  style={{marginBottom:"10px",
                                      fontSize:"20px",
                                       fontWeight: "bold",
                                     }}>Skills Covered</h3>
@@ -149,7 +149,7 @@ class overView extends Component {
                                       {currentCourse.skills && currentCourse.skills.map(skill=> 
                                     <p className="d-inline  skillset-tags mt-3 ">
                                   
-                                  <a
+                                  <a className="m-0"
                                   
                                   >
                                     {skill}{" "}

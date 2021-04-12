@@ -15,6 +15,31 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchMewithThunk: () =>
+    dispatch(async (dispatch) => {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      const me = await response.json();
+
+      if (response.ok) {
+        dispatch({
+          type: "SET_ME",
+          payload: me,
+        });
+        console.log("me endpoint", me);
+      } else {
+        dispatch({
+          type: "SET_ERROR",
+          payload: me,
+        });
+      }
+    }),
   fetchTheCoursewithThunk: (courseId) =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
@@ -108,6 +133,7 @@ class Learn extends Component {
     this.props.fetchMyCourseProgress(courseId);
     this.props.fetchTheCoursewithThunk(courseId);
     
+    
    
   };
   render() {
@@ -153,7 +179,7 @@ class Learn extends Component {
                     <OverView currentCourse={currentCourse}/>
                   </Tab>
                   <Tab eventKey="qa" title="QA ">
-                    <Comments />
+                    <Comments courseId={this.props.match.params.courseId} />
                   </Tab>
                   <Tab eventKey="notebook" title="Notebook">
                     <Notes />

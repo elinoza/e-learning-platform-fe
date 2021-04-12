@@ -3,6 +3,8 @@ import coursesReducers from "../reducers/courses";
 import playerReducers from "../reducers/player";
 import meReducers from "../reducers/me";
 import skillsReducers from "../reducers/skills";
+import postsReducers from "../reducers/posts";
+
 
 import thunk from "redux-thunk";
 
@@ -20,12 +22,12 @@ player:{
     currentCourseProgress:{},
     showSideBar:"true"
   },
-
-
-
-  courses: [],
-
-  skills:[]
+courses: [],
+skills:[],
+posts:{
+  currentPosts:[],
+  currentComments:[]
+}
 };
 
 const combinedReducer = combineReducers({
@@ -33,7 +35,8 @@ const combinedReducer = combineReducers({
   me: meReducers,
  courses: coursesReducers,
  player:playerReducers,
- skills:skillsReducers
+ skills:skillsReducers,
+ posts:postsReducers
 });
 
 export default function configureStore() {
