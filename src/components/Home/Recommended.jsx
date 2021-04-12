@@ -151,7 +151,7 @@ class Recommended extends Component {
 
 >
    
-<Card.Img  onClick={()=>this.props.history.push(`/learn/${courseId}`)}variant="top" src={video_thumbnail_img } style={{ height: "auto",minHeight:"8rem",
+<Card.Img  onClick={()=>this.props.history.push(`/learn/${courseId}`)}variant="top" src={video_thumbnail_img } style={{ height: "auto",minHeight:"9rem",
               objectFit: "contain"}} className="border"/>
 <p
               style={{ fontSize: "12px", fontWeight: "bold",paddingLeft: "10px",
@@ -184,7 +184,7 @@ style={{paddingLeft: "10px",
 </Card.Text>
 
 </Card.Body>
-<div className="infos-container ">
+<div className="infos-container  shadow">
               <div className="infos-content">
 
 

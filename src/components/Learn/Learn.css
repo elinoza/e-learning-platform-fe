@@ -167,6 +167,9 @@ ul.related-to-course li p {
     font-weight: bold
 }
 
+.icons.notWhiteIcons{
+    color: gray;
+}
 
 
 .sidebar-toggle-Button {
@@ -286,13 +289,32 @@ ul.related-to-course li p {
     
  }
   
-/* 
+ .LikeButton{
+    background-color:transparent;
+     color: #6C767B;
+     border:none;
+     font-size:14px;
+     font-weight:bold
+  }
+  .LikeButton:hover{
+    background-color:#d6e3ea;
+    color:#6C767B
+    
+  }
+  .div.MuiAvatar-root.qa{
+      margin:0!important
+  }
 
+  .three-dots-wrapper .dropdown-toggle::after {
+      border:none
+  }
+
+  .LikeButton:focus{
+    box-shadow:none;
+    background-color:none
+  }
+  .LikeButton:active{
+    box-shadow:none;
+    background-color:none
+  }
   
-
-  
-
-
-  
-
- */
