@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Form, Image, Card, Button,DropdownButton ,Dropdown } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { BiLike, BiCommentDetail } from "react-icons/bi";
-import { VscSmiley } from "react-icons/vsc";
+import { AiTwotoneLike} from "react-icons/ai";
 import { Avatar } from "@material-ui/core";
 import "./Learn.css";
 import { formatDistance, parseISO } from "date-fns";
@@ -270,7 +270,59 @@ handleModifyComment=(e, postId,commentId) => {
 	this.modifyComment(postId,commentId)}
 }
 
+likePost = async (postId)=> {
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/posts/like/"+postId, {
+        method: 'POST', 
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      
+  
+      if (response.ok) {
+       this.props.fetchPostswithThunk(this.props.courseId)
+       
+      } else {
+     console.log("save error",response)
+      }
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+  }}
 
+  unlikePost = async (postId)=> {
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/posts/unlike/"+postId, {
+        method: 'POST', 
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      
+  
+      if (response.ok) {
+		this.props.fetchPostswithThunk(this.props.courseId)
+       
+      } else {
+     console.log("save error",response)
+      }
+  
+      
+    } catch (error) {
+      console.log(error)
+      
+  }}
   componentDidMount = () => {
     let courseId = this.props.courseId;
     this.props.fetchPostswithThunk(courseId);
@@ -398,17 +450,26 @@ handleModifyComment=(e, postId,commentId) => {
                       }
                     ></Form.Control>:<p className=" general-font">{post.text}</p>}
                   </div>
-                  <p className="text-muted general-font"> 2 Likes</p>
+                 {post.likes.length >0 && <p className="text-muted general-font"> {post.likes.length} Likes</p>}
                   <hr></hr>
                   <div className="d-flex align-items-start">
-                    <Button
+
+				  { post.likes.find( like => like===this.props.me.me._id)?
+                   <Button
                       className="LikeButton  "
-                      //  onClick={()=>this.likePost(postId)}
+                      onClick={()=>this.unlikePost(post._id)}
+                      size="sm"
+                    >
+                      <AiTwotoneLike className="mr-2" />
+                      UnLike
+                    </Button>: <Button
+                      className="LikeButton  "
+                      onClick={()=>this.likePost(post._id)}
                       size="sm"
                     >
                       <BiLike className="mr-2" />
                       Like
-                    </Button>
+                    </Button>}
 
 					{post.comments.length>0 ?
                     <Button
