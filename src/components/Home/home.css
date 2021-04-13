@@ -101,7 +101,7 @@ color:#046097}
   padding-left:10px;
   padding-right:10px;
 padding-bottom:10px;
-  transform: translateY(15rem);
+  transform: translateY(16rem);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -111,6 +111,10 @@ padding-bottom:10px;
   background-color:white;
 
 
+}
+
+.infos-container.shadow{
+  box-shadow: 0 1.5rem 1.5rem rgb(0 0 0 / 10%) !important;
 }
 
 
@@ -158,7 +162,7 @@ padding-bottom:10px;
   opacity: 1;
   
   pointer-events: initial;
-  transform: translateY(11.8rem);
+  transform: translateY(13rem);
   pointer-events: initial;
   z-index: 10;
 

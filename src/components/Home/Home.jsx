@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import "./home.css";
 import SingleCourse from "../singleCourseInfo/SingleCourse";
-import { format, parseISO, formatDistance,intervalToDuration } from "date-fns";
+import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
 import Footer from "../Footer/Footer";
 
@@ -133,13 +133,17 @@ class Home extends Component {
         console.log(date);
         return date >= start && date <= end;
       });
-
-      const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      let watchedThisWeek = filteredDates
-        .map((item) => item.watch)
-        .reduce(reducer);
-      console.log(watchedThisWeek);
-      return watchedThisWeek/60;
+      if (filteredDates && filteredDates.length > 0) {
+        const reducer = (accumulator, currentValue) =>
+          accumulator + currentValue;
+        let watchedThisWeek = filteredDates
+          .map((item) => item.watch)
+          .reduce(reducer);
+        console.log(watchedThisWeek);
+        return watchedThisWeek / 60;
+      } else {
+        return 0;
+      }
     } else {
       return 0;
     }
@@ -153,7 +157,7 @@ class Home extends Component {
     if (watchArray) {
       let filteredDates = watchArray.filter((item) => {
         let date = new Date(item.createdAt);
-       
+
         return date >= start && date <= end;
       });
       if (filteredDates && filteredDates.length > 0) {
@@ -162,12 +166,10 @@ class Home extends Component {
         let watchedLastWeek = filteredDates
           .map((item) => item.watch)
           .reduce(reducer);
-       
-        return watchedLastWeek/60;
-      
-      }
-      else{
-        return 0
+
+        return watchedLastWeek / 60;
+      } else {
+        return 0;
       }
     } else {
       return 0;
@@ -188,11 +190,11 @@ class Home extends Component {
     this.props.fetchMewithThunk();
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
-    this.props.goalModalToggle(false)
+    this.props.goalModalToggle(false);
   };
 
   render() {
-    const { savedVideos,myWeeklyGoal } = this.props.me.me;
+    const { savedVideos, myWeeklyGoal } = this.props.me.me;
     const { myProgress } = this.props.me;
 
     const { courses } = this.props.courses;
@@ -275,61 +277,91 @@ class Home extends Component {
           <Row className=" border-bottom mt-5 ">
             <Col xs={12} md={6} className="  p-3">
               <h2 style={{ fontSize: "18px" }}>Weekly Goal</h2>
-              <Row><Col md={5}>
-              <div className="goal-parent m-0  ">
-                  <Circle
-                    percent={this.calculateWeekWatch()/myWeeklyGoal*100}
-                    strokeWidth="6"
-                    strokeColor="#0573B1"
-                    id="goal-progress"
-                  />
-                  {console.log("percent",this.calculateWeekWatch(),myWeeklyGoal,this.calculateWeekWatch()/myWeeklyGoal*100)}
-                 {myWeeklyGoal && myWeeklyGoal !== 0 ?  <p id="goal-fuk">{Math.round(this.calculateWeekWatch())+"/"+myWeeklyGoal}mins</p>: <GiTrophyCup id="goal-cup" /> }
-                </div>
+              <Row>
+                <Col md={5}>
+                  <div className="goal-parent m-0  ">
+                    <Circle
+                      percent={(this.calculateWeekWatch() / myWeeklyGoal) * 100}
+                      strokeWidth="6"
+                      strokeColor="#0573B1"
+                      id="goal-progress"
+                    />
+                    {console.log(
+                      "percent",
+                      this.calculateWeekWatch(),
+                      myWeeklyGoal,
+                      (this.calculateWeekWatch() / myWeeklyGoal) * 100
+                    )}
+                    {myWeeklyGoal && myWeeklyGoal !== 0 ? (
+                      <p id="goal-fuk">
+                        {Math.round(this.calculateWeekWatch()) +
+                          "/" +
+                          myWeeklyGoal}
+                        mins
+                      </p>
+                    ) : (
+                      <GiTrophyCup id="goal-cup" />
+                    )}
+                  </div>
+                </Col>
+                <Col md={7}>
+                  {" "}
+                  {myWeeklyGoal && myWeeklyGoal !== 0 ? (
+                    <div>
+                      <div className="d-flex">
+                        {" "}
+                        {/* <p>{Date.now() - 604800000}-{Date.now()} </p> */}
+                        <Button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "transparent",
+                            color: "#0973B1",
+                            fontWeight: "bold",
+                            marginLeft: "auto",
+                          }}
+                          onClick={() => this.props.goalModalToggle(true)}
+                        >
+                          Edit goal
+                        </Button>
+                      </div>
+                      {console.log("1", this.calculateWeekWatch())}
+                      {console.log("2", this.calculatelastWeekWatch())}
 
-              </Col>
-              <Col md={7}>  {myWeeklyGoal && myWeeklyGoal !== 0 ? <div> 
-               <div className="d-flex"> {/* <p>{Date.now() - 604800000}-{Date.now()} </p> */}
-                <Button
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "transparent",
-                      color: "#0973B1",
-                      fontWeight: "bold",
-                      marginLeft:"auto"
-                    }}
-                    onClick={() => this.props.goalModalToggle(true)}
-                  >
-                  Edit goal 
-                  </Button></div>
-             {console.log("1",this.calculateWeekWatch())}
-                    {console.log("2",this.calculatelastWeekWatch())}
-                 
-                {  this.calculateWeekWatch() >= myWeeklyGoal ? <p>Congratulations Hilal you did it!</p>: <p>Keep going! Learn for {Math.round(myWeeklyGoal-this.calculateWeekWatch())} minutes more to hit your goal! </p> }
+                      {this.calculateWeekWatch() >= myWeeklyGoal ? (
+                        <p>Congratulations Hilal you did it!</p>
+                      ) : (
+                        <p>
+                          Keep going! Learn for{" "}
+                          {Math.round(myWeeklyGoal - this.calculateWeekWatch())}{" "}
+                          minutes more to hit your goal!{" "}
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="ml-4 mt-4 ">
+                      <p>
+                        We’ll help you track your progress and remind you to
+                        keep learning
+                        {console.log("1", this.calculateWeekWatch())}
+                        {console.log("2", this.calculatelastWeekWatch())}
+                      </p>
+                      <Button
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "1px solid #0973B1",
+                          color: "#0973B1",
+                          fontWeight: "bold",
+                        }}
+                        onClick={() => this.props.goalModalToggle(true)}
+                      >
+                        Set a goal
+                      </Button>
 
-             </div> :<div className="ml-4 mt-4 ">
-                  <p>
-                    We’ll help you track your progress and remind you to keep
-                    learning
-                    {console.log("1",this.calculateWeekWatch())}
-                    {console.log("2",this.calculatelastWeekWatch())}
-                  </p>
-                  <Button
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "1px solid #0973B1",
-                      color: "#0973B1",
-                      fontWeight: "bold",
-                    }}
-                    onClick={() => this.props.goalModalToggle(true)}
-                  >
-                    Set a goal
-                  </Button>
-
-                  <GoalModal />
-                </div>
-  }</Col></Row>
-              
+                      <GoalModal />
+                    </div>
+                  )}
+                </Col>
+              </Row>
             </Col>
             <Col xs={12} md={6} className=" myprogress-home p-3 ">
               <Tabs
@@ -436,7 +468,7 @@ class Home extends Component {
                 </Tab>
               </Tabs>
             </Col>
-          </Row>  
+          </Row>
 
           <div className="my-5  blur-container">
             <h4>Top Picks For Hilal</h4>

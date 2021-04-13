@@ -333,7 +333,8 @@ likePost = async (postId)=> {
     console.log("render commens", this.props.posts);
     return (
       <>
-        <Form
+      {console.log("comments-->",currentPosts.length,currentComments.length )}
+        {/* <Form
           className="mt-1 ask-form border pb-5 px-3 shadow "
           onSubmit={(e) => this.askQuestion(e)}
         >
@@ -357,8 +358,8 @@ likePost = async (postId)=> {
           </Button>
         </Form>
 
-        {currentPosts &&
-          currentPosts.map((post) => (
+        {currentPosts && currentPosts.length>0
+          && currentPosts.map((post) => (
             <Card className="CommentCard mt-5 shadow">
                                              
               <Card.Header
@@ -515,8 +516,8 @@ likePost = async (postId)=> {
                     ></Form.Control>
                   </div>
 
-                  {currentComments &&
-                    currentComments.map(
+                  {currentComments && currentComments.length > 0
+                    && currentComments.map(
                       (comment) =>
                         comment.post === post._id && (
                           <div
@@ -638,7 +639,7 @@ likePost = async (postId)=> {
                 </Card.Text>
               </Card.Body>
             </Card>
-          ))}
+          ))} */}
       </>
     );
   }
