@@ -61,6 +61,16 @@ width:100%;
     z-index:99
    
 }
+.goal-fuk{
+  font-size: 6rem;
+    color: #DAE0E3;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    bottom: 25%;
+    right: 25%;
+    z-index:99
+}
 
 .myprogress-home  .nav.nav-tabs{
  border:none;

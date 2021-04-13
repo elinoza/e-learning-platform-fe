@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import "./home.css";
 import SingleCourse from "../singleCourseInfo/SingleCourse";
-import { format, parseISO, formatDistance } from "date-fns";
+import { format, parseISO, formatDistance,intervalToDuration } from "date-fns";
 
 import Footer from "../Footer/Footer";
 
@@ -117,7 +117,11 @@ class Home extends Component {
   state = {
     categories: ["software", "Self-improvement"],
   };
-
+  formatSeconds = (seconds) => {
+    let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
+    let formatted = `${duration.minutes}min `;
+    return formatted;
+  };
   calculateWeekWatch = () => {
     let start = new Date(Date.now() - 604800000); // 7 day ago
     let end = new Date(); //today's date
@@ -135,7 +139,7 @@ class Home extends Component {
         .map((item) => item.watch)
         .reduce(reducer);
       console.log(watchedThisWeek);
-      return watchedThisWeek;
+      return watchedThisWeek/60;
     } else {
       return 0;
     }
@@ -159,7 +163,7 @@ class Home extends Component {
           .map((item) => item.watch)
           .reduce(reducer);
        
-        return watchedLastWeek;
+        return watchedLastWeek/60;
       
       }
       else{
@@ -184,10 +188,11 @@ class Home extends Component {
     this.props.fetchMewithThunk();
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
+   
   };
 
   render() {
-    const { savedVideos } = this.props.me.me;
+    const { savedVideos,myWeeklyGoal } = this.props.me.me;
     const { myProgress } = this.props.me;
 
     const { courses } = this.props.courses;
@@ -269,18 +274,40 @@ class Home extends Component {
         <Container>
           <Row className=" border-bottom mt-5 ">
             <Col xs={12} md={6} className="  p-3">
-              <h2 style={{ fontSize: "18px" }}>Set Weekly Goal</h2>
-              <div className="d-flex flex-row justify-content-between border-top mt-4 pt-2">
-                <div className="goal-parent m-0  ">
+              <h2 style={{ fontSize: "18px" }}>Weekly Goal</h2>
+              <Row><Col md={5}>
+              <div className="goal-parent m-0  ">
                   <Circle
-                    percent="70"
+                    percent={this.calculateWeekWatch()/myWeeklyGoal*100}
                     strokeWidth="6"
                     strokeColor="#0573B1"
                     id="goal-progress"
                   />
-                  <GiTrophyCup id="goal-cup" />
+                  {console.log("percent",this.calculateWeekWatch(),myWeeklyGoal,this.calculateWeekWatch()/myWeeklyGoal*100)}
+                 {myWeeklyGoal && myWeeklyGoal !== 0 ?  <p id="goal-fuk">{Math.round(this.calculateWeekWatch())+"/"+myWeeklyGoal}mins</p>: <GiTrophyCup id="goal-cup" /> }
                 </div>
-                <div className="ml-4 mt-4 ">
+
+              </Col>
+              <Col md={7}>  {myWeeklyGoal && myWeeklyGoal !== 0 ? <div> 
+               <div className="d-flex"> {/* <p>{Date.now() - 604800000}-{Date.now()} </p> */}
+                <Button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "transparent",
+                      color: "#0973B1",
+                      fontWeight: "bold",
+                      marginLeft:"auto"
+                    }}
+                    onClick={() => this.props.goalModalToggle(true)}
+                  >
+                  Edit goal 
+                  </Button></div>
+             {console.log("1",this.calculateWeekWatch())}
+                    {console.log("2",this.calculatelastWeekWatch())}
+                 
+                {  this.calculateWeekWatch() >= myWeeklyGoal ? <p>Congratulations Hilal you did it!</p>: <p>Keep going! Learn for {Math.round(myWeeklyGoal-this.calculateWeekWatch())} minutes more to hit your goal! </p> }
+
+             </div> :<div className="ml-4 mt-4 ">
                   <p>
                     We’ll help you track your progress and remind you to keep
                     learning
@@ -301,7 +328,8 @@ class Home extends Component {
 
                   <GoalModal />
                 </div>
-              </div>
+  }</Col></Row>
+              
             </Col>
             <Col xs={12} md={6} className=" myprogress-home p-3 ">
               <Tabs
