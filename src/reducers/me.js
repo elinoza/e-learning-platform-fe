@@ -14,6 +14,12 @@ export default function (state = initialState, action) {
           myProgress: action.payload,
         };
 
+        case "TOGGLE_GOAL_MODAL":
+        return {
+          ...state,
+          show_goal_Modal:action.payload,
+        };
+
 
 
 

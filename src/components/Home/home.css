@@ -217,3 +217,52 @@ padding-bottom:10px;
  
   display: flex!important;
 }
+
+.modal{
+  top:90px!important;
+}
+
+.take_meals_opt{
+	display:block;
+  width:4rem;
+  height:4rem;
+  text-align: center;
+
+	font-size:10px;
+  
+display:flex!important;
+flex-direction:column;
+align-items:center;
+
+	background-color:none; /*#7cb289;*/
+	border-bottom:1px solid #343434;
+	transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+  float: left;
+}
+
+
+.take_meals_opt:hover{
+  cursor:pointer;
+  background-color:#0E73B1;
+  color:white;
+}
+.take_meals_opt.selected{
+  
+  background-color:#0E73B1;
+  color:white;
+}
+
+.linkedin-blue-bg{
+  background-color:#0E73B1
+}
+
+.btn.linkedin-blue-bg:hover{
+  background-color:#0E73B1
+}
+
+.linkedin-blue-color{
+ color:#0E73B1
+}

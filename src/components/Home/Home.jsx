@@ -6,33 +6,36 @@ import {
   Form,
   Button,
   Carousel,
-  
   Badge,
   Tabs,
   Tab,
-Card
+  Card,
 } from "react-bootstrap";
 import "./home.css";
-import SingleCourse from "../singleCourseInfo/SingleCourse"
-import { format,parseISO } from 'date-fns'
+import SingleCourse from "../singleCourseInfo/SingleCourse";
+import { format, parseISO, formatDistance } from "date-fns";
 
 import Footer from "../Footer/Footer";
 
-
 import { GiTrophyCup } from "react-icons/gi";
 
-
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import { Avatar } from "@material-ui/core";
 import { Line, Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
+import GoalModal from "./GoalModal";
 import { connect } from "react-redux";
-
 
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
+  goalModalToggle: (payload) =>
+    dispatch({
+      type: "TOGGLE_GOAL_MODAL",
+      payload: payload,
+    }),
+
   fetchMewithThunk: () =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
@@ -58,7 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
         });
       }
     }),
-    fetchMyProgresswithThunk: () =>
+  fetchMyProgresswithThunk: () =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
@@ -73,17 +76,17 @@ const mapDispatchToProps = (dispatch) => ({
       if (response.ok) {
         dispatch({
           type: "SET_MY_PROGRESS",
-          payload: myLearning ,
+          payload: myLearning,
         });
-        console.log("myLearning endpoint ", myLearning );
+        console.log("myLearning endpoint ", myLearning);
       } else {
         dispatch({
           type: "SET_ERROR",
-          payload: myLearning ,
+          payload: myLearning,
         });
       }
     }),
-    fetchCourseswithThunk: () =>
+  fetchCourseswithThunk: () =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
@@ -98,126 +101,169 @@ const mapDispatchToProps = (dispatch) => ({
       if (response.ok) {
         dispatch({
           type: "SET_COURSES",
-          payload: courses ,
+          payload: courses,
         });
-        console.log("courses /videos endpoint ", courses );
+        console.log("courses /videos endpoint ", courses);
       } else {
         dispatch({
           type: "SET_ERROR",
-          payload: courses ,
+          payload: courses,
         });
       }
     }),
-
-
 });
-
-
-
 
 class Home extends Component {
   state = {
-    categories:["software","Self-improvement"]
-
+    categories: ["software", "Self-improvement"],
   };
 
+  calculateWeekWatch = () => {
+    let start = new Date(Date.now() - 604800000); // 7 day ago
+    let end = new Date(); //today's date
+    let watchArray = this.props.me.me.myWatchProgress;
+    console.log(start, end, watchArray);
+    if (watchArray) {
+      let filteredDates = watchArray.filter((item) => {
+        let date = new Date(item.createdAt);
+        console.log(date);
+        return date >= start && date <= end;
+      });
 
+      const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      let watchedThisWeek = filteredDates
+        .map((item) => item.watch)
+        .reduce(reducer);
+      console.log(watchedThisWeek);
+      return watchedThisWeek;
+    } else {
+      return 0;
+    }
+  };
 
-isProgressed=(id)=>{
-  let myProgress= this.props.me.myProgress.find(item=> item.course._id === id)
+  calculatelastWeekWatch = () => {
+    let start = new Date(Date.now() - 1209600000); //14 day ago
+    let end = new Date(Date.now() - 604800000); //7 day ago
+    let watchArray = this.props.me.me.myWatchProgress;
+    console.log(start, end, watchArray);
+    if (watchArray) {
+      let filteredDates = watchArray.filter((item) => {
+        let date = new Date(item.createdAt);
+       
+        return date >= start && date <= end;
+      });
+      if (filteredDates && filteredDates.length > 0) {
+        const reducer = (accumulator, currentValue) =>
+          accumulator + currentValue;
+        let watchedLastWeek = filteredDates
+          .map((item) => item.watch)
+          .reduce(reducer);
+       
+        return watchedLastWeek;
+      
+      }
+      else{
+        return 0
+      }
+    } else {
+      return 0;
+    }
+  };
 
-console.log("isprogresses?",myProgress)
+  isProgressed = (id) => {
+    let myProgress = this.props.me.myProgress.find(
+      (item) => item.course._id === id
+    );
 
-  return  myProgress
-  
-}
+    console.log("isprogresses?", myProgress);
+
+    return myProgress;
+  };
 
   componentDidMount = () => {
-		this.props.fetchMewithThunk()
-		this.props.fetchMyProgresswithThunk()
-    this.props.fetchCourseswithThunk()
-
-	}
-
-
-
+    this.props.fetchMewithThunk();
+    this.props.fetchMyProgresswithThunk();
+    this.props.fetchCourseswithThunk();
+  };
 
   render() {
-    const {savedVideos}= this.props.me.me
-    const {myProgress}= this.props.me
-   
-    
-    const {courses}= this.props.courses
-    console.log("saved",savedVideos)
+    const { savedVideos } = this.props.me.me;
+    const { myProgress } = this.props.me;
+
+    const { courses } = this.props.courses;
+    console.log("saved", savedVideos);
     return (
       <>
-        <Carousel fade="true "style={{marginTop:"52px"}}>
-          {courses && courses.map(course=> 
-          <Carousel.Item  className="carousel-item m-3"  
-           onClick={()=>this.props.history.push(`/learn/${course._id}`)}
-           >
-            <img
-              className="d-block w-100 bg-image"
-              src={course.video_cover_img}
-              alt="First slide"
-            />
-            <Carousel.Caption className="d-flex flex-row justify-content-between  ">
-              <div className="w-100 d-flex flex-column justify-content-between text-left car-cap-1 ">
-                <h5>
-                  <Badge
-                    style={{ backgroundColor: "purple", marginRight: "3px" }}
-                  >
-                    Popular
-                  </Badge>
-                  <Badge
-                    style={{ backgroundColor: "green", marginRight: "3px" }}
-                  >
-                    New
-                  </Badge>
-                  <span className="text-near-badge">
-                    Released at {format(parseISO(course.createdAt),'MM/dd/yyyy')}
-                  </span>
-                </h5>
-
-                <h3 style={{ fontWeight: "600" }}>
-                 {course.videoName}
-                </h3>
-                <div className="d-flex">
-                  <Avatar
-                    src= {course.tutor.tutorImg}
-                    className="navbar-logo m-0 mt-1 p-0 d-inline"
-                  />
-                  <div>
-                    {" "}
-                    <p
-                      style={{ fontSize: "12px" }}
-                      className="d-block ml-1 mb-0 p-0 "
-                    >
-                     {course.tutor.tutorName}
-                    </p>
-                    <p
-                      style={{ fontSize: "12px" }}
-                      className="d-block ml-1 mb-0 p-0 "
-                    >
-                       {course.tutor.tutorProfession}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-100 d-none d-lg-block car-cap-2">
-                {" "}
+        <Carousel fade="true " style={{ marginTop: "52px" }}>
+          {courses &&
+            courses.map((course) => (
+              <Carousel.Item
+                className="carousel-item m-3"
+                onClick={() => this.props.history.push(`/learn/${course._id}`)}
+              >
                 <img
-                  className="d-block w-100 "
-                  src= {course.video_thumbnail_img}
-                  alt="tiny img"
-                  style={{ height: "13vw",
-                 objectFit: "contain"}}
+                  className="d-block w-100 bg-image"
+                  src={course.video_cover_img}
+                  alt="First slide"
                 />
-              </div>
-            </Carousel.Caption>
-          </Carousel.Item>
-          )}
+                <Carousel.Caption className="d-flex flex-row justify-content-between  ">
+                  <div className="w-100 d-flex flex-column justify-content-between text-left car-cap-1 ">
+                    <h5>
+                      <Badge
+                        style={{
+                          backgroundColor: "purple",
+                          marginRight: "3px",
+                        }}
+                      >
+                        Popular
+                      </Badge>
+                      <Badge
+                        style={{ backgroundColor: "green", marginRight: "3px" }}
+                      >
+                        New
+                      </Badge>
+                      <span className="text-near-badge">
+                        Released at{" "}
+                        {format(parseISO(course.createdAt), "MM/dd/yyyy")}
+                      </span>
+                    </h5>
+
+                    <h3 style={{ fontWeight: "600" }}>{course.videoName}</h3>
+                    <div className="d-flex">
+                      <Avatar
+                        src={course.tutor.tutorImg}
+                        className="navbar-logo m-0 mt-1 p-0 d-inline"
+                      />
+                      <div>
+                        {" "}
+                        <p
+                          style={{ fontSize: "12px" }}
+                          className="d-block ml-1 mb-0 p-0 "
+                        >
+                          {course.tutor.tutorName}
+                        </p>
+                        <p
+                          style={{ fontSize: "12px" }}
+                          className="d-block ml-1 mb-0 p-0 "
+                        >
+                          {course.tutor.tutorProfession}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-100 d-none d-lg-block car-cap-2">
+                    {" "}
+                    <img
+                      className="d-block w-100 "
+                      src={course.video_thumbnail_img}
+                      alt="tiny img"
+                      style={{ height: "13vw", objectFit: "contain" }}
+                    />
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
         </Carousel>
 
         <Container>
@@ -238,17 +284,22 @@ console.log("isprogresses?",myProgress)
                   <p>
                     We’ll help you track your progress and remind you to keep
                     learning
+                    {console.log("1",this.calculateWeekWatch())}
+                    {console.log("2",this.calculatelastWeekWatch())}
                   </p>
                   <Button
                     style={{
                       backgroundColor: "transparent",
                       border: "1px solid #0973B1",
+                      color: "#0973B1",
+                      fontWeight: "bold",
                     }}
+                    onClick={() => this.props.goalModalToggle(true)}
                   >
-                    <span style={{ color: "#0973B1", fontWeight: "bold" }}>
-                      Set a goal
-                    </span>
+                    Set a goal
                   </Button>
+
+                  <GoalModal />
                 </div>
               </div>
             </Col>
@@ -262,34 +313,34 @@ console.log("isprogresses?",myProgress)
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
-                      {myProgress  && myProgress.map(item=> 
-                 
-
-                       item.completePercentage!==1 &&
-            
-                     
-                     <SingleCourse
-                    
-                      courseId ={item._id}
-                      duration={item.duration} 
-                      tutorName={item.course.tutor.tutorName}
-                      tutorProfession={item.course.tutor.tutorProfession}
-                      videoName={item.course.videoName}
-                      createdAt={item.course.createdAt}
-                      updatedAt={item.course.updatedAt}
-                      remainingTime={item.remainingTime}
-                      secondLeft={item.secondLeft}
-                      playlistIndex={item.playlistIndex}
-                      completePercentage={item.completePercentage}
-                      video_thumbnail_img={item.course.video_thumbnail_img}
-                      completed="false"
-                      isProgressed="true"
-                      style="small"/>
-                   
-                      )}
-                
-                   </Row>
-                 
+                      {myProgress &&
+                        myProgress.map(
+                          (item) =>
+                            item.completePercentage !== 1 && (
+                              <SingleCourse
+                                courseId={item._id}
+                                duration={item.duration}
+                                tutorName={item.course.tutor.tutorName}
+                                tutorProfession={
+                                  item.course.tutor.tutorProfession
+                                }
+                                videoName={item.course.videoName}
+                                createdAt={item.course.createdAt}
+                                updatedAt={item.course.updatedAt}
+                                remainingTime={item.remainingTime}
+                                secondLeft={item.secondLeft}
+                                playlistIndex={item.playlistIndex}
+                                completePercentage={item.completePercentage}
+                                video_thumbnail_img={
+                                  item.course.video_thumbnail_img
+                                }
+                                completed="false"
+                                isProgressed="true"
+                                style="small"
+                              />
+                            )
+                        )}
+                    </Row>
                     <div
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
@@ -302,88 +353,76 @@ console.log("isprogresses?",myProgress)
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
-                     
-                    {savedVideos && savedVideos.map((item)=> {
-  let isProgressed=this.isProgressed(item._id)
+                      {savedVideos &&
+                        savedVideos.map((item) => {
+                          let isProgressed = this.isProgressed(item._id);
 
-
-  return   isProgressed?
-
-
-
-   <SingleCourse
-    courseId ={item._id} 
-    duration={item.duration}
-    tutorName={item.tutor.tutorName}
-    tutorProfession={item.tutor.tutorProfession}
-    videoName={item.videoName}
-    createdAt={item.createdAt}
-    updatedAt={item.updatedAt}
-    remainingTime={isProgressed.remainingTime}
-    secondLeft={isProgressed.secondLeft}
-    playlistIndex={isProgressed.playlistIndex}
-    completePercentage={isProgressed.completePercentage}
-    video_thumbnail_img={item.video_thumbnail_img}
-    completed={ isProgressed.completePercentage===1 ?"true":"false"}
-    isProgressed="true"
-    style="small"/>
-    
-    :
-
-    <SingleCourse
-    courseId ={item._id} 
-    duration={item.duration}
-    tutorName={item.tutor.tutorName}
-    tutorProfession={item.tutor.tutorProfession}
-    videoName={item.videoName}
-    createdAt={item.createdAt}
-    updatedAt={item.updatedAt}
-    video_thumbnail_img={item.video_thumbnail_img}
-    completed="false"
-    isProgressed="false"
-    style="small"/>
-                     } )}
-
-
-                    
-              
-
-
-
-                   
-                 
+                          return isProgressed ? (
+                            <SingleCourse
+                              courseId={item._id}
+                              duration={item.duration}
+                              tutorName={item.tutor.tutorName}
+                              tutorProfession={item.tutor.tutorProfession}
+                              videoName={item.videoName}
+                              createdAt={item.createdAt}
+                              updatedAt={item.updatedAt}
+                              remainingTime={isProgressed.remainingTime}
+                              secondLeft={isProgressed.secondLeft}
+                              playlistIndex={isProgressed.playlistIndex}
+                              completePercentage={
+                                isProgressed.completePercentage
+                              }
+                              video_thumbnail_img={item.video_thumbnail_img}
+                              completed={
+                                isProgressed.completePercentage === 1
+                                  ? "true"
+                                  : "false"
+                              }
+                              isProgressed="true"
+                              style="small"
+                            />
+                          ) : (
+                            <SingleCourse
+                              courseId={item._id}
+                              duration={item.duration}
+                              tutorName={item.tutor.tutorName}
+                              tutorProfession={item.tutor.tutorProfession}
+                              videoName={item.videoName}
+                              createdAt={item.createdAt}
+                              updatedAt={item.updatedAt}
+                              video_thumbnail_img={item.video_thumbnail_img}
+                              completed="false"
+                              isProgressed="false"
+                              style="small"
+                            />
+                          );
+                        })}
                     </Row>
-                  
-                   
-                    
                     <div
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All {savedVideos &&savedVideos.length}</a>
+                      <a>Show All {savedVideos && savedVideos.length}</a>
                     </div>
                   </div>
                 </Tab>
               </Tabs>
             </Col>
           </Row>
-     
-      <div className="my-5  blur-container">
-        <h4 >Top Picks For Hilal</h4>
 
-        {this.state.categories.map(category =>  <MultiCarousel  style={{marginBottom:"10rem",marginTop:"3rem"}}
-         
-         title={category.toUpperCase() + ` Related Courses`} category={category}/> )}
-       
+          <div className="my-5  blur-container">
+            <h4>Top Picks For Hilal</h4>
 
-        </div>
-
-    
-        
-        
-         
+            {this.state.categories.map((category) => (
+              <MultiCarousel
+                style={{ marginBottom: "10rem", marginTop: "3rem" }}
+                title={category.toUpperCase() + ` Related Courses`}
+                category={category}
+              />
+            ))}
+          </div>
         </Container>
-        <Footer/>
+        <Footer />
       </>
     );
   }
