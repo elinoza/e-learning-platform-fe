@@ -188,7 +188,7 @@ class Home extends Component {
     this.props.fetchMewithThunk();
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
-   
+    this.props.goalModalToggle(false)
   };
 
   render() {
@@ -436,7 +436,7 @@ class Home extends Component {
                 </Tab>
               </Tabs>
             </Col>
-          </Row>
+          </Row>  
 
           <div className="my-5  blur-container">
             <h4>Top Picks For Hilal</h4>
