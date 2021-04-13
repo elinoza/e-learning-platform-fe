@@ -3,18 +3,13 @@ import { initialState } from "../store";
 export default function (state = initialState, action) {
   switch (action.type) {
 
-        case "SET_ME":
-      return {
-        ...state,
-        me: action.payload,
-      };
-      case "SET_MY_PROGRESS":
+
+
+        case "TOGGLE_GOAL_MODAL":
         return {
           ...state,
-          myProgress: action.payload,
+          show_goal_Modal:action.payload,
         };
-
-
   
 
     default:

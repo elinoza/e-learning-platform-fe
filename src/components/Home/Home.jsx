@@ -190,7 +190,7 @@ class Home extends Component {
     this.props.fetchMewithThunk();
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
-    this.props.goalModalToggle(false);
+
   };
 
   render() {
@@ -279,30 +279,52 @@ class Home extends Component {
               <h2 style={{ fontSize: "18px" }}>Weekly Goal</h2>
               <Row>
                 <Col md={5}>
-                  <div className="goal-parent m-0  ">
+                {myWeeklyGoal && myWeeklyGoal !== 0 ? 
+                  <div className="goal-parent m-0 position-relative
+                    ">
                     <Circle
                       percent={(this.calculateWeekWatch() / myWeeklyGoal) * 100}
                       strokeWidth="6"
                       strokeColor="#0573B1"
                       id="goal-progress"
                     />
-                    {console.log(
-                      "percent",
-                      this.calculateWeekWatch(),
-                      myWeeklyGoal,
-                      (this.calculateWeekWatch() / myWeeklyGoal) * 100
-                    )}
-                    {myWeeklyGoal && myWeeklyGoal !== 0 ? (
-                      <p id="goal-fuk">
+                 
+                    <div className="cup-container">
+                      <div className="cup-content">
+                    
+                      <>
+                      <p style={{fontWeight:"bold",fontSize:"18px",margin:"0px"}}>
                         {Math.round(this.calculateWeekWatch()) +
                           "/" +
                           myWeeklyGoal}
-                        mins
+                        
                       </p>
-                    ) : (
-                      <GiTrophyCup id="goal-cup" />
-                    )}
+                      <span className="text-muted">minutes</span></>
+                 
+                    
+                    </div> </div>
                   </div>
+                  :  
+                  
+                  <div className="goal-parent m-0 position-relative">
+                    <Circle
+                      percent="0"
+                      strokeWidth="1"
+                      strokeColor="#0573B1"
+                      id="goal-progress"
+                    />
+                 
+                    <div className="cup-container">
+                      <div className="cup-content">
+                    
+                  
+                      <GiTrophyCup id="goal-cup" />
+                 
+                    
+                    </div> </div>
+                  </div>
+                     
+                  }
                 </Col>
                 <Col md={7}>
                   {" "}
@@ -356,8 +378,8 @@ class Home extends Component {
                       >
                         Set a goal
                       </Button>
-
-                      <GoalModal />
+{this.props.goal.show_goal_Modal=== true &&   <GoalModal />}
+                     
                     </div>
                   )}
                 </Col>

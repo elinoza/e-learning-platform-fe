@@ -29,6 +29,11 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_ME",
           payload: me,
         });
+        dispatch({
+            type: "TOGGLE_GOAL_MODAL",
+            payload: false,
+          });
+
       
         console.log("me endpoint", me);
       } else {
@@ -45,6 +50,11 @@ state={
     selected:{myWeeklyGoal:""}
 }
 
+
+handleClose=()=>{
+    this.props.fetchMewithThunk()
+
+}
    saveGoal=async()=>{
     try {
         const token = localStorage.getItem("token");
@@ -61,8 +71,9 @@ state={
         
     
         if (response.ok) {
-       
-         this.props.fetchMewithThunk()
+            // this.props.goalModalToggle()
+            // this.handleClose()
+            this.props.fetchMewithThunk()
          
         } else {
        console.log("save error",response)
@@ -78,7 +89,7 @@ state={
     return (
       <div className="goal-Modal">
         <Modal
-          show={this.props.me.show_goal_Modal}
+          show={this.props.goal.show_goal_Modal}
           onHide={() => this.props.goalModalToggle(false)}
         >
           <Modal.Header closeButton>

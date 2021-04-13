@@ -4,6 +4,7 @@ import playerReducers from "../reducers/player";
 import meReducers from "../reducers/me";
 import skillsReducers from "../reducers/skills";
 import postsReducers from "../reducers/posts";
+import goalReducers from "../reducers/goal";
 
 
 import thunk from "redux-thunk";
@@ -14,9 +15,10 @@ export const initialState = {
   me: {
     me: {},
     myProgress: [],
-    show_goal_Modal:false,
+   
  
   },
+  show_goal_Modal:false,
 
 player:{
     currentCourse:{},
@@ -37,7 +39,8 @@ const combinedReducer = combineReducers({
  courses: coursesReducers,
  player:playerReducers,
  skills:skillsReducers,
- posts:postsReducers
+ posts:postsReducers,
+ goal:goalReducers
 });
 
 export default function configureStore() {

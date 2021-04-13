@@ -333,8 +333,8 @@ likePost = async (postId)=> {
     console.log("render commens", this.props.posts);
     return (
       <>
-      {console.log("comments-->",currentPosts.length,currentComments.length )}
-        {/* <Form
+      
+        <Form
           className="mt-1 ask-form border pb-5 px-3 shadow "
           onSubmit={(e) => this.askQuestion(e)}
         >
@@ -639,7 +639,7 @@ likePost = async (postId)=> {
                 </Card.Text>
               </Card.Body>
             </Card>
-          ))} */}
+          ))}
       </>
     );
   }

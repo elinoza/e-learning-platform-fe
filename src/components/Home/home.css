@@ -53,24 +53,59 @@ width:100%;
 #goal-cup{
     font-size: 6rem;
     color: #DAE0E3;
-    position: absolute;
+    /* position: absolute;
     top: 25%;
     left: 25%;
     bottom: 25%;
-    right: 25%;
-    z-index:99
+    right: 25%; */
+  
    
 }
-.goal-fuk{
-  font-size: 6rem;
-    color: #DAE0E3;
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    bottom: 25%;
-    right: 25%;
-    z-index:99
+
+
+
+.cup-container {
+
+  position: absolute;
+  top:0;
+  bottom:0;
+  right: 0;
+  left: 0;
+  padding-left:10px;
+  padding-right:10px;
+padding-bottom:10px;
+  /* transform: translateY(13.2rem); */
+  pointer-events: none;
+  transition: transform 0.3s ease, transform 0.3s ease;
+  transition:  0.3s;
+  transition-timing-function:ease-in;
+
+
+
 }
+
+
+
+
+
+.cup-content {
+
+  /* padding: 1rem 1.5rem;
+  padding-top: 38px; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  height: 100%;
+  overflow: hidden;
+
+
+}
+
+
+
+
 
 .myprogress-home  .nav.nav-tabs{
  border:none;
@@ -101,7 +136,7 @@ color:#046097}
   padding-left:10px;
   padding-right:10px;
 padding-bottom:10px;
-  transform: translateY(16rem);
+  transform: translateY(13.2rem);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -113,8 +148,9 @@ padding-bottom:10px;
 
 }
 
+
 .infos-container.shadow{
-  box-shadow: 0 1.5rem 1.5rem rgb(0 0 0 / 10%) !important;
+  box-shadow: 0 1.5rem 1rem rgb(0 0 0 / 13%) !important;
 }
 
 
@@ -150,9 +186,10 @@ padding-bottom:10px;
 
 .recommendation-card:hover  {
 
-  transform: scale(1.1);
+  transform: scale(1.2);
 
     z-index: 10;
+    box-shadow: 0 1.5rem 1rem rgb(0 0 0 / 13%) !important;
 
 }
 
@@ -280,3 +317,6 @@ align-items:center;
 .linkedin-blue-color{
  color:#0E73B1
 }
+
+
+
