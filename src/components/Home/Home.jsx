@@ -14,7 +14,7 @@ Card
 } from "react-bootstrap";
 import "./home.css";
 import SingleCourse from "../singleCourseInfo/SingleCourse"
-import { format,parseISO } from 'date-fns'
+import { format,parseISO,formatDistance } from 'date-fns'
 
 import Footer from "../Footer/Footer";
 
@@ -27,12 +27,21 @@ import { Link } from "react-router-dom"
 import { Avatar } from "@material-ui/core";
 import { Line, Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
+import GoalModal from "./GoalModal"
 import { connect } from "react-redux";
 
 
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
+
+  goalModalToggle: (payload) =>
+  dispatch({
+    type: "TOGGLE_GOAL_MODAL",
+    payload:payload,
+  }),
+ 
+
   fetchMewithThunk: () =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
@@ -122,6 +131,20 @@ class Home extends Component {
   };
 
 
+  calculateWeekWatch=()=>{
+    let start = new Date(this.min);
+    let end   = new Date(this.max);
+    
+    return items.filter(item => {
+       let date = new Date(item.created_at);
+       return date >= start && date <= end;
+    }
+
+
+    // let today=new Date()
+    // let watchArray= this.props.me.me.myWatchProgress
+    // watchArray.map(item=>formatDistance(parseISO(item.createdAt), new Date())  )
+  }
 
 isProgressed=(id)=>{
   let myProgress= this.props.me.myProgress.find(item=> item.course._id === id)
@@ -238,17 +261,23 @@ console.log("isprogresses?",myProgress)
                   <p>
                     We’ll help you track your progress and remind you to keep
                     learning
+
+                    {this.calculateWeekWatch()}
                   </p>
                   <Button
                     style={{
                       backgroundColor: "transparent",
                       border: "1px solid #0973B1",
+                      color: "#0973B1", fontWeight: "bold" 
                     }}
+                    onClick={()=>this.props.goalModalToggle(true)}
                   >
-                    <span style={{ color: "#0973B1", fontWeight: "bold" }}>
+          
                       Set a goal
-                    </span>
+                
                   </Button>
+
+                  <GoalModal/>
                 </div>
               </div>
             </Col>

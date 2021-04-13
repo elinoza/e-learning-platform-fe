@@ -7,6 +7,9 @@ export default function (state = initialState, action) {
         skills: action.payload,
       };
 
+      
+
+
      
 
     default:

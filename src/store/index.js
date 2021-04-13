@@ -13,7 +13,8 @@ const composedEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const initialState = {
   me: {
     me: {},
-    myProgress: []
+    myProgress: [],
+    show_goal_Modal:false,
  
   },
 
