@@ -139,7 +139,7 @@ class myLearning extends Component {
 
   learningHistoryCount = () => {
     let completedCourses = this.props.me.myProgress.filter(
-      (item) => item.completePercentage === 1
+      (item) => item.completePercentage >= 1
     );
     return completedCourses.length;
   };
