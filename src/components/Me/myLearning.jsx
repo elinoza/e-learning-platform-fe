@@ -242,7 +242,7 @@ class myLearning extends Component {
                   {myProgress &&
                     myProgress.map(
                       (item) =>
-                        item.completePercentage !== 1 && (
+                        item.completePercentage < 1 && (
                           <SingleCourse
                             courseId={item._id}
                             duration={item.duration}
@@ -290,7 +290,7 @@ class myLearning extends Component {
                           completePercentage={isProgressed.completePercentage}
                           video_thumbnail_img={item.video_thumbnail_img}
                           completed={
-                            isProgressed.completePercentage === 1
+                            isProgressed.completePercentage >= 1
                               ? "true"
                               : "false"
                           }
@@ -325,7 +325,7 @@ class myLearning extends Component {
                   {myProgress &&
                     myProgress.map(
                       (item) =>
-                        item.completePercentage === 1 && (
+                        item.completePercentage >= 1 && (
                           <SingleCourse
                             courseId={item._id}
                             duration={item.duration}
