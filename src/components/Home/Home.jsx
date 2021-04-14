@@ -398,7 +398,7 @@ class Home extends Component {
                       {myProgress &&
                         myProgress.map(
                           (item) =>
-                            item.completePercentage < 1 && (
+                            item.completePercentage !== 1 && (
                               <SingleCourse
                                 courseId={item._id}
                                 duration={item.duration}
@@ -456,7 +456,7 @@ class Home extends Component {
                               }
                               video_thumbnail_img={item.video_thumbnail_img}
                               completed={
-                                isProgressed.completePercentage >=1
+                                isProgressed.completePercentage === 1
                                   ? "true"
                                   : "false"
                               }
