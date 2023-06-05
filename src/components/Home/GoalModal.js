@@ -3,7 +3,7 @@ import { Modal, Button, Row, Col, Image, Badge } from "react-bootstrap";
 import "./home.css";
 import { connect } from "react-redux";
 import { BiCertification } from "react-icons/bi";
-import { Box } from "@material-ui/core";
+
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({

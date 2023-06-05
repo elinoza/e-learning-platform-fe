@@ -21,6 +21,7 @@ export const initialState = {
   show_goal_Modal:false,
 
 player:{
+  
     currentCourse:{},
     currentCourseProgress:{},
     showSideBar:"true"

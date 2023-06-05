@@ -8,21 +8,19 @@ import {
   Carousel,
   Badge,
   Tabs,
-  Tab,
-  Card,
+  Tab
 } from "react-bootstrap";
 import "./home.css";
 import SingleCourse from "../singleCourseInfo/SingleCourse";
-import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
+import { format, parseISO,  intervalToDuration } from "date-fns";
 
 import Footer from "../Footer/Footer";
 
 import { GiTrophyCup } from "react-icons/gi";
 
-import { Link } from "react-router-dom";
 
 import { Avatar } from "@material-ui/core";
-import { Line, Circle } from "rc-progress";
+import { Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
 import GoalModal from "./GoalModal";
 import { connect } from "react-redux";
