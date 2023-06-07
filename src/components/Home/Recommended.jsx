@@ -9,7 +9,8 @@ import {
   Button,
   Carousel,
 
-Card
+Card,
+Modal
 } from "react-bootstrap";
 import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
@@ -140,7 +141,7 @@ class Recommended extends Component {
     videoName,
     duration,
     createdAt,video_thumbnail_img,learners}=this.props
-  
+  console.log("from rec",this.props.show_goal_Modal)
     return (
       
       <>

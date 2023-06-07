@@ -22,8 +22,9 @@ import { GiTrophyCup } from "react-icons/gi";
 import { Avatar } from "@material-ui/core";
 import { Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
-import GoalModal from "./GoalModal";
+
 import { connect } from "react-redux";
+import GoalModal from "./GoalModal";
 
 const mapStateToProps = (state) => state;
 
@@ -114,7 +115,16 @@ const mapDispatchToProps = (dispatch) => ({
 class Home extends Component {
   state = {
     categories: ["software", "Self-improvement"],
+ Bool:true
+    
   };
+  truncateArr=(arr,boolean)=>{
+return boolean ? arr.slice(0,3):arr
+  }
+
+  togglingBoolean=()=>{
+  this.setState({Bool:!this.state.Bool})
+  }
   formatSeconds = (seconds) => {
     let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
     let formatted = `${duration.minutes}min `;
@@ -124,11 +134,11 @@ class Home extends Component {
     let start = new Date(Date.now() - 604800000); // 7 day ago
     let end = new Date(); //today's date
     let watchArray = this.props.me.me.myWatchProgress;
-    console.log(start, end, watchArray);
+    // console.log(start, end, watchArray);
     if (watchArray) {
       let filteredDates = watchArray.filter((item) => {
         let date = new Date(item.createdAt);
-        console.log(date);
+        //console.log(date);
         return date >= start && date <= end;
       });
       if (filteredDates && filteredDates.length > 0) {
@@ -137,7 +147,7 @@ class Home extends Component {
         let watchedThisWeek = filteredDates
           .map((item) => item.watch)
           .reduce(reducer);
-        console.log(watchedThisWeek);
+        // console.log(watchedThisWeek);
         return watchedThisWeek / 60;
       } else {
         return 0;
@@ -151,7 +161,7 @@ class Home extends Component {
     let start = new Date(Date.now() - 1209600000); //14 day ago
     let end = new Date(Date.now() - 604800000); //7 day ago
     let watchArray = this.props.me.me.myWatchProgress;
-    console.log(start, end, watchArray);
+    // console.log(start, end, watchArray);
     if (watchArray) {
       let filteredDates = watchArray.filter((item) => {
         let date = new Date(item.createdAt);
@@ -183,6 +193,8 @@ class Home extends Component {
 
     return myProgress;
   };
+  
+
 
   componentDidMount = () => {
     this.props.fetchMewithThunk();
@@ -194,12 +206,16 @@ class Home extends Component {
   render() {
     const { savedVideos, myWeeklyGoal } = this.props.me.me;
     const { myProgress } = this.props.me;
+   
+    console.log("myprogress",myProgress)
+    
 
     const { courses } = this.props.courses;
-    console.log("saved", savedVideos);
+    // console.log("saved", savedVideos);
+    // console.log("show-goal-modal",this.props.show_goal_Modal,myWeeklyGoal)
     return (
       <>
-        <Carousel fade="true " style={{ marginTop: "52px" }}>
+        <Carousel id="carousel" className="carousel-fade" style={{ marginTop: "52px" }} fade="true" data-bs-ride="carousel">
           {courses &&
             courses.map((course) => (
               <Carousel.Item
@@ -344,8 +360,8 @@ class Home extends Component {
                           Edit goal
                         </Button>
                       </div>
-                      {console.log("1", this.calculateWeekWatch())}
-                      {console.log("2", this.calculatelastWeekWatch())}
+                      {/* {console.log("1", this.calculateWeekWatch())}
+                      {console.log("2", this.calculatelastWeekWatch())} */}
 
                       {this.calculateWeekWatch() >= myWeeklyGoal ? (
                         <p>Congratulations Hilal you did it!</p>
@@ -362,8 +378,8 @@ class Home extends Component {
                       <p>
                         We’ll help you track your progress and remind you to
                         keep learning
-                        {console.log("1", this.calculateWeekWatch())}
-                        {console.log("2", this.calculatelastWeekWatch())}
+                        {/* {console.log("1", this.calculateWeekWatch())}
+                        {console.log("2", this.calculatelastWeekWatch())} */}
                       </p>
                       <Button
                         style={{
@@ -394,12 +410,13 @@ class Home extends Component {
                     {" "}
                     <Row>
                       {myProgress &&
-                        myProgress.map(
+                       this.truncateArr(myProgress,this.state.Bool).map(
                           (item) =>
                             item.completePercentage < 1 && (
                               <SingleCourse
-                                courseId={item._id}
-                                duration={item.duration}
+                        
+                                courseId={item.course._id}
+                                duration={item.course.duration}
                                 tutorName={item.course.tutor.tutorName}
                                 tutorProfession={
                                   item.course.tutor.tutorProfession
@@ -422,10 +439,10 @@ class Home extends Component {
                         )}
                     </Row>
                     <div
-                      className="ml-auto d-inline w-75"
+                      className="ml-auto p-2 d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All {myProgress && myProgress.length}</a>
+                      <a  className="showMore" onClick={this.togglingBoolean} >Show {this.state.Bool ? `All ${ myProgress && myProgress.length}` :"Less"} {}</a>
                     </div>
                   </div>
                 </Tab>
@@ -433,12 +450,15 @@ class Home extends Component {
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
-                      {savedVideos &&
-                        savedVideos.map((item) => {
+                      {
+                     
+                      savedVideos &&
+             this.truncateArr(savedVideos,this.state.Bool).map((item) => {
                           let isProgressed = this.isProgressed(item._id);
 
                           return isProgressed ? (
                             <SingleCourse
+                      
                               courseId={item._id}
                               duration={item.duration}
                               tutorName={item.tutor.tutorName}
@@ -482,7 +502,7 @@ class Home extends Component {
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a>Show All {savedVideos && savedVideos.length}</a>
+                      <a className="showMore"onClick={this.togglingBoolean} >Show {this.state.Bool ? `All ${ savedVideos && savedVideos.length}`  :"Less"} </a>
                     </div>
                   </div>
                 </Tab>

@@ -133,7 +133,7 @@ class Learn extends Component {
     this.props.fetchMyCourseProgress(courseId);
     this.props.fetchTheCoursewithThunk(courseId);
     
-    
+    console.log("courseId",courseId)
    
   };
   render() {
@@ -141,7 +141,7 @@ class Learn extends Component {
 
    
    
-    console.log(this.props.player);
+    // console.log(this.props.player);
     return (
       
       <>

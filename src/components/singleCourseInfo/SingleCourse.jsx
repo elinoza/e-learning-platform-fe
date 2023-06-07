@@ -6,6 +6,8 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import "../Home/home.css";
 import "./SingleCourse.css";
+import {compose} from "redux";
+import { withRouter } from "react-router-dom"; 
 import { connect } from "react-redux";
 import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
@@ -35,11 +37,11 @@ class SingleCourse extends Component {
       courseId
     } = this.props;
 
-    console.log("remaining Time", remainingTime);
+    // console.log("remaining Time", remainingTime);
     return (
       <>
         <Col xs={12} className="mb-3 singleCourse-col"  
-        // onClick={()=>this.props.history.push(`/learn/${courseId}`)}
+       onClick={()=>this.props.history.push(`/learn/${courseId}`)}
         >
           <div
             className={
@@ -174,4 +176,8 @@ class SingleCourse extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(SingleCourse);
+// export default connect(mapStateToProps)(SingleCourse);
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(SingleCourse);
