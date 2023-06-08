@@ -21,13 +21,23 @@ class Login extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     console.log(urlParams.get("accessToken"));
-    if (!urlParams.has("accessToken")) {
+    if (!urlParams.has("accessToken") ) {
+      if(Object.hasOwn(localStorage,"token")){
+       // console.log("toke already exists",localStorage.getItem("token"))
+    window.location.replace("/home");
+    
+      }
+      
     } else {
+      
+  
       const token = urlParams.get("accessToken");
-      console.log(token);
+      console.log("hello",token);
       localStorage.setItem("token", token);
       window.location.replace("/home");
     }
+     
+    
   };
 
   changePassword = (e) => {

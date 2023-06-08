@@ -15,6 +15,7 @@ import SingleCourse from "../singleCourseInfo/SingleCourse";
 import { format, parseISO,  intervalToDuration } from "date-fns";
 
 import Footer from "../Footer/Footer";
+import GoalModal from "./GoalModal";
 
 import { GiTrophyCup } from "react-icons/gi";
 
@@ -24,7 +25,7 @@ import { Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
 
 import { connect } from "react-redux";
-import GoalModal from "./GoalModal";
+
 
 const mapStateToProps = (state) => state;
 
@@ -212,7 +213,7 @@ return boolean ? arr.slice(0,3):arr
 
     const { courses } = this.props.courses;
     // console.log("saved", savedVideos);
-    // console.log("show-goal-modal",this.props.show_goal_Modal,myWeeklyGoal)
+ console.log("show-goal-modal",this.props.goal.show_goal_Modal,myWeeklyGoal)
     return (
       <>
         <Carousel id="carousel" className="carousel-fade" style={{ marginTop: "52px" }} fade="true" data-bs-ride="carousel">
@@ -392,10 +393,11 @@ return boolean ? arr.slice(0,3):arr
                       >
                         Set a goal
                       </Button>
-{this.props.goal.show_goal_Modal=== true &&   <GoalModal />}
+              
                      
                     </div>
-                  )}
+                  )} 
+                   {this.props.goal.show_goal_Modal &&  <GoalModal/>}
                 </Col>
               </Row>
             </Col>

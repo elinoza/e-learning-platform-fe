@@ -86,13 +86,16 @@ handleClose=()=>{
     }
    }
   render() {
+
+    console.log("Im from goalModule budyy","yayy","viyuu")
     return (
+    
       <div className="goal-Modal">
         <Modal
           show={this.props.goal.show_goal_Modal}
-          onHide={() => this.props.goalModalToggle(false)}
+         onHide={() => this.props.goalModalToggle(false)}
         >
-          <Modal.Header closeButton>
+          <Modal.Header >
             <Modal.Title style={{ fontSize: "16px" }}>
               Set a Weekly Goal
             </Modal.Title>
@@ -105,7 +108,7 @@ handleClose=()=>{
                 {this.state.boxes.map(box=>
                 
                 
-                <a  onClick={()=>this.setState({ selected:{myWeeklyGoal:box}})}>
+               <a  onClick={()=>this.setState({ selected:{myWeeklyGoal:box}})}>
                     <div className={this.state.selected.myWeeklyGoal === box ? "take_meals_opt border p-1 selected":"take_meals_opt border p-1 "  }>
                       <h5 className="m-0 mt-2">{box}</h5>
                       <p className="m-0">mins</p>
@@ -150,7 +153,7 @@ handleClose=()=>{
                 border: "1px solid #0973B1",
                 color: "#0973B1", fontWeight: "bold" 
               }}
-              onClick={() => this.props.goalModalToggle(false)}
+             onClick={() => this.props.goalModalToggle(false)}
             >
               Close
             </Button>

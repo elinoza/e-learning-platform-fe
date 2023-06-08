@@ -18,7 +18,7 @@ export const initialState = {
    
  
   },
-  show_goal_Modal:false,
+  goal:{show_goal_Modal:false},
 
 player:{
   
@@ -41,7 +41,7 @@ const combinedReducer = combineReducers({
  player:playerReducers,
  skills:skillsReducers,
  posts:postsReducers,
- goal:goalReducers
+goal:goalReducers
 });
 
 export default function configureStore() {
