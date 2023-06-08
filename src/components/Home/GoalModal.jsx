@@ -125,8 +125,8 @@ handleClose=()=>{
                     <p style={{ fontWeight: "bold" }}>
                     <BiCertification className="mr-1"/>
                       Keep it Casual
-                      <Badge className="linkedin-blue-bg text-white ">
-                        Recommended
+                      <Badge className="linkedin-blue-bg text-white ml-1 ">
+                         Recommended
                       </Badge>{" "}
                     </p>
                     <p style={{ fontSize: "12px" }} className="text-muted ">

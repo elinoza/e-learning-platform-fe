@@ -1,7 +1,7 @@
 .navbar{
     background-color:#FFFFFF;
     font-size:12px;
-    max-height: 52px;
+    max-height: 57px;
     z-index:999999;
     position:fixed;
     top:0px;
@@ -32,7 +32,15 @@
     font-size:20px ;
     display: block;
 	margin: auto;
-	color: #0009!important
+	color: #0009!important;
+ 
+}
+
+.search-wrap .navbar-logo{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 5px;
 }
 
 .navbar-logo:active {
@@ -59,7 +67,8 @@
     border-radius: 0.25rem;
     width:30%;
     max-height:39px;
-    background-color:#E9E9E9;
+    background-color:#E9E9E9;position:relative;
+    padding-left:5px;
   
 }
 
@@ -97,3 +106,35 @@ color: #0E73B1;
 
 }
 
+
+
+
+
+@media (max-width:992px) {
+ .navbar-collapse {
+    background-color:white;
+    padding:5px;
+    }
+    .navbar-collapse a  svg{
+        display:inline;
+        margin-right:30px;
+       
+
+
+    
+      
+
+        }
+        .navbar-collapse a  {
+            display:block;
+            padding:5px;
+      
+    
+            }
+        .navbar-collapse a p {
+         display:inline
+    
+            }
+
+
+}
