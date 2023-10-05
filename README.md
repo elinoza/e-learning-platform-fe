@@ -7,7 +7,7 @@ A full-featured clone of the LinkedIn Learning platform, offering a rich online 
 - **User Registration and Authentication:** Users can securely sign up and log in to their accounts with e-mail or ´Google´.
 - **Course Catalog:** Browse & save courses.
 - **Course Details:** Access comprehensive course information, including video lectures, materials, and instructor details.
-- **Course Details:** Post comments and answers about course videos to discuss with others.
+- **Interaction:** Post comments and answers about course videos to discuss with others.
 - **Progress Tracking:** Track your progress,set and track the weekly completion goal, mark courses as completed.
 - **Personalized Recommendations:** Select the topics based on your interests.
 - **Responsive Design:** Enjoy a seamless experience across devices, from desktop to mobile.
@@ -23,3 +23,7 @@ A full-featured clone of the LinkedIn Learning platform, offering a rich online 
 ## Contributing 🤝
 
 Contributions to this project are highly encouraged! If you have any ideas, suggestions, bug reports, or feature requests, please submit them through issues or pull requests on GitHub.
+
+## Ps
+- "This is my capstone project, which I completed in one month for my graduation from the bootcamp. I'm providing the video presentation of this project here, in case you'd like to watch it.
+- https://www.linkedin.com/posts/hilalsemercioglu_reactjs-nodejs-redux-activity-6789133160971071488-yrHl?utm_source=share&utm_medium=member_desktop
