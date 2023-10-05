@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# LinkedIn Learning Clone 📚
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-featured clone of the LinkedIn Learning platform, offering a rich online learning experience for users. This project allows individuals to discover, enroll in, and complete a wide range of courses in various fields. It also allows users to post comments and answers about course videos, track their progress, and  set and track the weekly completion goal.
 
-## Available Scripts
+## Features 🔥
 
-In the project directory, you can run:
+- **User Registration and Authentication:** Users can securely sign up and log in to their accounts with e-mail or ´Google´.
+- **Course Catalog:** Browse & save courses.
+- **Course Details:** Access comprehensive course information, including video lectures, materials, and instructor details.
+- **Course Details:** Post comments and answers about course videos to discuss with others.
+- **Progress Tracking:** Track your progress,set and track the weekly completion goal, mark courses as completed.
+- **Personalized Recommendations:** Select the topics based on your interests.
+- **Responsive Design:** Enjoy a seamless experience across devices, from desktop to mobile.
 
-### `npm start`
+## Technologies Used 💻
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend:** Built using React.js, offering a dynamic and responsive user interface.
+- **Backend:** Powered by Node.js and Express.js, with MongoDB for efficient data storage.
+- **Authentication:** Passport.js for user authentication and authorization.
+- **User Interface:** Bootstrap for a polished and user-friendly design & react-icons for icons.
+- **Video Player:** Videojs for video player.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Contributing 🤝
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions to this project are highly encouraged! If you have any ideas, suggestions, bug reports, or feature requests, please submit them through issues or pull requests on GitHub.
