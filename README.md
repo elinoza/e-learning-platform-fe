@@ -14,10 +14,11 @@ A full-featured clone of the LinkedIn Learning platform, offering a rich online 
 
 ## Technologies Used 💻
 
-- **Frontend:** Built using React.js, offering a dynamic and responsive user interface.
-- **Backend:** Powered by Node.js and Express.js, with MongoDB for efficient data storage.
-- **Authentication:** Passport.js for user authentication and authorization.
-- **User Interface:** Bootstrap for a polished and user-friendly design & react-icons for icons.
+- **Frontend:** Built using `React.js`, offering a dynamic and responsive user interface.
+- **Backend:** Powered by `Node.js` and `Express.js`, with `MongoDB` for efficient data storage.
+- **Authentication:** `Passport.js` for user authentication and authorization.
+- **User Interface:** `Bootstrap` for a polished and user-friendly design & `react-icons` for icons.
+- **State Management:** `Redux` managing the state of your application in a predictable and centralized manner
 - **Video Player:** Videojs for video player.
 
 ## Contributing 🤝
