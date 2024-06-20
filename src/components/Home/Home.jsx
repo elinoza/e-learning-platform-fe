@@ -8,24 +8,20 @@ import {
   Carousel,
   Badge,
   Tabs,
-  Tab
+  Tab,
 } from "react-bootstrap";
 import "./home.css";
-import SingleCourse from "../singleCourseInfo/SingleCourse";
-import { format, parseISO,  intervalToDuration } from "date-fns";
 
+import SingleCourse from "../singleCourseInfo/SingleCourse";
+import { format, parseISO, intervalToDuration } from "date-fns";
 import Footer from "../Footer/Footer";
 import GoalModal from "./GoalModal";
-
 import { GiTrophyCup } from "react-icons/gi";
-
-
 import { Avatar } from "@material-ui/core";
 import { Circle } from "rc-progress";
 import MultiCarousel from "./MultiCarousel";
 
 import { connect } from "react-redux";
-
 
 const mapStateToProps = (state) => state;
 
@@ -53,7 +49,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_ME",
           payload: me,
         });
-        console.log("me endpoint", me);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -78,7 +73,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_MY_PROGRESS",
           payload: myLearning,
         });
-        console.log("myLearning endpoint ", myLearning);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -103,7 +97,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_COURSES",
           payload: courses,
         });
-        console.log("courses /videos endpoint ", courses);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -116,16 +109,15 @@ const mapDispatchToProps = (dispatch) => ({
 class Home extends Component {
   state = {
     categories: ["software", "Self-improvement"],
- Bool:true
-    
+    Bool: true,
   };
-  truncateArr=(arr,boolean)=>{
-return boolean ? arr.slice(0,3):arr
-  }
+  truncateArr = (arr, boolean) => {
+    return boolean ? arr.slice(0, 3) : arr;
+  };
 
-  togglingBoolean=()=>{
-  this.setState({Bool:!this.state.Bool})
-  }
+  togglingBoolean = () => {
+    this.setState({ Bool: !this.state.Bool });
+  };
   formatSeconds = (seconds) => {
     let duration = intervalToDuration({ start: 0, end: seconds * 1000 });
     let formatted = `${duration.minutes}min `;
@@ -135,11 +127,9 @@ return boolean ? arr.slice(0,3):arr
     let start = new Date(Date.now() - 604800000); // 7 day ago
     let end = new Date(); //today's date
     let watchArray = this.props.me.me.myWatchProgress;
-    // console.log(start, end, watchArray);
     if (watchArray) {
       let filteredDates = watchArray.filter((item) => {
         let date = new Date(item.createdAt);
-        //console.log(date);
         return date >= start && date <= end;
       });
       if (filteredDates && filteredDates.length > 0) {
@@ -148,7 +138,6 @@ return boolean ? arr.slice(0,3):arr
         let watchedThisWeek = filteredDates
           .map((item) => item.watch)
           .reduce(reducer);
-        // console.log(watchedThisWeek);
         return watchedThisWeek / 60;
       } else {
         return 0;
@@ -162,7 +151,6 @@ return boolean ? arr.slice(0,3):arr
     let start = new Date(Date.now() - 1209600000); //14 day ago
     let end = new Date(Date.now() - 604800000); //7 day ago
     let watchArray = this.props.me.me.myWatchProgress;
-    // console.log(start, end, watchArray);
     if (watchArray) {
       let filteredDates = watchArray.filter((item) => {
         let date = new Date(item.createdAt);
@@ -189,34 +177,28 @@ return boolean ? arr.slice(0,3):arr
     let myProgress = this.props.me.myProgress.find(
       (item) => item.course._id === id
     );
-
-    console.log("isprogresses?", myProgress);
-
     return myProgress;
   };
-  
-
 
   componentDidMount = () => {
     this.props.fetchMewithThunk();
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
-
   };
 
   render() {
     const { savedVideos, myWeeklyGoal } = this.props.me.me;
     const { myProgress } = this.props.me;
-   
-    console.log("myprogress",myProgress)
-    
-
     const { courses } = this.props.courses;
-    // console.log("saved", savedVideos);
- console.log("show-goal-modal",this.props.goal.show_goal_Modal,myWeeklyGoal)
     return (
       <>
-        <Carousel id="carousel" className="carousel-fade" style={{ marginTop: "52px" }} fade="true" data-bs-ride="carousel">
+        <Carousel
+          id="carousel"
+          className="carousel-fade"
+          style={{ marginTop: "52px" }}
+          fade="true"
+          data-bs-ride="carousel"
+        >
           {courses &&
             courses.map((course) => (
               <Carousel.Item
@@ -294,52 +276,55 @@ return boolean ? arr.slice(0,3):arr
               <h2 style={{ fontSize: "18px" }}>Weekly Goal</h2>
               <Row>
                 <Col md={5}>
-                {myWeeklyGoal && myWeeklyGoal !== 0 ? 
-                  <div className="goal-parent m-0 position-relative
-                    ">
-                    <Circle
-                      percent={(this.calculateWeekWatch() / myWeeklyGoal) * 100}
-                      strokeWidth="6"
-                      strokeColor="#0573B1"
-                      id="goal-progress"
-                    />
-                 
-                    <div className="cup-container">
-                      <div className="cup-content">
-                    
-                      <>
-                      <p style={{fontWeight:"bold",fontSize:"18px",margin:"0px"}}>
-                        {Math.round(this.calculateWeekWatch()) +
-                          "/" +
-                          myWeeklyGoal}
-                        
-                      </p>
-                      <span className="text-muted">minutes</span></>
-                 
-                    
-                    </div> </div>
-                  </div>
-                  :  
-                  
-                  <div className="goal-parent m-0 position-relative">
-                    <Circle
-                      percent="0"
-                      strokeWidth="1"
-                      strokeColor="#0573B1"
-                      id="goal-progress"
-                    />
-                 
-                    <div className="cup-container">
-                      <div className="cup-content">
-                    
-                  
-                      <GiTrophyCup id="goal-cup" />
-                 
-                    
-                    </div> </div>
-                  </div>
-                     
-                  }
+                  {myWeeklyGoal && myWeeklyGoal !== 0 ? (
+                    <div
+                      className="goal-parent m-0 position-relative
+                    "
+                    >
+                      <Circle
+                        percent={
+                          (this.calculateWeekWatch() / myWeeklyGoal) * 100
+                        }
+                        strokeWidth="6"
+                        strokeColor="#0573B1"
+                        id="goal-progress"
+                      />
+
+                      <div className="cup-container">
+                        <div className="cup-content">
+                          <>
+                            <p
+                              style={{
+                                fontWeight: "bold",
+                                fontSize: "18px",
+                                margin: "0px",
+                              }}
+                            >
+                              {Math.round(this.calculateWeekWatch()) +
+                                "/" +
+                                myWeeklyGoal}
+                            </p>
+                            <span className="text-muted">minutes</span>
+                          </>
+                        </div>{" "}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="goal-parent m-0 position-relative">
+                      <Circle
+                        percent="0"
+                        strokeWidth="1"
+                        strokeColor="#0573B1"
+                        id="goal-progress"
+                      />
+
+                      <div className="cup-container">
+                        <div className="cup-content">
+                          <GiTrophyCup id="goal-cup" />
+                        </div>{" "}
+                      </div>
+                    </div>
+                  )}
                 </Col>
                 <Col md={7}>
                   {" "}
@@ -361,9 +346,6 @@ return boolean ? arr.slice(0,3):arr
                           Edit goal
                         </Button>
                       </div>
-                      {/* {console.log("1", this.calculateWeekWatch())}
-                      {console.log("2", this.calculatelastWeekWatch())} */}
-
                       {this.calculateWeekWatch() >= myWeeklyGoal ? (
                         <p>Congratulations Hilal you did it!</p>
                       ) : (
@@ -379,8 +361,6 @@ return boolean ? arr.slice(0,3):arr
                       <p>
                         We’ll help you track your progress and remind you to
                         keep learning
-                        {/* {console.log("1", this.calculateWeekWatch())}
-                        {console.log("2", this.calculatelastWeekWatch())} */}
                       </p>
                       <Button
                         style={{
@@ -393,11 +373,9 @@ return boolean ? arr.slice(0,3):arr
                       >
                         Set a goal
                       </Button>
-              
-                     
                     </div>
-                  )} 
-                   {this.props.goal.show_goal_Modal &&  <GoalModal/>}
+                  )}
+                  {this.props.goal.show_goal_Modal && <GoalModal />}
                 </Col>
               </Row>
             </Col>
@@ -412,11 +390,10 @@ return boolean ? arr.slice(0,3):arr
                     {" "}
                     <Row>
                       {myProgress &&
-                       this.truncateArr(myProgress,this.state.Bool).map(
+                        this.truncateArr(myProgress, this.state.Bool).map(
                           (item) =>
                             item.completePercentage < 1 && (
                               <SingleCourse
-                        
                                 courseId={item.course._id}
                                 duration={item.course.duration}
                                 tutorName={item.course.tutor.tutorName}
@@ -444,7 +421,13 @@ return boolean ? arr.slice(0,3):arr
                       className="ml-auto p-2 d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a  className="showMore" onClick={this.togglingBoolean} >Show {this.state.Bool ? `All ${ myProgress && myProgress.length}` :"Less"} {}</a>
+                      <a className="showMore" onClick={this.togglingBoolean}>
+                        Show{" "}
+                        {this.state.Bool
+                          ? `All ${myProgress && myProgress.length}`
+                          : "Less"}{" "}
+                        {}
+                      </a>
                     </div>
                   </div>
                 </Tab>
@@ -452,59 +435,63 @@ return boolean ? arr.slice(0,3):arr
                   <div className="d-flex  border-top pt-2">
                     {" "}
                     <Row>
-                      {
-                     
-                      savedVideos &&
-             this.truncateArr(savedVideos,this.state.Bool).map((item) => {
-                          let isProgressed = this.isProgressed(item._id);
+                      {savedVideos &&
+                        this.truncateArr(savedVideos, this.state.Bool).map(
+                          (item) => {
+                            let isProgressed = this.isProgressed(item._id);
 
-                          return isProgressed ? (
-                            <SingleCourse
-                      
-                              courseId={item._id}
-                              duration={item.duration}
-                              tutorName={item.tutor.tutorName}
-                              tutorProfession={item.tutor.tutorProfession}
-                              videoName={item.videoName}
-                              createdAt={item.createdAt}
-                              updatedAt={item.updatedAt}
-                              remainingTime={isProgressed.remainingTime}
-                              secondLeft={isProgressed.secondLeft}
-                              playlistIndex={isProgressed.playlistIndex}
-                              completePercentage={
-                                isProgressed.completePercentage
-                              }
-                              video_thumbnail_img={item.video_thumbnail_img}
-                              completed={
-                                isProgressed.completePercentage >=1
-                                  ? "true"
-                                  : "false"
-                              }
-                              isProgressed="true"
-                              style="small"
-                            />
-                          ) : (
-                            <SingleCourse
-                              courseId={item._id}
-                              duration={item.duration}
-                              tutorName={item.tutor.tutorName}
-                              tutorProfession={item.tutor.tutorProfession}
-                              videoName={item.videoName}
-                              createdAt={item.createdAt}
-                              updatedAt={item.updatedAt}
-                              video_thumbnail_img={item.video_thumbnail_img}
-                              completed="false"
-                              isProgressed="false"
-                              style="small"
-                            />
-                          );
-                        })}
+                            return isProgressed ? (
+                              <SingleCourse
+                                courseId={item._id}
+                                duration={item.duration}
+                                tutorName={item.tutor.tutorName}
+                                tutorProfession={item.tutor.tutorProfession}
+                                videoName={item.videoName}
+                                createdAt={item.createdAt}
+                                updatedAt={item.updatedAt}
+                                remainingTime={isProgressed.remainingTime}
+                                secondLeft={isProgressed.secondLeft}
+                                playlistIndex={isProgressed.playlistIndex}
+                                completePercentage={
+                                  isProgressed.completePercentage
+                                }
+                                video_thumbnail_img={item.video_thumbnail_img}
+                                completed={
+                                  isProgressed.completePercentage >= 1
+                                    ? "true"
+                                    : "false"
+                                }
+                                isProgressed="true"
+                                style="small"
+                              />
+                            ) : (
+                              <SingleCourse
+                                courseId={item._id}
+                                duration={item.duration}
+                                tutorName={item.tutor.tutorName}
+                                tutorProfession={item.tutor.tutorProfession}
+                                videoName={item.videoName}
+                                createdAt={item.createdAt}
+                                updatedAt={item.updatedAt}
+                                video_thumbnail_img={item.video_thumbnail_img}
+                                completed="false"
+                                isProgressed="false"
+                                style="small"
+                              />
+                            );
+                          }
+                        )}
                     </Row>
                     <div
                       className="ml-auto d-inline w-75"
                       style={{ color: "#554AC2" }}
                     >
-                      <a className="showMore"onClick={this.togglingBoolean} >Show {this.state.Bool ? `All ${ savedVideos && savedVideos.length}`  :"Less"} </a>
+                      <a className="showMore" onClick={this.togglingBoolean}>
+                        Show{" "}
+                        {this.state.Bool
+                          ? `All ${savedVideos && savedVideos.length}`
+                          : "Less"}{" "}
+                      </a>
                     </div>
                   </div>
                 </Tab>

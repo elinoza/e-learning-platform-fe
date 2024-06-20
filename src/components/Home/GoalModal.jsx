@@ -4,7 +4,6 @@ import "./home.css";
 import { connect } from "react-redux";
 import { BiCertification } from "react-icons/bi";
 
-
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
   goalModalToggle: (payload) =>
@@ -12,7 +11,7 @@ const mapDispatchToProps = (dispatch) => ({
       type: "TOGGLE_GOAL_MODAL",
       payload: payload,
     }),
-    fetchMewithThunk: () =>
+  fetchMewithThunk: () =>
     dispatch(async (dispatch) => {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
@@ -30,12 +29,9 @@ const mapDispatchToProps = (dispatch) => ({
           payload: me,
         });
         dispatch({
-            type: "TOGGLE_GOAL_MODAL",
-            payload: false,
-          });
-
-      
-        console.log("me endpoint", me);
+          type: "TOGGLE_GOAL_MODAL",
+          payload: false,
+        });
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -45,57 +41,45 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 });
 class GoalModal extends Component {
-state={
-    boxes:[15,30,60,120],
-    selected:{myWeeklyGoal:""}
-}
+  state = {
+    boxes: [15, 30, 60, 120],
+    selected: { myWeeklyGoal: "" },
+  };
 
-
-handleClose=()=>{
-    this.props.fetchMewithThunk()
-
-}
-   saveGoal=async()=>{
+  handleClose = () => {
+    this.props.fetchMewithThunk();
+  };
+  saveGoal = async () => {
     try {
-        const token = localStorage.getItem("token");
-        const url = process.env.REACT_APP_URL;
-        const response = await fetch(url + "/users/me", {
-          method: 'PUT', 
-          headers: {
-            Authorization: "Bearer " + token,
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify(this.state.selected)
-        });
-    
-        
-    
-        if (response.ok) {
-            // this.props.goalModalToggle()
-            // this.handleClose()
-            this.props.fetchMewithThunk()
-         
-        } else {
-       console.log("save error",response)
-        }
-    
-        
-      } catch (error) {
-        console.log(error)
-        
-    }
-   }
-  render() {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/users/me", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.state.selected),
+      });
 
-    console.log("Im from goalModule budyy","yayy","viyuu")
+      if (response.ok) {
+        // this.props.goalModalToggle()
+        // this.handleClose()
+        this.props.fetchMewithThunk();
+      } else {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  render() {
     return (
-    
       <div className="goal-Modal">
         <Modal
           show={this.props.goal.show_goal_Modal}
-         onHide={() => this.props.goalModalToggle(false)}
+          onHide={() => this.props.goalModalToggle(false)}
         >
-          <Modal.Header >
+          <Modal.Header>
             <Modal.Title style={{ fontSize: "16px" }}>
               Set a Weekly Goal
             </Modal.Title>
@@ -103,30 +87,36 @@ handleClose=()=>{
           <Modal.Body>
             <Row>
               <Col md={8}>
-                  
-                <div  className="w-100 d-flex justify-content-center">
-                {this.state.boxes.map(box=>
-                
-                
-               <a  onClick={()=>this.setState({ selected:{myWeeklyGoal:box}})}>
-                    <div className={this.state.selected.myWeeklyGoal === box ? "take_meals_opt border p-1 selected":"take_meals_opt border p-1 "  }>
-                      <h5 className="m-0 mt-2">{box}</h5>
-                      <p className="m-0">mins</p>
-                    </div>
-                  </a>)}
-               
+                <div className="w-100 d-flex justify-content-center">
+                  {this.state.boxes.map((box) => (
+                    <a
+                      onClick={() =>
+                        this.setState({ selected: { myWeeklyGoal: box } })
+                      }
+                    >
+                      <div
+                        className={
+                          this.state.selected.myWeeklyGoal === box
+                            ? "take_meals_opt border p-1 selected"
+                            : "take_meals_opt border p-1 "
+                        }
+                      >
+                        <h5 className="m-0 mt-2">{box}</h5>
+                        <p className="m-0">mins</p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
                 <div
                   className="w-100 mt-2 py-2 px-2 "
                   style={{ backgroundColor: "#f7f7f7" }}
                 >
                   <div>
-                
                     <p style={{ fontWeight: "bold" }}>
-                    <BiCertification className="mr-1"/>
+                      <BiCertification className="mr-1" />
                       Keep it Casual
                       <Badge className="linkedin-blue-bg text-white ml-1 ">
-                         Recommended
+                        Recommended
                       </Badge>{" "}
                     </p>
                     <p style={{ fontSize: "12px" }} className="text-muted ">
@@ -147,20 +137,18 @@ handleClose=()=>{
           </Modal.Body>
           <Modal.Footer>
             <Button
-            className="linkedin-blue-color"
-            style={{
+              className="linkedin-blue-color"
+              style={{
                 backgroundColor: "transparent",
                 border: "1px solid #0973B1",
-                color: "#0973B1", fontWeight: "bold" 
+                color: "#0973B1",
+                fontWeight: "bold",
               }}
-             onClick={() => this.props.goalModalToggle(false)}
+              onClick={() => this.props.goalModalToggle(false)}
             >
               Close
             </Button>
-            <Button
-             className="linkedin-blue-bg"
-              onClick={this.saveGoal}
-            >
+            <Button className="linkedin-blue-bg" onClick={this.saveGoal}>
               Save Changes
             </Button>
           </Modal.Footer>
