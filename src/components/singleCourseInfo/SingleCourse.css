@@ -1,24 +1,20 @@
 .single-course p:first-of-type {
-    font-size: 0.9em;
+  font-size: 0.9em;
+}
 
-  }
+.single-course p:nth-of-type(2) {
+  font-size: 0.7em;
+}
 
-  .single-course p:nth-of-type(2){
-    font-size: 0.7em;
-    
-  }
+.big-single-course p:first-of-type {
+  font-size: 1.5em;
+}
 
-  .big-single-course p:first-of-type {
-    font-size: 1.5em;
+.big-single-course p:nth-of-type(2) {
+  font-size: 1.3em;
+}
 
-  }
-
-  .big-single-course p:nth-of-type(2){
-    font-size: 1.3em;
-    
-  }
-
-  .singleCourse-col:hover{
-    cursor:pointer;
-    background-color:rgb(249, 249, 249)
-  }
+.singleCourse-col:hover {
+  cursor: pointer;
+  background-color: rgb(249, 249, 249);
+}

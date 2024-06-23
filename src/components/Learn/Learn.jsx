@@ -32,7 +32,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_ME",
           payload: me,
         });
-        console.log("me endpoint", me);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -57,7 +56,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_CURRENT_COURSE",
           payload: currentCourse,
         });
-        console.log("currentCourse from learn component ", currentCourse);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -82,21 +80,14 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_COURSE_PROGRESS",
           payload: progress,
         });
-
-        
-
-        console.log("progress ", progress);
-       
       } else {
         dispatch({
           type: "SET_ERROR",
           payload: progress,
         });
-    
       }
     }),
 });
-
 
 const videoJsOptions = {
   autoplay: false,
@@ -105,7 +96,6 @@ const videoJsOptions = {
   controls: true,
   responsive: true,
   preload: "metadata",
-
 
   // ,sources: [
   //   {
@@ -116,37 +106,26 @@ const videoJsOptions = {
 };
 
 class Learn extends Component {
-  state = {
- 
-    
-  };
-  triggerParentComponentforRedux=(setMode)=>{
-    if(setMode=== true){
+  state = {};
+  triggerParentComponentforRedux = (setMode) => {
+    if (setMode === true) {
       let courseId = this.props.match.params.courseId;
-      this.props.fetchMyCourseProgress(courseId);}
-    
-
-  }
+      this.props.fetchMyCourseProgress(courseId);
+    }
+  };
   componentDidMount = () => {
-   
     let courseId = this.props.match.params.courseId;
     this.props.fetchMyCourseProgress(courseId);
     this.props.fetchTheCoursewithThunk(courseId);
-    
-    console.log("courseId",courseId)
-   
   };
   render() {
-    const { currentCourse, currentCourseProgress,showSideBar } = this.props.player;
-
-   
-   
-    // console.log(this.props.player);
+    const { currentCourse, currentCourseProgress, showSideBar } =
+      this.props.player;
     return (
-      
       <>
-
-        <SideBar   triggerParentComponentforRedux={this.triggerParentComponentforRedux}/>
+        <SideBar
+          triggerParentComponentforRedux={this.triggerParentComponentforRedux}
+        />
 
         <Row
           id="Main"
@@ -154,18 +133,18 @@ class Learn extends Component {
           className={showSideBar === true ? "show" : ""}
         >
           <Col xs={12} className="player-col p-0">
+            <VideoNavBar />
 
-          <VideoNavBar />
-
-          
-           { currentCourse._id !==undefined   &&  
-            <Video
-            currentProgress={currentCourseProgress}
-            currentCourse={currentCourse}
-              {...videoJsOptions}
-              triggerParentComponentforRedux={this.triggerParentComponentforRedux}
-             
-            /> }
+            {currentCourse._id !== undefined && (
+              <Video
+                currentProgress={currentCourseProgress}
+                currentCourse={currentCourse}
+                {...videoJsOptions}
+                triggerParentComponentforRedux={
+                  this.triggerParentComponentforRedux
+                }
+              />
+            )}
           </Col>
           <Col xs={12} className="p-0">
             <div className="learn">
@@ -176,7 +155,7 @@ class Learn extends Component {
                   className=" d-flex justify-content-center my-4"
                 >
                   <Tab eventKey="overview" title="Overview">
-                    <OverView currentCourse={currentCourse}/>
+                    <OverView currentCourse={currentCourse} />
                   </Tab>
                   <Tab eventKey="qa" title="QA ">
                     <Comments courseId={this.props.match.params.courseId} />

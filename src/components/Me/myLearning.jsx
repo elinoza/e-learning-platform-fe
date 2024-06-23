@@ -39,7 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_ME",
           payload: me,
         });
-        console.log("me endpoint", me);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -64,7 +63,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_MY_PROGRESS",
           payload: myLearning,
         });
-        console.log("myLearning endpoint ", myLearning);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -89,7 +87,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_COURSES",
           payload: courses,
         });
-        console.log("courses /videos endpoint ", courses);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -114,7 +111,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_SKILLS",
           payload: skills,
         });
-        console.log("skills ", skills);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -122,7 +118,6 @@ const mapDispatchToProps = (dispatch) => ({
         });
       }
     }),
-  
 });
 
 class myLearning extends Component {
@@ -131,8 +126,6 @@ class myLearning extends Component {
     let myProgress = this.props.me.myProgress.find(
       (item) => item.course._id === id
     );
-
-    console.log("isprogresses?", myProgress);
 
     return myProgress;
   };
@@ -146,7 +139,6 @@ class myLearning extends Component {
 
   setGoalSkill = async (skill) => {
     try {
-      console.log(skill);
       let data = {
         skillName: skill.skillName,
         category: skill.category,
@@ -166,48 +158,37 @@ class myLearning extends Component {
       if (response.ok) {
         this.props.fetchMewithThunk();
       } else {
-        console.log("save error", response);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
-  isItGoalItem=(skill)=>{
-    let res= this.props.me.me.goalSkills.find((goalItem) =>new String(goalItem.skillName).valueOf() == new String(skill.skillName).valueOf()
-    )
+  isItGoalItem = (skill) => {
+    let res = this.props.me.me.goalSkills.find(
+      (goalItem) =>
+        new String(goalItem.skillName).valueOf() ==
+        new String(skill.skillName).valueOf()
+    );
 
-
- return res
-    
-  }
+    return res;
+  };
 
   removeGoalSkill = async (skill) => {
     try {
-      console.log(skill);
-    
-
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/users/me/goalSkill/" +skill._id , {
+      const response = await fetch(url + "/users/me/goalSkill/" + skill._id, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json",
-        }
-        
+        },
       });
 
       if (response.ok) {
         this.props.fetchMewithThunk();
         this.props.fetchSkillswithThunk();
-
-        console.log("skill removed-->",skill.skillName)
       } else {
-        console.log("save error", response);
       }
-    } catch (error) { 
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   componentDidMount = () => {
@@ -215,15 +196,12 @@ class myLearning extends Component {
     this.props.fetchMyProgresswithThunk();
     this.props.fetchCourseswithThunk();
     this.props.fetchSkillswithThunk();
-  
   };
 
   render() {
     const { myProgress } = this.props.me;
     const { savedVideos } = this.props.me.me;
     const { skills, goalSkills } = this.props.me.me;
-    console.log("skills render", this.props.skills);
-
     return (
       <>
         <Container style={{ marginTop: "52px" }} className="mt-4">
@@ -365,22 +343,26 @@ class myLearning extends Component {
                         </p>
                       ))}{" "}
                   </div>
-               {goalSkills && goalSkills.length >0 &&  <div className="mt-4">
-                    <h8
-                      className="d-block"
-                      style={{ marginBottom: "30px", fontWeight: "bold" }}
-                    >
-                      Skills I’m interested in
-                    </h8>
-                    <div className="skillset-wrap">
-                    {
-                      goalSkills.map((skill) => (
-                        <p className="d-inline  skill-set-tags-fill mt-3 "  onClick={() => this.removeGoalSkill(skill)}>
-                          <a>{skill.skillName} x</a>
-                        </p>
-                      ))} </div>
-                  </div>
-                  }     
+                  {goalSkills && goalSkills.length > 0 && (
+                    <div className="mt-4">
+                      <h8
+                        className="d-block"
+                        style={{ marginBottom: "30px", fontWeight: "bold" }}
+                      >
+                        Skills I’m interested in
+                      </h8>
+                      <div className="skillset-wrap">
+                        {goalSkills.map((skill) => (
+                          <p
+                            className="d-inline  skill-set-tags-fill mt-3 "
+                            onClick={() => this.removeGoalSkill(skill)}
+                          >
+                            <a>{skill.skillName} x</a>
+                          </p>
+                        ))}{" "}
+                      </div>
+                    </div>
+                  )}
                   <div className="mt-4">
                     <h8
                       className="d-block"
@@ -397,39 +379,35 @@ class myLearning extends Component {
                       // value={this.state.comment.text}
                       // onChange={this.updateField}
                     />
-<div className="skillset-wrap">
-                    {this.props.skills.skills &&
-                      this.props.skills.skills.slice(0, 10).map(
-                        (skill) =>
-
-
-                          goalSkills && this.isItGoalItem(skill)!== undefined 
-                          ? (
-                           
-                              <p
-                                className="d-inline  skill-set-tags-fill  "
-                                style={{backgroundColor:" #485D69"}}
-                                onClick={() => this.removeGoalSkill(this.isItGoalItem(skill))}
-                              >
-                                <a  style={{color:"white"}}>
-                                  {skill.skillName}{" "}
-                                 
-                                </a>
-                                <GrFormCheckmark
-                                      style={{color:"white",fontSize:"14px"}}
-                                  />
-                              </p>
-                            ) : (  
-                              <p
-                                className="d-inline  skillset-tags-me  "
-                                onClick={() => this.setGoalSkill(skill)}
-                              >
-                                <a className="">{skill.skillName} +</a>
-                              </p>
-                            )
-                         
-                      )}
-                      </div>
+                    <div className="skillset-wrap">
+                      {this.props.skills.skills &&
+                        this.props.skills.skills.slice(0, 10).map((skill) =>
+                          goalSkills &&
+                          this.isItGoalItem(skill) !== undefined ? (
+                            <p
+                              className="d-inline  skill-set-tags-fill  "
+                              style={{ backgroundColor: " #485D69" }}
+                              onClick={() =>
+                                this.removeGoalSkill(this.isItGoalItem(skill))
+                              }
+                            >
+                              <a style={{ color: "white" }}>
+                                {skill.skillName}{" "}
+                              </a>
+                              <GrFormCheckmark
+                                style={{ color: "white", fontSize: "14px" }}
+                              />
+                            </p>
+                          ) : (
+                            <p
+                              className="d-inline  skillset-tags-me  "
+                              onClick={() => this.setGoalSkill(skill)}
+                            >
+                              <a className="">{skill.skillName} +</a>
+                            </p>
+                          )
+                        )}
+                    </div>
                   </div>
                 </div>
               </Tab>

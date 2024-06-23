@@ -1,320 +1,274 @@
 .player-col {
-    height: 60vh;
-    position: relative
+  height: 60vh;
+  position: relative;
 }
 
 .learn .nav.nav-tabs {
-    border: none;
-    color: gray;
-
-
-
+  border: none;
+  color: gray;
 }
 
-
 .learn .nav-tabs .nav-link.active {
-    font-weight: bold;
-    border: none;
-    border-bottom: 2px solid #046097;
-    color: #046097;
+  font-weight: bold;
+  border: none;
+  border-bottom: 2px solid #046097;
+  color: #046097;
 }
 
 .learn a {
-    color: #6C767C;
-    font-weight: bold;
-    font-size: 14px;
-    margin-right: 50px;
+  color: #6c767c;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 50px;
 }
 
 .showAll-tags {
-    color: #287EB8
+  color: #287eb8;
 }
 
-
 .icons {
-    font-size: 24px;
-    color: #666666
+  font-size: 24px;
+  color: #666666;
 }
 
 ul.related-to-course li {
-    list-style: none;
-
-
+  list-style: none;
 }
 
 ul.related-to-course li p {
-    font-size: 14px;
-    margin-left: 10px;
-    font-weight: bold;
-    display: inline
+  font-size: 14px;
+  margin-left: 10px;
+  font-weight: bold;
+  display: inline;
 }
 
 .instructor .MuiAvatar-root {
-    width: 56px !important;
-    height: 56px !important;
+  width: 56px !important;
+  height: 56px !important;
 }
 
-
 .skillset-tags {
-    color: #666666;
-    font-size: 16px;
-    margin:5px;
-    border: 1px solid #666666;
-    border-radius: 50rem !important;
-    padding: 5px;
-  
-    
-
- 
-
+  color: #666666;
+  font-size: 16px;
+  margin: 5px;
+  border: 1px solid #666666;
+  border-radius: 50rem !important;
+  padding: 5px;
 }
 
 .skillset-tags a {
-    color: #666666;
-    font-size: 16px;
-
-   
-    
-  
-
+  color: #666666;
+  font-size: 16px;
 }
 
-.skillset-wrap{
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-    justify-content: flex-start;
-  }
-
-
+.skillset-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: flex-start;
+}
 
 .noManualResize {
-    resize: none;
+  resize: none;
 }
 
 .a-tags {
-
-    color: #262626
+  color: #262626;
 }
 
 .a-tags:hover {
-    cursor: pointer
+  cursor: pointer;
 }
 
 .profilePic-mini {
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
 
-    display: inline-block;
+  display: inline-block;
 }
 
 .CommentCard .card-header {
-    border-bottom: none
+  border-bottom: none;
 }
 
 .general-font {
-    font-size: 14px;
-
+  font-size: 14px;
 }
 
 .form-control:focus {
-    box-shadow: none;
-    border: none
+  box-shadow: none;
+  border: none;
 }
 
 .btn:focus {
-    box-shadow: none
+  box-shadow: none;
 }
 
 .btn:active {
-    box-shadow: none
+  box-shadow: none;
 }
-
 
 #videoNavbar {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(
-180deg
-, rgb(14 14 14) 46%, rgb(72 71 71) 100%);
-  
-    position: absolute;
-    color: white;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgb(14 14 14) 46%, rgb(72 71 71) 100%);
 
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    z-index: 999;
-    box-shadow: -1px 2rem 3rem 2px rgb(0 0 0) !important;
-    border-bottom: 1px solid #626669 
+  position: absolute;
+  color: white;
 
-
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 999;
+  box-shadow: -1px 2rem 3rem 2px rgb(0 0 0) !important;
+  border-bottom: 1px solid #626669;
 }
-#videoNavbar.navbar{
-    min-height:63px
-} 
+#videoNavbar.navbar {
+  min-height: 63px;
+}
 
 #videoNavbar p {
-    color: white;
-    margin: 0px;
-    padding: 0px;
-    font-size: 16px;
-
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
 }
 
 .icons {
-    font-size: 14px;
-    color: white;
-    font-weight: bold
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
 }
 
-.icons.notWhiteIcons{
-    color: gray;
+.icons.notWhiteIcons {
+  color: gray;
 }
-
 
 .sidebar-toggle-Button {
-    background-color: transparent;
-    color: white;
-    border: none;
-    font-size: 18px;
-    font-weight: bold
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .sidebar-toggle-Button:hover {
-    background-color: transparent;
-
-
+  background-color: transparent;
 }
 
 .sidebar-toggle-wrap:hover {
-    background-color: rgb(38, 38, 38);
-    
+  background-color: rgb(38, 38, 38);
 }
 
 .sidebar-toggle-wrap {
-    border-right: 1px solid #626669
+  border-right: 1px solid #626669;
 }
-.sidebar-toggle-Button:focus{
-    box-shadow:none;
-    border:none;
-    background-color:transparent;
-  }
-
-  .sidebar {
-    height: 100%;
-  
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #3A3A3A;
-    overflow-x: hidden;
-    overflow-y:auto;
-    transition: width .5s;
-    padding-top: 54px;
-  }
-
-  .sidebar li{
-    padding: 8px 16px 8px 16px;
-    text-decoration: none;
-    font-size: 14px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-    font-weight:bold;
-    width: 100%;
-    display: flex;
-    cursor:pointer;
-   
-  }
-   
- 
-  
-  .sidebar li:hover:not(.active) {
-    background-color: #555;
-    color: white;
-  }
-  .sidebar li:hover {
-    color: #f1f1f1;
-  }
-
-  .sidebar .activeContent{
-   background-color: rgb(23, 23, 23)
-  }
-
-  .sidebar .closebtn {
-    position: absolute;
-    top: 53px;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    color:white;
- 
-  }
-
-  .sidebar .closebtn:hover{
-
-    cursor:pointer
-  }
-
-  #Main{
-      
-    margin-right:0px;
-    transition: margin-left .5s
-    
+.sidebar-toggle-Button:focus {
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
 }
 
-#Main.show{
-    margin-left:300px
+.sidebar {
+  height: 100%;
+
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #3a3a3a;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.5s;
+  padding-top: 54px;
 }
 
-.sidebar.closedSideBar{
+.sidebar li {
+  padding: 8px 16px 8px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+}
 
-    width: 0px;
-  
-    }
- .sidebar.showSideBar{
-      width: 300px;
-  
- }
+.sidebar li:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+.sidebar li:hover {
+  color: #f1f1f1;
+}
 
- .sidebar-toggle-wrapper{
-    border-bottom: 1px solid #828486 !important;
-    height:60px;
+.sidebar .activeContent {
+  background-color: rgb(23, 23, 23);
+}
 
- }
- .sidebar-toggle-wrapper:hover{
-    background-color: #555;
-    color: white;
-    
- }
-  
- .LikeButton{
-    background-color:transparent;
-     color: #6C767B;
-     border:none;
-     font-size:14px;
-     font-weight:bold
-  }
-  .LikeButton:hover{
-    background-color:#d6e3ea;
-    color:#6C767B
-    
-  }
-  .div.MuiAvatar-root.qa{
-      margin:0!important
-  }
+.sidebar .closebtn {
+  position: absolute;
+  top: 53px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: white;
+}
 
-  .three-dots-wrapper .dropdown-toggle::after {
-      border:none
-  }
+.sidebar .closebtn:hover {
+  cursor: pointer;
+}
 
-  .LikeButton:focus{
-    box-shadow:none;
-    background-color:none
-  }
-  .LikeButton:active{
-    box-shadow:none;
-    background-color:none
-  }
-  
+#Main {
+  margin-right: 0px;
+  transition: margin-left 0.5s;
+}
+
+#Main.show {
+  margin-left: 300px;
+}
+
+.sidebar.closedSideBar {
+  width: 0px;
+}
+.sidebar.showSideBar {
+  width: 300px;
+}
+
+.sidebar-toggle-wrapper {
+  border-bottom: 1px solid #828486 !important;
+  height: 60px;
+}
+.sidebar-toggle-wrapper:hover {
+  background-color: #555;
+  color: white;
+}
+
+.LikeButton {
+  background-color: transparent;
+  color: #6c767b;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+.LikeButton:hover {
+  background-color: #d6e3ea;
+  color: #6c767b;
+}
+.div.MuiAvatar-root.qa {
+  margin: 0 !important;
+}
+
+.three-dots-wrapper .dropdown-toggle::after {
+  border: none;
+}
+
+.LikeButton:focus {
+  box-shadow: none;
+  background-color: none;
+}
+.LikeButton:active {
+  box-shadow: none;
+  background-color: none;
+}

@@ -6,8 +6,8 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { AiFillCheckCircle } from "react-icons/ai";
 import "../Home/home.css";
 import "./SingleCourse.css";
-import {compose} from "redux";
-import { withRouter } from "react-router-dom"; 
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { format, parseISO, formatDistance, intervalToDuration } from "date-fns";
 
@@ -34,14 +34,15 @@ class SingleCourse extends Component {
       completePercentage,
       isProgressed,
       duration,
-      courseId
+      courseId,
     } = this.props;
 
-    // console.log("remaining Time", remainingTime);
     return (
       <>
-        <Col xs={12} className="mb-3 singleCourse-col"  
-       onClick={()=>this.props.history.push(`/learn/${courseId}`)}
+        <Col
+          xs={12}
+          className="mb-3 singleCourse-col"
+          onClick={() => this.props.history.push(`/learn/${courseId}`)}
         >
           <div
             className={
@@ -58,9 +59,10 @@ class SingleCourse extends Component {
                 className="d-block w-100 d-inline border mr-2  "
                 src={video_thumbnail_img}
                 alt="progress video"
-                style={{ 
-                  height:"auto",
-                objectFit: "contain"}}
+                style={{
+                  height: "auto",
+                  objectFit: "contain",
+                }}
               />
             </div>
             <div className="d-inline  w-50">
@@ -75,8 +77,6 @@ class SingleCourse extends Component {
               <p style={{ fontWeight: "bold" }} className="mb-0">
                 {videoName}
               </p>
-
-              {console.log("style", this.props.style)}
               {/* {(() => {
                 if (this.props.style === "small") {
                   if (isProgressed === "true") {
@@ -90,9 +90,6 @@ class SingleCourse extends Component {
                 }
               })()} */}
 
-
-
-
               {this.props.style === "small" ? (
                 isProgressed === "true" ? (
                   <p
@@ -102,56 +99,62 @@ class SingleCourse extends Component {
                     COURSE . {this.formatSeconds(remainingTime)} left
                   </p>
                 ) : (
-                  <p style={{ fontSize: "12px",fontWeight: "bold" }} className="text-muted mb-1 ">
+                  <p
+                    style={{ fontSize: "12px", fontWeight: "bold" }}
+                    className="text-muted mb-1 "
+                  >
                     By: {tutorName} . Released{" "}
                     {format(parseISO(createdAt), "MM/dd/yyyy")}
                   </p>
                 )
               ) : (
-                <p style={{ fontSize: "14px", marginBottom:"0px"}}>
+                <p style={{ fontSize: "14px", marginBottom: "0px" }}>
                   By: {tutorName} . Released{" "}
                   {format(parseISO(createdAt), "MM/dd/yyyy")}
                 </p>
               )}
 
-
-
-              { isProgressed === "true" ? 
-              
-              this.props.completed === "false" ? (
-                <Line
-                  percent={completePercentage * 100}
-                  strokeWidth="2.0"
-                  strokeColor="#0573B1"
-                  className="w-75"
-                />
+              {isProgressed === "true" ? (
+                this.props.completed === "false" ? (
+                  <Line
+                    percent={completePercentage * 100}
+                    strokeWidth="2.0"
+                    strokeColor="#0573B1"
+                    className="w-75"
+                  />
+                ) : (
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      color: "#307B16",
+                    }}
+                    className=" ml-2 mb-0 d-inline"
+                  >
+                    <AiFillCheckCircle /> Completed at{" "}
+                    {updatedAt && format(parseISO(updatedAt), "MM/dd/yyyy")}
+                  </p>
+                )
               ) : (
                 <p
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                    color: "#307B16",
-                  }}
-                  className=" ml-2 mb-0 d-inline"
+                  style={{ fontSize: "12px", fontWeight: "bold" }}
+                  className="text-muted mb-1 "
                 >
-                  <AiFillCheckCircle /> Completed at {updatedAt && format(parseISO(updatedAt), "MM/dd/yyyy") }
-                </p>
-              ): <p style={{ fontSize: "12px",fontWeight: "bold" }} className="text-muted mb-1 ">Duration . {this.formatSeconds(duration)}</p>}
-
-              {this.props.style=== "big" && this.props.completed === "false" && (
-                <p
-                  style={{ fontSize: "14px" }}
-                  className="text-muted ml-2 mb-0 d-inline"
-                >
-                  {remainingTime &&  this.formatSeconds(remainingTime)}
+                  Duration . {this.formatSeconds(duration)}
                 </p>
               )}
+
+              {this.props.style === "big" &&
+                this.props.completed === "false" && (
+                  <p
+                    style={{ fontSize: "14px" }}
+                    className="text-muted ml-2 mb-0 d-inline"
+                  >
+                    {remainingTime && this.formatSeconds(remainingTime)}
+                  </p>
+                )}
             </div>
 
-
-
-
-            
             {this.props.style === "big" && (
               <div
                 className="ml-auto d-inline mt-5"
@@ -177,7 +180,4 @@ class SingleCourse extends Component {
   }
 }
 // export default connect(mapStateToProps)(SingleCourse);
-export default compose(
-  withRouter,
-  connect(mapStateToProps)
-)(SingleCourse);
+export default compose(withRouter, connect(mapStateToProps))(SingleCourse);

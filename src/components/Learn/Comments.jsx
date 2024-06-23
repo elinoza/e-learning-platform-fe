@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { Col, Form, Image, Card, Button,DropdownButton ,Dropdown } from "react-bootstrap";
+import {
+  Col,
+  Form,
+  Image,
+  Card,
+  Button,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { BiLike, BiCommentDetail } from "react-icons/bi";
-import { AiTwotoneLike} from "react-icons/ai";
+import { AiTwotoneLike } from "react-icons/ai";
 import { Avatar } from "@material-ui/core";
 import "./Learn.css";
 import { formatDistance, parseISO } from "date-fns";
@@ -28,7 +36,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_CURRENT_POSTS",
           payload: posts,
         });
-        console.log("posts from qa component ", posts);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -53,7 +60,6 @@ const mapDispatchToProps = (dispatch) => ({
           type: "SET_CURRENT_COMMENTS",
           payload: comments,
         });
-        console.log("comments from qa component ", comments);
       } else {
         dispatch({
           type: "SET_ERROR",
@@ -71,15 +77,15 @@ class Comments extends Component {
     comment: { text: "" },
 
     commentShow: false,
-	modifyPost:false,
-	modifiedMessage: {
-		text: "",
-	  },
+    modifyPost: false,
+    modifiedMessage: {
+      text: "",
+    },
 
-	  modifyComment:false,
-	  modifiedComment: {
-		text: "",
-	  },
+    modifyComment: false,
+    modifiedComment: {
+      text: "",
+    },
   };
 
   askQuestion = async (e) => {
@@ -89,11 +95,9 @@ class Comments extends Component {
 
     // let courseId = params.split("/")[1]
     // let courseId= this.props.player.currentCourse._id
-	let courseId = this.props.courseId;
+    let courseId = this.props.courseId;
 
     try {
-      console.log(courseId);
-
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
       const response = await fetch(url + "/videos/" + courseId + "/posts", {
@@ -109,17 +113,12 @@ class Comments extends Component {
         this.setState({ message: { text: "" } });
         this.props.fetchPostswithThunk(courseId);
       } else {
-        console.log("save error", response);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   postFetchComments = async (postId) => {
     try {
-      console.log("postId", postId);
-
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
       const response = await fetch(url + "/posts/" + postId + "/comments", {
@@ -135,11 +134,8 @@ class Comments extends Component {
         this.props.fetchCommentswithThunk(postId);
         this.setState({ comment: { text: "" } });
       } else {
-        console.log("save error", response);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   handleChange = (e, postId) => {
@@ -153,176 +149,149 @@ class Comments extends Component {
     this.props.fetchCommentswithThunk(postId);
     this.setState({ commentShow: true });
   };
-  deletePost=async (postId)=>{
+  deletePost = async (postId) => {
+    try {
+      let courseId = this.props.courseId;
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(
+        url + "/videos/" + courseId + "/posts/" + postId,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-	try {
-		console.log("postId", postId);
-		let courseId = this.props.courseId;
-		const token = localStorage.getItem("token");
-		const url = process.env.REACT_APP_URL;
-		const response = await fetch(url + "/videos/" + courseId + "/posts/"+ postId , {
-		  method: "DELETE",
-		  headers: {
-			Authorization: "Bearer " + token,
-			"Content-Type": "application/json",
-		  }
-		});
-  
-		if (response.ok) {
-		  this.props.fetchPostswithThunk(courseId);
-		
-		} else {
-		  console.log("save error", response);
-		}
-	  } catch (error) {
-		console.log(error);
-	  }
+      if (response.ok) {
+        this.props.fetchPostswithThunk(courseId);
+      } else {
+      }
+    } catch (error) {}
+  };
 
-  }
+  modifyPost = async (postId) => {
+    try {
+      let courseId = this.props.courseId;
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(
+        url + "/videos/" + courseId + "/posts/" + postId,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.state.modifiedMessage),
+        }
+      );
 
-  modifyPost=async (postId)=>{
-	try {
-		console.log("postId", postId);
-		let courseId = this.props.courseId;
-		const token = localStorage.getItem("token");
-		const url = process.env.REACT_APP_URL;
-		const response = await fetch(url + "/videos/" + courseId + "/posts/"+ postId , {
-		  method: "PUT",
-		  headers: {
-			Authorization: "Bearer " + token,
-			"Content-Type": "application/json",
-		  },
-		  body: JSON.stringify(this.state. modifiedMessage),
-		});
-  
-		if (response.ok) {
-		  this.props.fetchPostswithThunk(courseId);
-		  this.setState({ modifiedMessage: { text: "" },modifyPost:false });
-		
-		} else {
-		  console.log("save error", response);
-		}
-	  } catch (error) {
-		console.log(error);
-	  }
-
-  
-	  
-}
-deleteComment=async (postId,commentId)=>{
-	try {
-	
-		const token = localStorage.getItem("token");
-		const url = process.env.REACT_APP_URL;
-		const response = await fetch(url + "/posts/" + postId + "/comments/"+ commentId, {
-		  method: "DELETE",
-		  headers: {
-			Authorization: "Bearer " + token,
-			"Content-Type": "application/json",
-		  }
-		});
-  
-		if (response.ok) {
-		  this.props.fetchCommentswithThunk(postId);
-		
-		} else {
-		  console.log("save error", response);
-		}
-	  } catch (error) {
-		console.log(error);
-	  }
-}
-
-modifyComment=async (postId,commentId)=>{
-	try {
-		console.log("postId", postId);
-		let courseId = this.props.courseId;
-		const token = localStorage.getItem("token");
-		const url = process.env.REACT_APP_URL;
-		const response = await fetch(url + "/posts/" + postId+ "/comments/"+ commentId , {
-		  method: "PUT",
-		  headers: {
-			Authorization: "Bearer " + token,
-			"Content-Type": "application/json",
-		  },
-		  body: JSON.stringify(this.state.modifiedComment),
-		});
-  
-		if (response.ok) {
-			this.props.fetchCommentswithThunk(postId);
-		  this.setState({ modifiedComment: { text: "" },modifyComment:false });
-		} else {
-		  console.log("save error", response);
-		}
-	  } catch (error) {
-		console.log(error);
-	  }
-
-}
-handleModify=(e, postId) => {
-    if (e.keyCode === 13) {
-    e.preventDefault(); 
-	this.modifyPost(postId)}
-}
-handleModifyComment=(e, postId,commentId) => {
-    if (e.keyCode === 13) {
-    e.preventDefault(); 
-	this.modifyComment(postId,commentId)}
-}
-
-likePost = async (postId)=> {
+      if (response.ok) {
+        this.props.fetchPostswithThunk(courseId);
+        this.setState({ modifiedMessage: { text: "" }, modifyPost: false });
+      } else {
+      }
+    } catch (error) {}
+  };
+  deleteComment = async (postId, commentId) => {
     try {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/posts/like/"+postId, {
-        method: 'POST', 
-        headers: {
-          Authorization: "Bearer " + token,
-          'Content-Type': 'application/json'
-        },
-      });
-  
-      
-  
-      if (response.ok) {
-       this.props.fetchPostswithThunk(this.props.courseId)
-       
-      } else {
-     console.log("save error",response)
-      }
-  
-      
-    } catch (error) {
-      console.log(error)
-      
-  }}
+      const response = await fetch(
+        url + "/posts/" + postId + "/comments/" + commentId,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  unlikePost = async (postId)=> {
+      if (response.ok) {
+        this.props.fetchCommentswithThunk(postId);
+      } else {
+      }
+    } catch (error) {}
+  };
+
+  modifyComment = async (postId, commentId) => {
+    try {
+      let courseId = this.props.courseId;
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(
+        url + "/posts/" + postId + "/comments/" + commentId,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.state.modifiedComment),
+        }
+      );
+
+      if (response.ok) {
+        this.props.fetchCommentswithThunk(postId);
+        this.setState({ modifiedComment: { text: "" }, modifyComment: false });
+      } else {
+      }
+    } catch (error) {}
+  };
+  handleModify = (e, postId) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.modifyPost(postId);
+    }
+  };
+  handleModifyComment = (e, postId, commentId) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.modifyComment(postId, commentId);
+    }
+  };
+
+  likePost = async (postId) => {
     try {
       const token = localStorage.getItem("token");
       const url = process.env.REACT_APP_URL;
-      const response = await fetch(url + "/posts/unlike/"+postId, {
-        method: 'POST', 
+      const response = await fetch(url + "/posts/like/" + postId, {
+        method: "POST",
         headers: {
           Authorization: "Bearer " + token,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
       });
-  
-      
-  
+
       if (response.ok) {
-		this.props.fetchPostswithThunk(this.props.courseId)
-       
+        this.props.fetchPostswithThunk(this.props.courseId);
       } else {
-     console.log("save error",response)
       }
-  
-      
-    } catch (error) {
-      console.log(error)
-      
-  }}
+    } catch (error) {}
+  };
+
+  unlikePost = async (postId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const url = process.env.REACT_APP_URL;
+      const response = await fetch(url + "/posts/unlike/" + postId, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        this.props.fetchPostswithThunk(this.props.courseId);
+      } else {
+      }
+    } catch (error) {}
+  };
   componentDidMount = () => {
     let courseId = this.props.courseId;
     this.props.fetchPostswithThunk(courseId);
@@ -330,10 +299,8 @@ likePost = async (postId)=> {
 
   render() {
     const { currentPosts, currentComments } = this.props.posts;
-    console.log("render commens", this.props.posts);
     return (
       <>
-      
         <Form
           className="mt-1 ask-form border pb-5 px-3 shadow "
           onSubmit={(e) => this.askQuestion(e)}
@@ -358,8 +325,9 @@ likePost = async (postId)=> {
           </Button>
         </Form>
 
-        {currentPosts && currentPosts.length>0
-          && currentPosts.map((post) => (
+        {currentPosts &&
+          currentPosts.length > 0 &&
+          currentPosts.map((post) => (
             <Card className="CommentCard mt-5 shadow">
                                              
               <Card.Header
@@ -407,90 +375,105 @@ likePost = async (postId)=> {
                     ])}
                   </p>
                 </div>
-				{this.props.me.me._id === post.user._id && 
-                <div className=" ml-auto a-tags  three-dots-wrapper">
-                  {" "}
-				 
-								 
-								 <DropdownButton variant="Secondary"
-								 title={ <BsThreeDots style={{ fontSize: "18px" }} />}
-								 >
-								 <Dropdown.Item as="button" style={{ fontSize: "14px" }}  onClick={()=>this.deletePost(post._id)}>
-
-									Delete your post
-								 </Dropdown.Item>
-								 <Dropdown.Item as="button"style={{ fontSize: "14px" }}  onClick={()=>this.setState({modifyPost:true})}>
-
-									Edit your post
-								 </Dropdown.Item>
-								 </DropdownButton>
-									
-					
-                
-                </div>}
+                {this.props.me.me._id === post.user._id && (
+                  <div className=" ml-auto a-tags  three-dots-wrapper">
+                    {" "}
+                    <DropdownButton
+                      variant="Secondary"
+                      title={<BsThreeDots style={{ fontSize: "18px" }} />}
+                    >
+                      <Dropdown.Item
+                        as="button"
+                        style={{ fontSize: "14px" }}
+                        onClick={() => this.deletePost(post._id)}
+                      >
+                        Delete your post
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        as="button"
+                        style={{ fontSize: "14px" }}
+                        onClick={() => this.setState({ modifyPost: true })}
+                      >
+                        Edit your post
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </div>
+                )}
               </Card.Header>
               <Card.Body>
                 <Card.Title>
-
                   <div className="pb-3 general-font">
-					  {this.state.modifyPost ? 
-                    <Form.Control
-                      as="textarea"
-                      rows={2}
-					  style={{border:"none"}}
-                      className=" pb-2 px-3  "
-                      placeholder={post.text}
-                      value={this.state. modifiedMessage.text}
-                      onKeyDown={(e) => this.handleModify(e, post._id)}
-                      onChange={(e) =>
-                        this.setState({
-                         modifiedMessage: {
-                            text: e.currentTarget.value,
-                          },
-                        })
-                      }
-                    ></Form.Control>:<p className=" general-font">{post.text}</p>}
+                    {this.state.modifyPost ? (
+                      <Form.Control
+                        as="textarea"
+                        rows={2}
+                        style={{ border: "none" }}
+                        className=" pb-2 px-3  "
+                        placeholder={post.text}
+                        value={this.state.modifiedMessage.text}
+                        onKeyDown={(e) => this.handleModify(e, post._id)}
+                        onChange={(e) =>
+                          this.setState({
+                            modifiedMessage: {
+                              text: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      ></Form.Control>
+                    ) : (
+                      <p className=" general-font">{post.text}</p>
+                    )}
                   </div>
-                 {post.likes.length >0 && <p className="text-muted general-font"> {post.likes.length} Likes</p>}
+                  {post.likes.length > 0 && (
+                    <p className="text-muted general-font">
+                      {" "}
+                      {post.likes.length} Likes
+                    </p>
+                  )}
                   <hr></hr>
                   <div className="d-flex align-items-start">
+                    {post.likes.find(
+                      (like) => like === this.props.me.me._id
+                    ) ? (
+                      <Button
+                        className="LikeButton  "
+                        onClick={() => this.unlikePost(post._id)}
+                        size="sm"
+                      >
+                        <AiTwotoneLike className="mr-2" />
+                        UnLike
+                      </Button>
+                    ) : (
+                      <Button
+                        className="LikeButton  "
+                        onClick={() => this.likePost(post._id)}
+                        size="sm"
+                      >
+                        <BiLike className="mr-2" />
+                        Like
+                      </Button>
+                    )}
 
-				  { post.likes.find( like => like===this.props.me.me._id)?
-                   <Button
-                      className="LikeButton  "
-                      onClick={()=>this.unlikePost(post._id)}
-                      size="sm"
-                    >
-                      <AiTwotoneLike className="mr-2" />
-                      UnLike
-                    </Button>: <Button
-                      className="LikeButton  "
-                      onClick={()=>this.likePost(post._id)}
-                      size="sm"
-                    >
-                      <BiLike className="mr-2" />
-                      Like
-                    </Button>}
-
-					{post.comments.length>0 ?
-                    <Button
-                      className="LikeButton mr-auto"
-                      onClick={() => this.seeAnswers(post._id)}
-                      size="sm"
-                    >
-                      <BiCommentDetail className="mr-2" />
-                  	See answers({post.comments.length}) 
-                    </Button>: <Button
-                      className="LikeButton mr-auto"
-                      onClick={() => this.seeAnswers(post._id)}
-                      size="sm"
-                    >
-                      <BiCommentDetail className="mr-2" />
-                  	Be the first one to answer
-                    </Button>}
+                    {post.comments.length > 0 ? (
+                      <Button
+                        className="LikeButton mr-auto"
+                        onClick={() => this.seeAnswers(post._id)}
+                        size="sm"
+                      >
+                        <BiCommentDetail className="mr-2" />
+                        See answers({post.comments.length})
+                      </Button>
+                    ) : (
+                      <Button
+                        className="LikeButton mr-auto"
+                        onClick={() => this.seeAnswers(post._id)}
+                        size="sm"
+                      >
+                        <BiCommentDetail className="mr-2" />
+                        Be the first one to answer
+                      </Button>
+                    )}
                   </div>
-
-                
                 </Card.Title>
                 <Card.Text>
                   <div className="d-flex">
@@ -516,8 +499,9 @@ likePost = async (postId)=> {
                     ></Form.Control>
                   </div>
 
-                  {currentComments && currentComments.length > 0
-                    && currentComments.map(
+                  {currentComments &&
+                    currentComments.length > 0 &&
+                    currentComments.map(
                       (comment) =>
                         comment.post === post._id && (
                           <div
@@ -573,46 +557,66 @@ likePost = async (postId)=> {
                                 </p>
                               </div>
 
-							  {this.props.me.me._id === post.user._id && 
-							  <div className=" ml-auto a-tags  three-dots-wrapper">
-                  {" "}
-				 
-								 
-								 <DropdownButton variant="Secondary"
-								 title={ <BsThreeDots style={{ fontSize: "18px" }} />}
-								 >
-								 <Dropdown.Item as="button" style={{ fontSize: "14px" }}  onClick={()=>this.deletePost(post._id,comment._id)}>
-
-									Delete your comment
-								 </Dropdown.Item>
-								 <Dropdown.Item as="button"style={{ fontSize: "14px" }}  onClick={()=>this.setState({modifyComment:true})}>
-
-									Edit your comment
-								 </Dropdown.Item>
-								 </DropdownButton>
-									
-					
-                
-                </div>}
+                              {this.props.me.me._id === post.user._id && (
+                                <div className=" ml-auto a-tags  three-dots-wrapper">
+                                  {" "}
+                                  <DropdownButton
+                                    variant="Secondary"
+                                    title={
+                                      <BsThreeDots
+                                        style={{ fontSize: "18px" }}
+                                      />
+                                    }
+                                  >
+                                    <Dropdown.Item
+                                      as="button"
+                                      style={{ fontSize: "14px" }}
+                                      onClick={() =>
+                                        this.deletePost(post._id, comment._id)
+                                      }
+                                    >
+                                      Delete your comment
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                      as="button"
+                                      style={{ fontSize: "14px" }}
+                                      onClick={() =>
+                                        this.setState({ modifyComment: true })
+                                      }
+                                    >
+                                      Edit your comment
+                                    </Dropdown.Item>
+                                  </DropdownButton>
+                                </div>
+                              )}
                             </div>
                             <div className="pb-3 mt-2 general-font">
-							{this.state.modifyComment? 
-                    <Form.Control
-                      as="textarea"
-                      rows={2}
-					  style={{border:"none"}}
-                      className=" pb-2 px-3  "
-                      placeholder={comment.text}
-                      value={this.state. modifiedComment.text}
-                      onKeyDown={(e) => this.handleModifyComment(e, post._id,comment._id)}
-                      onChange={(e) =>
-                        this.setState({
-                         modifiedComment: {
-                            text: e.currentTarget.value,
-                          },
-                        })
-                      }
-                    ></Form.Control>:<p className=" general-font">{comment.text}</p>}
+                              {this.state.modifyComment ? (
+                                <Form.Control
+                                  as="textarea"
+                                  rows={2}
+                                  style={{ border: "none" }}
+                                  className=" pb-2 px-3  "
+                                  placeholder={comment.text}
+                                  value={this.state.modifiedComment.text}
+                                  onKeyDown={(e) =>
+                                    this.handleModifyComment(
+                                      e,
+                                      post._id,
+                                      comment._id
+                                    )
+                                  }
+                                  onChange={(e) =>
+                                    this.setState({
+                                      modifiedComment: {
+                                        text: e.currentTarget.value,
+                                      },
+                                    })
+                                  }
+                                ></Form.Control>
+                              ) : (
+                                <p className=" general-font">{comment.text}</p>
+                              )}
                             </div>
                             <Button
                               className="LikeButton  "

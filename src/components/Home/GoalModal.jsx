@@ -68,9 +68,7 @@ class GoalModal extends Component {
         this.props.fetchMewithThunk();
       } else {
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   render() {
     return (
